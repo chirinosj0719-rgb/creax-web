@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">  <!-- borrador: quitar al publicar la web oficial -->
+<title>Automatizaciones · CreaX</title>
+<meta name="description" content="Atención automática en WhatsApp e Instagram, confirmación de pedidos y citas, registro y reportes. Flujos armados con n8n sobre las herramientas que el negocio ya usa.">
+<meta name="theme-color" content="#f5f4f2">
+<script>document.documentElement.classList.add("con-js");</script>
+<link rel="stylesheet" href="assets/iconos/style.css">
+<link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+
+<div class="avance" id="avance" aria-hidden="true"></div>
+<div class="reticula" aria-hidden="true"></div>
+<div class="grano" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
+  <div class="nav-caja">
+    <a class="nav-marca" href="index.html" aria-label="CreaX, inicio">
+      <img class="logo" src="assets/creax-logo.svg" alt="CreaX" width="72" height="21">
+    </a>
+    <nav class="nav-enlaces">
+      <a class="enlace" href="servicios.html">Servicios</a>
+      <a class="enlace" href="automatizaciones.html" aria-current="page">Automatizaciones</a>
+      <a class="enlace" href="bocetos.html">Bocetos</a>
+      <a class="enlace" href="nosotros.html">Nosotros</a>
+      <!-- CONTACTO -->
+      <a class="boton boton-principal boton-chico brillo" href="https://wa.me/51000000000" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="encabezado">
+    <div class="envoltura">
+      <p class="migas"><a href="index.html">Inicio</a> · Automatizaciones</p>
+      <p class="marca-seccion revelar">Automatizaciones</p>
+      <h1 class="revelar">Los procesos también trabajan <em class="cursiva">solos</em></h1>
+      <p class="entrada revelar">Con n8n se conectan las herramientas que el negocio ya usa. La información pasa sola de una a otra, sin que nadie copie y pegue entre el WhatsApp, la hoja de cálculo y la agenda.</p>
+    </div>
+  </section>
+
+  <!-- ================= el flujo ================= -->
+  <section id="flujo-seccion">
+    <div class="envoltura">
+      <div class="metodo-grilla">
+        <div>
+          <p class="marca-seccion revelar">Cómo funciona</p>
+          <h2 class="revelar">Un mensaje entra, el sistema hace <em class="cursiva">el resto</em></h2>
+          <p class="entrada revelar">No es un robot que contesta frases sueltas. Es un flujo con las reglas del negocio: qué responder, cuándo pasar la conversación a una persona y dónde queda anotado cada pedido.</p>
+          <ul class="muestra-lista revelar">
+            <li>Atención automática en WhatsApp e Instagram, con las respuestas del propio negocio</li>
+            <li>Confirmación de pedidos, reservas y citas, con recordatorio al cliente</li>
+            <li>Cada pedido registrado solo en la hoja de cálculo o en el sistema que ya usan</li>
+            <li>Avisos al equipo cuando entra algo que necesita a una persona</li>
+            <li>Reportes automáticos de lo vendido y de lo que más preguntan</li>
+          </ul>
+        </div>
+
+        <div class="flujo revelar" id="flujo">
+          <p class="flujo-titulo">Un flujo típico, hecho con n8n</p>
+          <div class="flujo-pestanas" role="tablist" aria-label="Flujo por rubro">
+            <button class="pestana" role="tab" aria-selected="true" data-flujo="general">General</button>
+            <button class="pestana" role="tab" aria-selected="false" data-flujo="panaderia">Panadería</button>
+            <button class="pestana" role="tab" aria-selected="false" data-flujo="consultorio">Consultorio</button>
+            <button class="pestana" role="tab" aria-selected="false" data-flujo="tienda">Tienda</button>
+          </div>
+          <div class="flujo-nodos">
+            <article class="nodo" data-nodo="1">
+              <div class="nodo-icono"><i class="ph ph-chat-circle-dots" aria-hidden="true"></i></div>
+              <div><b>Llega un mensaje</b><span>WhatsApp, Instagram o el formulario de la web</span></div>
+            </article>
+            <div class="flujo-linea" aria-hidden="true"><i class="ph ph-arrow-down"></i></div>
+            <article class="nodo" data-nodo="2">
+              <div class="nodo-icono"><i class="ph ph-git-branch" aria-hidden="true"></i></div>
+              <div><b>n8n decide qué hacer</b><span>Según el horario, el producto o el tipo de consulta</span></div>
+            </article>
+            <div class="flujo-linea" aria-hidden="true"><i class="ph ph-arrow-down"></i></div>
+            <article class="nodo" data-nodo="3">
+              <div class="nodo-icono"><i class="ph ph-paper-plane-tilt" aria-hidden="true"></i></div>
+              <div><b>Responde y registra</b><span>Contesta al cliente y anota el pedido donde corresponde</span></div>
+            </article>
+            <div class="flujo-linea" aria-hidden="true"><i class="ph ph-arrow-down"></i></div>
+            <article class="nodo" data-nodo="4">
+              <div class="nodo-icono"><i class="ph ph-bell-ringing" aria-hidden="true"></i></div>
+              <div><b>Avisa al equipo</b><span>El encargado recibe el pedido listo para atender</span></div>
+            </article>
+          </div>
+          <p class="nodo-detalle" id="nodoDetalle" aria-live="polite"><b>Toca un paso</b> para ver qué pasa ahí.</p>
+        </div>
+      </div>
+
+      <div class="integraciones">
+        <div class="integracion revelar"><img src="assets/logos/n8n.svg" alt="n8n" width="26" height="26"><span>n8n</span></div>
+        <div class="integracion revelar"><img src="assets/logos/whatsapp.svg" alt="WhatsApp" width="26" height="26"><span>WhatsApp</span></div>
+        <div class="integracion revelar"><img src="assets/logos/instagram.svg" alt="Instagram" width="26" height="26"><span>Instagram</span></div>
+        <div class="integracion revelar"><img src="assets/logos/meta.svg" alt="Meta" width="26" height="26"><span>Meta</span></div>
+        <div class="integracion revelar"><img src="assets/logos/googlesheets.svg" alt="Google Sheets" width="26" height="26"><span>Sheets</span></div>
+        <div class="integracion revelar"><img src="assets/logos/googlecalendar.svg" alt="Google Calendar" width="26" height="26"><span>Calendar</span></div>
+        <div class="integracion revelar"><img src="assets/logos/gmail.svg" alt="Gmail" width="26" height="26"><span>Gmail</span></div>
+        <div class="integracion revelar"><img src="assets/logos/notion.svg" alt="Notion" width="26" height="26"><span>Notion</span></div>
+        <div class="integracion revelar"><img src="assets/logos/telegram.svg" alt="Telegram" width="26" height="26"><span>Telegram</span></div>
+        <div class="integracion revelar"><img src="assets/logos/mercadopago.svg" alt="Mercado Pago" width="26" height="26"><span>Mercado Pago</span></div>
+      </div>
+      <p class="nota revelar">Si el negocio ya usa otra herramienta, se conecta igual: n8n habla con cientos de servicios.</p>
+    </div>
+  </section>
+
+  <!-- ================= qué se automatiza por rubro ================= -->
+  <section>
+    <div class="envoltura">
+      <p class="marca-seccion revelar">Por rubro</p>
+      <h2 class="revelar">Qué se automatiza en <em class="cursiva">cada</em> negocio</h2>
+      <p class="entrada revelar">La operación de una panadería no se parece a la de un consultorio. Estos son los flujos que más se repiten en cada rubro.</p>
+
+      <div class="resultados">
+        <article class="tarjeta brillo revelar">
+          <div class="icono"><i class="ph ph-fork-knife" aria-hidden="true"></i></div>
+          <h3>Gastronomía</h3>
+          <p>El pedido entra por la web o el WhatsApp, se confirma con hora de recojo o reparto y queda anotado con el total del día.</p>
+          <ul>
+            <li>Carta y promociones respondidas al instante</li>
+            <li>Pedidos por anticipado, con aviso a cocina</li>
+            <li>Cierre del día con lo vendido</li>
+          </ul>
+        </article>
+
+        <article class="tarjeta brillo revelar">
+          <div class="icono"><i class="ph ph-first-aid-kit" aria-hidden="true"></i></div>
+          <h3>Salud y bienestar</h3>
+          <p>La cita se reserva sola en la agenda, el paciente recibe el recordatorio y el consultorio ve el día completo sin llamadas.</p>
+          <ul>
+            <li>Reserva y reprogramación por WhatsApp</li>
+            <li>Recordatorio el día antes, para reducir ausencias</li>
+            <li>Ficha del paciente registrada al momento</li>
+          </ul>
+        </article>
+
+        <article class="tarjeta brillo revelar">
+          <div class="icono"><i class="ph ph-shopping-bag-open" aria-hidden="true"></i></div>
+          <h3>Comercio</h3>
+          <p>Consultas de stock y precio contestadas al toque, pedido armado y seguimiento del envío sin que nadie esté pendiente.</p>
+          <ul>
+            <li>Catálogo y disponibilidad en el chat</li>
+            <li>Pedido y datos de entrega en un mensaje</li>
+            <li>Aviso al cliente cuando sale su envío</li>
+          </ul>
+        </article>
+
+        <article class="tarjeta brillo revelar">
+          <div class="icono"><i class="ph ph-briefcase" aria-hidden="true"></i></div>
+          <h3>Servicios profesionales</h3>
+          <p>La consulta llega ordenada, con los datos que hacen falta para responder, y queda registrada como oportunidad.</p>
+          <ul>
+            <li>Preguntas iniciales respondidas por el flujo</li>
+            <li>Formulario que arma el caso antes de la llamada</li>
+            <li>Seguimiento automático a quien no contestó</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= qué hace falta ================= -->
+  <section>
+    <div class="envoltura">
+      <div class="dos-columnas">
+        <div class="revelar">
+          <p class="marca-seccion">Qué hace falta</p>
+          <h2>Lo que tiene que poner <em class="cursiva">el negocio</em></h2>
+          <p class="entrada">Casi siempre ya lo tienen. Lo que falta se saca en la primera reunión.</p>
+          <ul class="lista-marcada">
+            <li><i class="ph ph-check-circle" aria-hidden="true"></i> Un número de WhatsApp de trabajo, distinto del personal</li>
+            <li><i class="ph ph-check-circle" aria-hidden="true"></i> Una cuenta de Google para la hoja de cálculo y la agenda</li>
+            <li><i class="ph ph-check-circle" aria-hidden="true"></i> Las respuestas de siempre: precios, horarios, formas de pago y de entrega</li>
+            <li><i class="ph ph-check-circle" aria-hidden="true"></i> Una persona del equipo que reciba los avisos y atienda lo que el flujo deriva</li>
+          </ul>
+        </div>
+
+        <aside class="tarjeta revelar">
+          <div class="icono"><i class="ph ph-gear" aria-hidden="true"></i></div>
+          <h3>Cómo se pone en marcha</h3>
+          <ul>
+            <li>Se escribe la operación tal como funciona hoy, paso por paso</li>
+            <li>Se arma el flujo en n8n y se prueba con casos reales del negocio</li>
+            <li>Sale primero en paralelo, sin apagar la atención manual</li>
+            <li>Se ajusta con lo que aparece en la primera semana</li>
+            <li>Queda documentado, para que el negocio sepa qué hace cada paso</li>
+          </ul>
+          <p class="acciones">
+            <!-- CONTACTO -->
+            <a class="boton boton-principal boton-chico brillo" href="https://wa.me/51000000000" target="_blank" rel="noopener">Conversar la operación</a>
+          </p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto">
+    <div class="envoltura">
+      <div class="cierre-caja revelar">
+        <h2>¿Qué se está haciendo <em class="cursiva">a mano</em> hoy?</h2>
+        <p class="entrada">Responder lo mismo veinte veces, copiar pedidos a una hoja, confirmar citas una por una. Eso es lo que se automatiza primero.</p>
+        <div class="acciones">
+          <!-- CONTACTO -->
+          <a class="boton boton-principal brillo" href="https://wa.me/51000000000" target="_blank" rel="noopener">
+            <i class="ph ph-whatsapp-logo" aria-hidden="true"></i> Escribir por WhatsApp
+          </a>
+          <a class="boton boton-secundario" href="servicios.html">Ver servicios</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="envoltura">
+    <div class="pie-grilla">
+      <div>
+        <img class="logo-pie" src="assets/creax-logo.svg" alt="CreaX" width="90" height="26">
+        <p>Desarrollo web y automatización de procesos para negocios de Lima.</p>
+      </div>
+      <div>
+        <h4>Qué hacemos</h4>
+        <ul>
+          <li><a href="servicios.html">Servicios</a></li>
+          <li><a href="automatizaciones.html">Automatizaciones</a></li>
+          <li><a href="bocetos.html">Bocetos</a></li>
+          <li><a href="nosotros.html">Nosotros</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contacto</h4>
+        <ul>
+          <!-- CONTACTO -->
+          <li><a href="https://wa.me/51000000000" target="_blank" rel="noopener">WhatsApp</a></li>
+          <!-- CONTACTO -->
+          <li><a href="mailto:hola@creax.pe">hola@creax.pe</a></li>
+          <!-- CONTACTO -->
+          <li><a href="https://instagram.com/creax.pe" target="_blank" rel="noopener">Instagram</a></li>
+          <!-- CONTACTO -->
+          <li><a href="https://www.linkedin.com/company/creax" target="_blank" rel="noopener">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="pie-legal">
+      <span>&copy; <span id="anio">2026</span> CreaX</span>
+      <span>Lima, Perú</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/anime.min.js"></script>
+<script src="animacion.js" defer></script>
+</body>
+</html>

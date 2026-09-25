@@ -1,0 +1,6 @@
+Fotos de muestra para el boceto de ejemplo.
+Todas son CC0 o dominio público, obtenidas con la API de Openverse.
+Se reemplazan por las fotos del negocio cuando el cliente las manda.
+
+portada.jpg  ·  Free big bread bakery shop  ·  CC0  ·  https://www.rawpixel.com/image/5928055/photo-image-public-domain-food-free
+item-3.jpg  ·  Chocolate Cake  ·  CC0  ·  https://stocksnap.io/photo/chocolate-cake-XTNRPGQBYL
