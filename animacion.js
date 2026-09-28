@@ -48,98 +48,14 @@
       var pieza = document.createElement("span");
       pieza.className = "pieza";
       pieza.textContent = palabra;
-      if (i === palabras.length - 1) pieza.classList.add("acento");
+      var acentos = parseInt(titular.dataset.acento || "1", 10);
+      if (i >= palabras.length - acentos) pieza.classList.add("acento");
       linea.appendChild(pieza);
       titular.appendChild(linea);
       titular.appendChild(document.createTextNode(" "));
       piezas.push(pieza);
     });
   }
-
-  /* --------------------------------------------------------------
-     3. Rotación de bocetos: demuestra que la solución se adapta al rubro
-     -------------------------------------------------------------- */
-  var BOCETOS = {
-    panaderia: {
-      imagen: "assets/boceto-panaderia.png",
-      alt: "Boceto de la web de una panadería, visto en un celular",
-      puntos: [
-        "Carta con sus fotos y sus precios, lista para pedir",
-        "El pedido llega armado al WhatsApp, sin audios",
-        "Galería, horario y ubicación del local"
-      ]
-    },
-    dental: {
-      imagen: "assets/boceto-dental.png",
-      alt: "Boceto de la web de una clínica dental, visto en un celular",
-      puntos: [
-        "Cada tratamiento con lo que incluye y cuánto cuesta",
-        "La cita se reserva por WhatsApp, sin llamadas",
-        "El consultorio por dentro, horarios y cómo llegar"
-      ]
-    },
-    gimnasio: {
-      imagen: "assets/boceto-gimnasio.png",
-      alt: "Boceto de la web de un gimnasio, visto en un celular",
-      puntos: [
-        "Planes, clases y precios en una sola pantalla",
-        "Inscripción y consultas directo por WhatsApp",
-        "Fotos del local, horarios y cómo llegar"
-      ]
-    }
-  };
-  Object.keys(BOCETOS).forEach(function (clave) {
-    var previa = new Image();
-    previa.src = BOCETOS[clave].imagen;
-  });
-
-  /* --------------------------------------------------------------
-     4. Pestañas de la muestra: cambian la pantalla y lo que se lista
-     -------------------------------------------------------------- */
-  var pestanas = document.querySelectorAll(".pestana[data-boceto]");
-  var pantalla = document.getElementById("bocetoMuestra");
-  var lista = document.getElementById("muestraLista");
-
-  function pintarBoceto(clave) {
-    var datos = BOCETOS[clave];
-    if (!datos || !pantalla) return;
-
-    if (quieto) {
-      pantalla.src = datos.imagen;
-      pantalla.alt = datos.alt;
-    } else {
-      A.animate(pantalla, {
-        opacity: [1, 0], scale: [1, 0.985], duration: 220, ease: salida,
-        onComplete: function () {
-          pantalla.src = datos.imagen;
-          pantalla.alt = datos.alt;
-          A.animate(pantalla, { opacity: [0, 1], scale: [0.985, 1], duration: 420, ease: salida });
-        }
-      });
-    }
-
-    if (lista) {
-      lista.innerHTML = "";
-      datos.puntos.forEach(function (punto) {
-        var li = document.createElement("li");
-        li.textContent = punto;
-        lista.appendChild(li);
-      });
-      if (!quieto) {
-        A.animate(lista.querySelectorAll("li"), {
-          opacity: [0, 1], x: [-10, 0], duration: 460, delay: A.stagger(70), ease: salida
-        });
-      }
-    }
-  }
-
-  pestanas.forEach(function (boton) {
-    boton.addEventListener("click", function () {
-      pestanas.forEach(function (otra) { otra.setAttribute("aria-selected", "false"); });
-      boton.setAttribute("aria-selected", "true");
-      pintarBoceto(boton.dataset.boceto);
-    });
-  });
 
   /* --------------------------------------------------------------
      5. Los pasos del método se encienden al llegar a la pantalla
@@ -233,27 +149,27 @@
   var FLUJOS = {
     general: [
       ["Llega un mensaje", "WhatsApp, Instagram o el formulario de la web", "Todo lo que escriben entra por el mismo lado, venga de donde venga."],
-      ["n8n decide qué hacer", "Según el horario, el producto o el tipo de consulta", "Las reglas son las del negocio: qué se responde solo y qué necesita a una persona."],
-      ["Responde y registra", "Contesta al cliente y anota el pedido donde corresponde", "El cliente recibe la respuesta al momento y el pedido queda en la hoja, sin copiarlo."],
+      ["El sistema decide qué hacer", "Según el horario, el producto o el tipo de consulta", "Las reglas son las del negocio: qué se responde solo y qué necesita a una persona."],
+      ["Responde y registra", "Contesta al cliente y anota el pedido donde corresponde", "El cliente recibe la respuesta al momento y el pedido queda anotado, sin copiarlo."],
       ["Avisa al equipo", "El encargado recibe el pedido listo para atender", "Llega un aviso con todo lo que hace falta: nadie tiene que volver a preguntar."]
-    ],
-    panaderia: [
-      ["Piden una torta por WhatsApp", "A las once de la noche, con el local cerrado", "El mensaje entra aunque no haya nadie mirando el celular."],
-      ["n8n revisa la anticipación", "Las tortas se piden con un día de anticipación", "Si llega a tiempo, sigue; si no, ofrece lo que hay listo para mañana."],
-      ["Confirma y anota", "Hora de recojo, total y datos en la hoja del día", "El cliente recibe la confirmación con el total y el pedido entra a la lista de producción."],
-      ["Avisa a cocina", "La lista de mañana llega ordenada a primera hora", "Temprano, el equipo ya sabe qué hornear y para qué hora."]
-    ],
-    consultorio: [
-      ["Un paciente pide cita", "Por WhatsApp o desde la web del consultorio", "Escribe como le escribiría a una persona; el flujo entiende qué necesita."],
-      ["n8n mira la agenda", "Ofrece los horarios libres de Google Calendar", "Solo aparecen los espacios que de verdad están disponibles."],
-      ["Reserva y registra", "La cita queda en la agenda y en la ficha del paciente", "Sin llamadas ni idas y vueltas: el paciente elige y queda reservado."],
-      ["Recuerda un día antes", "El paciente confirma o reprograma con un toque", "Menos ausencias, y el consultorio sabe con tiempo si se libera un espacio."]
     ],
     tienda: [
       ["Preguntan si hay stock", "Por Instagram, con la foto de un producto", "La consulta más repetida del día, contestada sin que nadie tenga que leerla."],
-      ["n8n consulta el inventario", "Revisa talla, color y cantidad en la hoja de stock", "Responde con lo que de verdad hay, no con lo que había la semana pasada."],
+      ["Revisa el inventario", "Talla, color y cantidad disponibles", "Responde con lo que de verdad hay, no con lo que había la semana pasada."],
       ["Arma el pedido", "Datos de entrega y enlace de pago en un mensaje", "El cliente paga y el pedido queda registrado con su estado."],
       ["Avisa el despacho", "El cliente recibe el aviso cuando sale su envío", "Se terminan los «¿ya salió mi pedido?» en el chat."]
+    ],
+    servicios: [
+      ["Llega una consulta", "Por WhatsApp, Instagram o la web", "El cliente cuenta su caso con sus palabras, a la hora que sea."],
+      ["Ordena el caso", "Pide los datos que faltan: servicio, fecha y presupuesto", "Antes de hablar con el cliente, ya se sabe qué necesita."],
+      ["Agenda la llamada", "Ofrece horarios libres y la deja en el calendario", "Sin idas y vueltas para cuadrar una reunión."],
+      ["Hace el seguimiento", "Si el cliente no responde, le escribe a los días", "Ninguna oportunidad se enfría por falta de seguimiento."]
+    ],
+    consultorio: [
+      ["Un paciente pide cita", "Por WhatsApp o desde la web", "Escribe como le escribiría a una persona; el sistema entiende qué necesita."],
+      ["Revisa la agenda", "Ofrece los horarios que están libres", "Solo aparecen los espacios que de verdad están disponibles."],
+      ["Reserva y registra", "La cita queda en la agenda y en la ficha del paciente", "Sin llamadas: el paciente elige y queda reservado."],
+      ["Recuerda un día antes", "El paciente confirma o reprograma con un toque", "Menos ausencias, y se sabe con tiempo si se libera un espacio."]
     ]
   };
   var nodosFlujo = document.querySelectorAll(".nodo");
@@ -306,19 +222,165 @@
     });
   });
 
+  /* --------------------------------------------------------------
+     5f. La escena de la portada rota: panadería, gimnasio y dentista,
+         una a la vez, con la pantalla y la conversación de cada una
+     -------------------------------------------------------------- */
+  var ESCENAS = {
+    panaderia: { nombre: "Panadería", icono: "ph-bread", color: "color-servicios",
+      pregunta: "Hola, ¿tienen torta de chocolate para hoy?", respuesta: "¡Hola! Sí, te muestro lo que tenemos listo:",
+      icono1: "ph-cake", opcion1: "Torta de chocolate", icono2: "ph-bread", opcion2: "Pan del día",
+      eleccion: "Quiero la torta, para recoger a las 6", listo: "Pedido anotado", detalle: "Listo para las 6:00 p. m., sin copiar nada a mano" },
+    gimnasio: { nombre: "Gimnasio", icono: "ph-barbell", color: "color-automatizaciones",
+      pregunta: "Hola, ¿qué planes tienen?", respuesta: "¡Hola! Estos son los más pedidos:",
+      icono1: "ph-calendar-check", opcion1: "Plan mensual", icono2: "ph-person-simple-run", opcion2: "Clases grupales",
+      eleccion: "Quiero el mensual, ¿cómo me inscribo?", listo: "Inscripción registrada", detalle: "Ya está en la lista, sin llenar nada a mano" },
+    dentista: { nombre: "Dentista", icono: "ph-tooth", color: "color-nosotros",
+      pregunta: "Hola, ¿tienen cita para limpieza esta semana?", respuesta: "¡Hola! Estos son los horarios libres:",
+      icono1: "ph-calendar-check", opcion1: "Jueves, 10:00 a. m.", icono2: "ph-calendar-check", opcion2: "Viernes, 4:00 p. m.",
+      eleccion: "El jueves, por favor", listo: "Cita reservada", detalle: "Jueves a las 10:00 a. m., con recordatorio un día antes" }
+  };
+  var escenaPortada = document.getElementById("escena");
+  var fonoPortada = document.getElementById("fono");
+  if (escenaPortada && fonoPortada && !quieto) {
+    var ordenEscenas = ["panaderia", "gimnasio", "dentista"];
+    var escenaActual = 0;
+    var pantallasEscena = escenaPortada.querySelectorAll(".ventana-pantallas img");
+    var rubroEscena = document.getElementById("escenaRubro");
+    var COLORES = ["color-servicios", "color-automatizaciones", "color-nosotros"];
+    var pintarEscena = function (clave) {
+      var datos = ESCENAS[clave];
+      pantallasEscena.forEach(function (img) { img.classList.toggle("activa", img.dataset.rubro === clave); });
+      rubroEscena.textContent = datos.nombre;
+      COLORES.forEach(function (c) { rubroEscena.classList.remove(c); });
+      rubroEscena.classList.add(datos.color);
+      fonoPortada.classList.add("cambiando");
+      setTimeout(function () {
+        COLORES.forEach(function (c) { fonoPortada.classList.remove(c); });
+        fonoPortada.classList.add(datos.color);
+        document.getElementById("chatNombre").textContent = datos.nombre;
+        document.getElementById("chatIcono").className = "ph " + datos.icono;
+        fonoPortada.querySelectorAll("[data-campo]").forEach(function (el) {
+          var campo = el.dataset.campo;
+          if (campo.indexOf("icono") === 0) el.className = "ph " + datos[campo];
+          else el.textContent = datos[campo];
+        });
+        fonoPortada.classList.remove("cambiando");
+      }, 380);
+    };
+    rubroEscena.classList.add(ESCENAS.panaderia.color);
+    setInterval(function () {
+      if (document.hidden) return;
+      escenaActual = (escenaActual + 1) % ordenEscenas.length;
+      pintarEscena(ordenEscenas[escenaActual]);
+    }, 4800);
+  } else if (escenaPortada) {
+    var chipRubro = document.getElementById("escenaRubro");
+    if (chipRubro) chipRubro.classList.add("color-servicios");
+  }
+
+  /* --------------------------------------------------------------
+     5g. La conversación de la laptop avanza a medida que se baja
+     -------------------------------------------------------------- */
+  var pistaConversacion = document.getElementById("conversacionPista");
+  var mensajesConversacion = document.querySelectorAll("#convMensajes [data-paso]");
+  var contadorConversacion = document.getElementById("convContador");
+  if (pistaConversacion && mensajesConversacion.length) {
+    var totalMensajes = mensajesConversacion.length;
+    var visibles = 0;
+    var mostrarHasta = function (n) {
+      if (n === visibles) return;
+      mensajesConversacion.forEach(function (msj, i) {
+        var toca = i < n;
+        if (toca && !msj.classList.contains("visto")) {
+          msj.classList.add("visto");
+          if (!quieto && msj.classList.contains("asistente") && i === n - 1) {
+            msj.classList.add("escribiendo");
+            setTimeout(function () { msj.classList.remove("escribiendo"); }, 750);
+          }
+        } else if (!toca) {
+          msj.classList.remove("visto", "escribiendo");
+        }
+      });
+      visibles = n;
+      if (contadorConversacion) contadorConversacion.textContent = n;
+    };
+    if (quieto) {
+      document.documentElement.classList.add("sin-movimiento");
+      mostrarHasta(totalMensajes);
+    } else {
+      var esperando = false;
+      var segunScroll = function () {
+        esperando = false;
+        var caja = pistaConversacion.getBoundingClientRect();
+        var recorrido = caja.height - window.innerHeight;
+        var avance = recorrido > 0 ? Math.min(1, Math.max(0, -caja.top / recorrido)) : 1;
+        mostrarHasta(Math.max(1, Math.min(totalMensajes, Math.ceil(avance * totalMensajes))));
+      };
+      window.addEventListener("scroll", function () {
+        if (!esperando) { esperando = true; requestAnimationFrame(segunScroll); }
+      }, { passive: true });
+      segunScroll();
+    }
+  }
+
   /* ==============================================================
      De acá para abajo, solo si hay movimiento permitido
      ============================================================== */
   if (quieto) {
+    document.documentElement.classList.remove("con-intro");
     document.querySelectorAll(".revelar").forEach(function (el) { el.style.opacity = "1"; });
     return;
+  }
+
+  /* --------------------------------------------------------------
+     5z. La intro: los bloques se arman, el cursor arrastra el último a
+         su lugar, aparece CreaX y la cortina sube. Una vez por visita;
+         un clic la salta. La portada arranca recién cuando termina.
+     -------------------------------------------------------------- */
+  var raiz = document.documentElement;
+  var intro = document.getElementById("intro");
+  var conIntro = !!intro && raiz.classList.contains("con-intro");
+  var alTerminarIntro = [];
+  var introTerminada = !conIntro;
+  var tareasHechas = false;
+  var correrTareas = function () {            // la portada empieza a entrar mientras sube la cortina
+    if (tareasHechas) return;
+    tareasHechas = true;
+    alTerminarIntro.forEach(function (tarea) { tarea(); });
+  };
+  var terminarIntro = function () {
+    if (introTerminada) return;
+    introTerminada = true;
+    raiz.classList.remove("con-intro");
+    if (intro && intro.parentNode) intro.parentNode.removeChild(intro);
+    try { sessionStorage.setItem("creax-intro", "1"); } catch (e) { /* sin memoria de sesión: se verá otra vez */ }
+    correrTareas();
+  };
+  if (conIntro) {
+    A.createTimeline({ defaults: { ease: salida }, onComplete: terminarIntro })
+      .add("#intro .ib", { opacity: [0, 1], scale: [0, 1], duration: 640, delay: A.stagger(90), ease: rebote }, 100)
+      .add("#intro .ranura", { opacity: [0, 1], duration: 420 }, 480)
+      .add("#intro .arrastre", { x: [58, 0], y: [58, 0], rotate: [-14, 0], duration: 950 }, 640)
+      .add("#intro .arrastre", { scale: [1, 0.92, 1], duration: 300, ease: "outQuad" }, 1600)
+      .add("#intro .intro-palabra", { opacity: [0, 1], y: [22, 0], duration: 650 }, 1450)
+      .call(correrTareas, 2300)
+      .add("#intro", { y: ["0%", "-100%"], duration: 760, ease: "inOutQuart" }, 2350);
+    intro.addEventListener("click", terminarIntro);
+    setTimeout(terminarIntro, 4300);        // red de seguridad: la página nunca queda tapada
+  } else if (intro && intro.parentNode) {
+    intro.parentNode.removeChild(intro);
   }
 
   /* --------------------------------------------------------------
      6. Entrada de la portada, de arriba hacia abajo
      -------------------------------------------------------------- */
   var hayPortada = !!document.querySelector(".portada");
-  var entrada = hayPortada ? A.createTimeline({ defaults: { ease: salida, duration: 900 } }) : null;
+  var entrada = hayPortada ? A.createTimeline({ defaults: { ease: salida, duration: 900 }, autoplay: !conIntro }) : null;
+  if (hayPortada && conIntro) {
+    entrada.seek(0);                          // bajo la cortina, la portada espera en su punto de partida
+    alTerminarIntro.push(function () { entrada.play(); });
+  }
   if (hayPortada) entrada
     .add(".portada .sello", { opacity: [0, 1], y: [14, 0], duration: 700 }, 0)
     .add(piezas, { opacity: [0, 1], y: ["105%", "0%"], rotate: [4, 0], delay: A.stagger(80) }, 120)

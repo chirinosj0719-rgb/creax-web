@@ -5,31 +5,59 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">  <!-- borrador: quitar al publicar la web oficial -->
 <title>Nosotros · CreaX</title>
-<meta name="description" content="Cuatro socios: dos construyen y dos atienden. Cómo trabaja CreaX, qué se compromete en cada proyecto y cómo conversar el suyo.">
-<meta name="theme-color" content="#f5f4f2">
-<script>document.documentElement.classList.add("con-js");</script>
+<meta name="description" content="CreaX es una empresa peruana de desarrollo web y automatización de procesos, formada por cuatro socios.">
+<meta name="theme-color" content="#63E2C6">
+<script>
+  document.documentElement.classList.add("con-js");
+  /* la intro del logo: una vez por visita, y nunca si pidieron menos movimiento o es una captura */
+  try {
+    if (!sessionStorage.getItem("creax-intro") && !matchMedia("(prefers-reduced-motion: reduce)").matches &&
+        location.search.indexOf("estatico") < 0) {
+      document.documentElement.classList.add("con-intro");
+      setTimeout(function () { document.documentElement.classList.remove("con-intro"); }, 5000);
+    }
+  } catch (e) {}
+</script>
+<link rel="icon" href="assets/creax-isotipo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/iconos/style.css">
 <link rel="stylesheet" href="estilos.css">
 </head>
 
-<body>
+<body class="color-nosotros">
+
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="intro-caja">
+    <svg class="intro-logo" viewBox="0 0 100 100">
+      <rect class="ib" x="8" y="8" width="24" height="24" rx="7" fill="#FF7A59"/>
+      <rect class="ib" x="64" y="8" width="24" height="24" rx="7" fill="#B9A6FF"/>
+      <rect class="ib" x="36" y="36" width="24" height="24" rx="7" fill="#F4F4F2"/>
+      <rect class="ib" x="8" y="64" width="24" height="24" rx="7" fill="#FFD84D"/>
+      <rect class="ranura" x="64" y="64" width="24" height="24" rx="7" fill="none" stroke="#F4F4F2" stroke-width="2.5" stroke-dasharray="4 4"/>
+      <g class="arrastre">
+        <rect x="70" y="70" width="24" height="24" rx="7" fill="#C5F82A" transform="rotate(8 82 82)"/>
+        <path d="M80 80 L98 88 L90 90 L88 98 Z" fill="#F4F4F2" stroke="#101010" stroke-width="3" stroke-linejoin="round"/>
+      </g>
+    </svg>
+    <p class="intro-palabra">Crea<span>X</span></p>
+  </div>
+  <p class="intro-saltar">Toca para entrar</p>
+</div>
+
 
 <div class="avance" id="avance" aria-hidden="true"></div>
-<div class="reticula" aria-hidden="true"></div>
-<div class="grano" aria-hidden="true"></div>
 
 <header class="nav" id="nav">
   <div class="nav-caja">
     <a class="nav-marca" href="index.html" aria-label="CreaX, inicio">
-      <img class="logo" src="assets/creax-logo.svg" alt="CreaX" width="72" height="21">
+      <img class="isotipo" src="assets/creax-isotipo.svg" alt="" width="26" height="26"><img class="logo" src="assets/creax-logo.svg" alt="CreaX" width="72" height="21">
     </a>
     <nav class="nav-enlaces">
-      <a class="enlace" href="servicios.html">Servicios</a>
-      <a class="enlace" href="automatizaciones.html">Automatizaciones</a>
-      <a class="enlace" href="bocetos.html">Bocetos</a>
-      <a class="enlace" href="nosotros.html" aria-current="page">Nosotros</a>
+      <a class="enlace color-servicios" href="servicios.html">Servicios</a>
+      <a class="enlace color-automatizaciones" href="automatizaciones.html">Automatizaciones</a>
+      <a class="enlace color-bocetos" href="bocetos.html">Bocetos</a>
+      <a class="enlace color-nosotros" href="nosotros.html" aria-current="page">Nosotros</a>
       <!-- CONTACTO -->
-      <a class="boton boton-principal boton-chico brillo" href="https://wa.me/51000000000" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+      <a class="boton boton-principal boton-chico" href="https://wa.me/51000000000" target="_blank" rel="noopener">Escribir por WhatsApp</a>
     </nav>
   </div>
 </header>
@@ -38,10 +66,9 @@
 
   <section class="encabezado">
     <div class="envoltura">
-      <p class="migas"><a href="index.html">Inicio</a> · Nosotros</p>
       <p class="marca-seccion revelar">Nosotros</p>
       <h1 class="revelar">Cuatro socios, un <em class="cursiva">solo</em> equipo</h1>
-      <p class="entrada revelar">CreaX es un estudio peruano de desarrollo web y automatización de procesos. Trabajamos con negocios de Lima que ya venden por canales digitales pero siguen gestionando su operación a mano.</p>
+      <p class="entrada revelar">CreaX es una empresa peruana de desarrollo web y automatización de procesos. Trabajamos con negocios de Lima que ya venden por canales digitales y buscan ordenar su operación.</p>
     </div>
   </section>
 
@@ -49,109 +76,107 @@
   <section id="equipo">
     <div class="envoltura">
       <p class="marca-seccion revelar">Equipo</p>
-      <h2 class="revelar">Quiénes están <em class="cursiva">detrás</em></h2>
-      <p class="entrada revelar">Dos construyen y dos atienden, así que el desarrollo no se detiene por una reunión y el cliente nunca se queda sin respuesta. Cada frente tiene dos responsables: nada depende de una sola persona.</p>
+      <h2 class="revelar">El <em class="cursiva">equipo</em></h2>
+      <p class="entrada revelar">La empresa está conformada por cuatro socios con participación igualitaria. Las áreas de desarrollo y de gestión trabajan en paralelo, de modo que cada proyecto cuenta desde el inicio con responsables técnicos y comerciales.</p>
       <div class="socios">
         <article class="tarjeta socio revelar" tabindex="0">
-          <div class="socio-inicial">JD</div>
+          <div class="socio-foto" aria-hidden="true"><span>Foto</span></div>
           <h3>Juan Diego Chirinos</h3>
-          <p>Producto y desarrollo web · atención de clientes</p>
-          <div class="socio-detalle"><ul><li>Webs y bocetos</li><li>Estándares técnicos</li><li>Atención de clientes</li></ul></div>
-          <span class="socio-pista">+ de qué se encarga</span>
+          <p>Producto, desarrollo web y marca</p>
+          <div class="socio-detalle"><ul><li>Desarrollo de páginas web</li><li>Estándares técnicos</li><li>Marca</li></ul></div>
+          <span class="socio-pista">+ Áreas a su cargo</span>
         </article>
         <article class="tarjeta socio revelar" tabindex="0">
-          <div class="socio-inicial">IO</div>
+          <div class="socio-foto" aria-hidden="true"><span>Foto</span></div>
           <h3>Iker Olite</h3>
           <p>Automatización, integraciones y soporte</p>
-          <div class="socio-detalle"><ul><li>Automatizaciones con n8n</li><li>Integraciones</li><li>Soporte técnico e infraestructura</li></ul></div>
-          <span class="socio-pista">+ de qué se encarga</span>
+          <div class="socio-detalle"><ul><li>Automatización de procesos</li><li>Integraciones</li><li>Soporte técnico e infraestructura</li></ul></div>
+          <span class="socio-pista">+ Áreas a su cargo</span>
         </article>
         <article class="tarjeta socio revelar" tabindex="0">
-          <div class="socio-inicial">JO</div>
+          <div class="socio-foto" aria-hidden="true"><span>Foto</span></div>
           <h3>Joaquín Ortiz</h3>
-          <p>Dirección, estrategia comercial y marca</p>
-          <div class="socio-detalle"><ul><li>Dirección y estrategia comercial</li><li>Alianzas</li><li>Marca</li></ul></div>
-          <span class="socio-pista">+ de qué se encarga</span>
+          <p>Dirección, estrategia comercial y clientes</p>
+          <div class="socio-detalle"><ul><li>Dirección y estrategia comercial</li><li>Alianzas</li><li>Atención de clientes</li></ul></div>
+          <span class="socio-pista">+ Áreas a su cargo</span>
         </article>
         <article class="tarjeta socio revelar" tabindex="0">
-          <div class="socio-inicial">LF</div>
+          <div class="socio-foto" aria-hidden="true"><span>Foto</span></div>
           <h3>Luis Felipe Terzi</h3>
-          <p>Gerencia, contratos y atención de clientes</p>
+          <p>Gerencia general, contratos y clientes</p>
           <div class="socio-detalle"><ul><li>Gerencia general</li><li>Contratos y finanzas</li><li>Trámites y atención de clientes</li></ul></div>
-          <span class="socio-pista">+ de qué se encarga</span>
+          <span class="socio-pista">+ Áreas a su cargo</span>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- ================= cómo trabajamos ================= -->
+  <!-- ================= compromisos ================= -->
   <section>
     <div class="envoltura">
       <div class="dos-columnas">
         <div class="revelar">
           <p class="marca-seccion">Cómo trabajamos</p>
-          <h2>Lo que nos comprometemos <em class="cursiva">a hacer</em></h2>
+          <h2>Nuestros <em class="cursiva">compromisos</em></h2>
           <ul class="lista-marcada">
-            <li><i class="ph ph-check-circle" aria-hidden="true"></i> Mostrar el trabajo antes de cobrarlo: primero el boceto, después la conversación</li>
-            <li><i class="ph ph-check-circle" aria-hidden="true"></i> Decir el alcance y el precio por escrito antes de empezar</li>
-            <li><i class="ph ph-check-circle" aria-hidden="true"></i> Publicar todo a nombre del negocio: el dominio, la web y las cuentas son suyas</li>
-            <li><i class="ph ph-check-circle" aria-hidden="true"></i> Explicar en castellano qué hace cada cosa, sin escondernos en tecnicismos</li>
-            <li><i class="ph ph-check-circle" aria-hidden="true"></i> Dejar documentado el trabajo, para que no dependan de nosotros para seguir</li>
-            <li><i class="ph ph-check-circle" aria-hidden="true"></i> Avisar cuando algo no conviene, aunque signifique vender menos</li>
+            <li><i class="ph ph-check-circle" aria-hidden="true"></i> Definir por escrito el alcance, los plazos y el precio antes de iniciar el trabajo.</li>
+            <li><i class="ph ph-check-circle" aria-hidden="true"></i> Publicar todo a nombre del cliente: el dominio, la página y las cuentas le pertenecen.</li>
+            <li><i class="ph ph-check-circle" aria-hidden="true"></i> Explicar con claridad el funcionamiento de cada solución, sin tecnicismos innecesarios.</li>
+            <li><i class="ph ph-check-circle" aria-hidden="true"></i> Documentar el trabajo entregado, para que el cliente conserve su autonomía.</li>
+            <li><i class="ph ph-check-circle" aria-hidden="true"></i> Recomendar únicamente lo que el negocio necesita.</li>
           </ul>
         </div>
 
         <aside class="tarjeta revelar">
           <div class="icono"><i class="ph ph-buildings" aria-hidden="true"></i></div>
           <h3>Con quiénes trabajamos</h3>
-          <p>Negocios de Lima, de 5 a 50 trabajadores, que ya venden por canales digitales y quieren dejar de gestionar a mano.</p>
+          <p>Pequeñas y medianas empresas de Lima, de 5 a 50 trabajadores, que venden por canales digitales y desean dejar de gestionar su operación a mano.</p>
           <ul>
-            <li>Gastronomía: panaderías, pastelerías, restaurantes</li>
-            <li>Salud y bienestar: consultorios, gimnasios, estudios</li>
-            <li>Comercio: tiendas, distribuidoras, ópticas</li>
+            <li>Gastronomía: panaderías, pastelerías y restaurantes</li>
+            <li>Salud y bienestar: consultorios, gimnasios y centros de estética</li>
+            <li>Comercio: tiendas, distribuidoras y ópticas</li>
             <li>Servicios profesionales y educación</li>
           </ul>
-          <p class="acciones"><a class="boton boton-secundario boton-chico" href="bocetos.html">Ver bocetos por rubro</a></p>
         </aside>
       </div>
     </div>
   </section>
 
-  <!-- ================= el proceso de un proyecto ================= -->
+  <!-- ================= etapas de un proyecto ================= -->
   <section>
     <div class="envoltura">
-      <p class="marca-seccion revelar">Un proyecto por dentro</p>
-      <h2 class="revelar">De la primera conversación a la <em class="cursiva">publicación</em></h2>
+      <p class="marca-seccion revelar">Metodología</p>
+      <h2 class="revelar">Etapas de un <em class="cursiva">proyecto</em></h2>
       <div class="resultados">
-        <article class="tarjeta brillo revelar">
+        <article class="tarjeta revelar">
           <span class="resultado-num">01</span>
-          <h3>Conversación</h3>
-          <p>Veinte minutos para entender qué vende, cómo atiende hoy y qué le está costando tiempo.</p>
+          <h3>Diagnóstico</h3>
+          <p>Reunión inicial para conocer la operación del negocio y sus necesidades.</p>
         </article>
-        <article class="tarjeta brillo revelar">
+        <article class="tarjeta revelar">
           <span class="resultado-num">02</span>
-          <h3>Boceto</h3>
-          <p>Se arma su página con información pública y se le muestra funcionando en el celular.</p>
-        </article>
-        <article class="tarjeta brillo revelar">
-          <span class="resultado-num">03</span>
           <h3>Propuesta</h3>
-          <p>Alcance, plazos y precio por escrito. Si hay automatización, se detalla cada flujo.</p>
+          <p>Alcance, plazos y precio por escrito. Si incluye automatización, se detalla cada flujo.</p>
         </article>
-        <article class="tarjeta brillo revelar">
+        <article class="tarjeta revelar">
+          <span class="resultado-num">03</span>
+          <h3>Diseño</h3>
+          <p>Se define la estructura y el diseño de la página a partir de la información del negocio.</p>
+        </article>
+        <article class="tarjeta revelar">
           <span class="resultado-num">04</span>
-          <h3>Construcción</h3>
-          <p>Se construye con avances a la vista y dos rondas de ajustes incluidas.</p>
+          <h3>Desarrollo</h3>
+          <p>Se construye con avances periódicos y dos rondas de ajustes incluidas.</p>
         </article>
-        <article class="tarjeta brillo revelar">
+        <article class="tarjeta revelar">
           <span class="resultado-num">05</span>
           <h3>Publicación</h3>
-          <p>Sale al aire con su dominio, su ficha de Google al día y el equipo capacitado.</p>
+          <p>La página se publica con el dominio del cliente, su ficha de Google actualizada y el equipo capacitado.</p>
         </article>
-        <article class="tarjeta brillo revelar">
+        <article class="tarjeta revelar">
           <span class="resultado-num">06</span>
           <h3>Acompañamiento</h3>
-          <p>Garantía de 30 días y, si lo quiere, el Plan Cuidado para mantener todo al día.</p>
+          <p>Garantía de 30 días y, de manera opcional, un plan mensual de mantenimiento.</p>
         </article>
       </div>
     </div>
@@ -160,11 +185,11 @@
   <section id="contacto">
     <div class="envoltura">
       <div class="cierre-caja revelar">
-        <h2>Conversemos sobre <em class="cursiva">el negocio</em></h2>
-        <p class="entrada">Una llamada de veinte minutos alcanza para entender la operación. De ahí sale el boceto, sin compromiso.</p>
+        <h2>Conversemos sobre <em class="cursiva">su</em> negocio</h2>
+        <p class="entrada">Una reunión breve nos permite conocer su operación y proponerle la solución adecuada.</p>
         <div class="acciones">
           <!-- CONTACTO -->
-          <a class="boton boton-principal brillo" href="https://wa.me/51000000000" target="_blank" rel="noopener">
+          <a class="boton boton-principal" href="https://wa.me/51000000000" target="_blank" rel="noopener">
             <i class="ph ph-whatsapp-logo" aria-hidden="true"></i> Escribir por WhatsApp
           </a>
           <!-- CONTACTO -->
@@ -187,7 +212,7 @@
   <div class="envoltura">
     <div class="pie-grilla">
       <div>
-        <img class="logo-pie" src="assets/creax-logo.svg" alt="CreaX" width="90" height="26">
+        <span class="firma-pie"><img class="isotipo" src="assets/creax-isotipo.svg" alt="" width="30" height="30"><img class="logo-pie" src="assets/creax-logo.svg" alt="CreaX" width="90" height="26"></span>
         <p>Desarrollo web y automatización de procesos para negocios de Lima.</p>
       </div>
       <div>

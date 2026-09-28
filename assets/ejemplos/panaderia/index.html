@@ -4,17 +4,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <meta name="description" content="Pan del día, pasteles por encargo y tu pedido listo en un mensaje.">
-<meta name="theme-color" content="#B4451F">
-<title>Panadería Aurora · Panadería y pastelería · Barranco</title>
+<meta name="theme-color" content="#D2441E">
+<title>Panadería · Panadería y pastelería · Lima</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Karla:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Karla:wght@400;500;600;700&display=swap">
 <style>
 *, *::before, *::after { box-sizing: border-box; }
 :root {
-  --color: #B4451F; --rgb: 180, 69, 31; --oscuro: #6E2810; --claro: #FDF4EE; --claro2: #F6DECF;
+  --color: #D2441E; --rgb: 210, 68, 30; --oscuro: #8F2C12; --claro: #FFF1EC; --claro2: #FFD9CC;
   --tinta: #14181D; --gris: #5C656F; --linea: #E7E9EC; --papel: #FFFFFF; --fondo: #FAFAFB;
-  --titulo: "Bricolage Grotesque", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", sans-serif; --texto: "Karla", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", sans-serif;
+  --titulo: "DM Serif Display", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", sans-serif; --texto: "Karla", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", sans-serif; --acento: "DM Serif Display", Georgia, serif; --peso-titulo: 400;
   --r: 20px; --rc: 14px;
   --s1: 0 1px 2px rgba(18,23,28,.05), 0 10px 22px -14px rgba(18,23,28,.30);
   --s2: 0 2px 6px rgba(18,23,28,.06), 0 28px 50px -24px rgba(18,23,28,.40);
@@ -291,7 +291,56 @@ footer p { margin: 0 0 8px; max-width: 60ch; }
   background: rgba(255,255,255,.92); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
   border-top: 1px solid var(--linea); }
 .barra-abajo .btn { flex: 1; }
+.captura .barra-abajo { display: none; }
 @media (min-width: 860px) { .barra-abajo { display: none; } footer { padding-bottom: 52px; } }
+
+
+/* ---------- portada editorial: frase con cursiva, foto en arco, sello que gira y polaroid ---------- */
+.aura, .trama { display: none; }
+.portada { background: var(--claro); }
+h1 { font-weight: var(--peso-titulo); font-size: clamp(40px, 10vw, 66px); line-height: 1.02; }
+h1 em, h2 em { font-family: var(--acento); font-style: italic; font-weight: 400; color: var(--color); letter-spacing: -0.01em; }
+.escena-editorial { position: relative; width: min(100%, 420px); margin: 40px auto 18px; }
+@media (min-width: 900px) { .escena-editorial { margin: 0 0 0 auto; } }
+.arco { margin: 0; aspect-ratio: 4 / 5; border-radius: 999px 999px 26px 26px; overflow: hidden;
+  background: var(--claro2); border: 1px solid rgba(var(--rgb), .2); display: grid; place-items: center; }
+.arco img { width: 100%; height: 100%; object-fit: cover; }
+.arco span { font-size: 12px; font-weight: 650; color: var(--oscuro); background: rgba(255,255,255,.85); padding: 6px 13px; border-radius: 999px; }
+.sello-giratorio { position: absolute; top: -16px; right: -12px; width: 122px; height: 122px; border-radius: 50%;
+  background: var(--papel); border: 1px solid rgba(var(--rgb), .28); display: grid; place-items: center; }
+.sello-giratorio svg { position: absolute; inset: 5px; width: calc(100% - 10px); height: calc(100% - 10px); animation: girar 24s linear infinite; }
+.sello-giratorio text { font-family: var(--texto); font-size: 10.4px; font-weight: 700; letter-spacing: 1.9px; fill: var(--oscuro); }
+.sello-centro { font-family: var(--acento); font-style: italic; font-size: 34px; line-height: 1; color: var(--color); }
+@keyframes girar { to { transform: rotate(360deg); } }
+.polaroid { position: absolute; left: -28px; bottom: -24px; width: 150px; margin: 0; background: #fff;
+  padding: 8px 8px 10px; border-radius: 6px; border: 1px solid #ebe8e2; transform: rotate(-4deg);
+  box-shadow: 0 18px 30px -20px rgba(0,0,0,.4); }
+.polaroid img, .polaroid .vacio { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 3px; background: var(--claro2); }
+.polaroid figcaption { margin-top: 6px; text-align: center; font-family: var(--acento); font-style: italic; font-size: 15px; line-height: 1.2; color: var(--tinta); }
+@media (max-width: 560px) {
+  .escena-editorial { width: 84%; }
+  .sello-giratorio { width: 98px; height: 98px; right: -14px; }
+  .sello-giratorio text { font-size: 9.2px; letter-spacing: 1.6px; }
+  .sello-centro { font-size: 27px; }
+  .polaroid { width: 120px; left: -18px; bottom: -20px; }
+}
+
+/* ---------- pasos: números grandes en cursiva y la conversación al lado ---------- */
+.pasos-grilla { display: grid; gap: 36px; }
+@media (min-width: 900px) { .pasos-grilla { grid-template-columns: 1.15fr .85fr; align-items: center; gap: 56px; } }
+.pasos-grilla .pasos { grid-template-columns: 1fr !important; gap: 14px; }
+.paso { display: grid; grid-template-columns: 58px 1fr; column-gap: 12px; }
+.paso .n { grid-row: span 2; width: auto; height: auto; margin: 0; background: none; border: 0;
+  font-family: var(--acento); font-style: italic; font-weight: 400; font-size: 50px; line-height: .9; color: var(--color); }
+.paso:not(:last-child)::after { display: none; }
+.pasos-grilla .charla { width: 100%; max-width: 360px; margin: 0 auto; transform: rotate(1.4deg); }
+
+/* ---------- productos en carrusel dentro del celular ---------- */
+@media (max-width: 619px) {
+  .rejilla { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 82%; overflow-x: auto;
+    scroll-snap-type: x mandatory; margin-right: -20px; padding-right: 20px; padding-bottom: 6px; }
+  .rejilla .item { scroll-snap-align: start; }
+}
 
 /* movimiento */
 .con-js .revelar { opacity: 0; transform: translateY(24px); }
@@ -305,11 +354,10 @@ footer p { margin: 0 0 8px; max-width: 60ch; }
 </head>
 <body>
 
-<p class="aviso">Boceto de demostración preparado por <b>CreaX</b> con información pública de Panadería Aurora.
-No está publicado ni aparece en buscadores.</p>
+
 
 <header class="barra">
-  <a class="marca" href="#inicio"><span class="sigla">PA</span>Panadería Aurora</a>
+  <a class="marca" href="#inicio"><span class="sigla">P</span>Panadería</a>
   <nav class="enlaces">
     <a href="#catalogo">La carta</a>
     <a href="#pedir">Cómo pedir</a>
@@ -320,30 +368,24 @@ No está publicado ni aparece en buscadores.</p>
 
 <main>
 <section class="portada" id="inicio">
-  <div class="aura"></div>
-  <div class="trama"></div>
   <div class="envoltura portada-caja">
     <div>
-      <p class="etiqueta"><span class="pulso"></span>Panadería y pastelería · Barranco</p>
-      <h1>Panadería Aurora</h1>
+      <p class="etiqueta"><span class="pulso"></span>Panadería y pastelería · Lima</p>
+      <h1>Pan recién horneado, <em>todos los días.</em></h1>
       <p class="bajada">Pan del día, pasteles por encargo y tu pedido listo en un mensaje.</p>
       <div class="acciones">
         <a class="btn" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>Pedir por WhatsApp</a>
         <a class="btn fantasma" href="#catalogo">Ver la carta</a>
       </div>
-      <ul class="datos"><li><b>Barranco</b></li><li>Horario: <b>Lun a Sáb · 7:00 a. m. – 9:00 p. m.</b></li></ul>
+      <ul class="datos"><li><b>Lima</b></li><li>Horario: <b>Lun a Sáb · 7:00 a. m. – 9:00 p. m.</b></li></ul>
     </div>
-    <div class="escena">
-      <figure class="foto-portada"><img src="fotos/portada.jpg" alt="Panadería Aurora"></figure>
-      <div class="charla">
-        <div class="charla-barra">
-          <span class="sigla">PA</span>
-          <div><b>Panadería Aurora</b><i>en línea</i></div>
-        </div>
-        <div class="globo cliente">Hola, quisiera hacer un pedido<span class="hora">9:41</span></div>
-        <div class="globo negocio">¡Hola! Te confirmo: <b>Pan de masa madre</b>. ¿A qué hora te viene bien?<span class="hora">9:41</span></div>
-        <div class="escribiendo"><i></i><i></i><i></i></div>
+    <div class="escena-editorial">
+      <figure class="arco"><img src="fotos/portada.jpg" alt="Panadería"></figure>
+      <div class="sello-giratorio" aria-hidden="true">
+        <svg viewBox="0 0 120 120"><defs><path id="circulo" d="M60,60 m-47,0 a47,47 0 1,1 94,0 a47,47 0 1,1 -94,0"/></defs><text><textPath href="#circulo" textLength="293" lengthAdjust="spacing">RECIÉN HECHO · TODOS LOS DÍAS · </textPath></text></svg>
+        <span class="sello-centro">P</span>
       </div>
+      <figure class="polaroid"><img src="fotos/item-1.jpg" alt="" loading="lazy"><figcaption>Pan de masa madre</figcaption></figure>
     </div>
   </div>
   <div class="tira"><ul><li>Pedidos por WhatsApp</li><li>Carta siempre al día</li><li>Recojo y delivery</li></ul></div>
@@ -426,26 +468,37 @@ No está publicado ni aparece en buscadores.</p>
 </section>
 
 <section class="bloque papel" id="pedir">
-  <div class="envoltura">
-    <p class="cintillo revelar">02 — Cómo pedir</p>
-    <h2 class="revelar">Cómo pedir</h2>
-    <p class="lede revelar">Sin audios ni idas y vueltas: el pedido llega listo.</p>
-    <ol class="pasos">
+  <div class="envoltura pasos-grilla">
+    <div>
+      <p class="cintillo revelar">02 — Cómo pedir</p>
+      <h2 class="revelar">Cómo pedir</h2>
+      <p class="lede revelar">Sin audios ni idas y vueltas: el pedido llega listo.</p>
+      <ol class="pasos">
         <li class="paso revelar">
-          <span class="n">01</span>
+          <span class="n">1</span>
           <h3>Eliges de la carta</h3>
           <p>Todo está acá, con foto y precio.</p>
         </li>
         <li class="paso revelar">
-          <span class="n">02</span>
+          <span class="n">2</span>
           <h3>Nos escribes por WhatsApp</h3>
           <p>El pedido se arma solo, con lo que elegiste.</p>
         </li>
         <li class="paso revelar">
-          <span class="n">03</span>
+          <span class="n">3</span>
           <h3>Lo recoges o te lo llevamos</h3>
           <p>Te confirmamos la hora y el monto.</p>
         </li></ol>
+    </div>
+    <div class="charla revelar">
+      <div class="charla-barra">
+        <span class="sigla">P</span>
+        <div><b>Panadería</b><i>en línea</i></div>
+      </div>
+      <div class="globo cliente">Hola, quisiera hacer un pedido<span class="hora">9:41</span></div>
+      <div class="globo negocio">¡Hola! Te confirmo: <b>Pan de masa madre</b>. ¿A qué hora te viene bien?<span class="hora">9:41</span></div>
+      <div class="escribiendo"><i></i><i></i><i></i></div>
+    </div>
   </div>
 </section>
 
@@ -477,9 +530,9 @@ No está publicado ni aparece en buscadores.</p>
     <div class="contacto">
       <div class="ficha revelar">
         <dl>
-          <div><dt>Dirección</dt><dd>Av. de ejemplo 000, Barranco</dd></div>
+          <div><dt>Dirección</dt><dd>Lima</dd></div>
           <div><dt>Horario</dt><dd>Lun a Sáb · 7:00 a. m. – 9:00 p. m.</dd></div>
-          <div><dt>WhatsApp</dt><dd>[Teléfono por confirmar]</dd></div>
+          <div><dt>WhatsApp</dt><dd>Escríbenos por WhatsApp</dd></div>
         </dl>
         <a class="btn" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>Pedir por WhatsApp</a>
       </div>
@@ -494,9 +547,8 @@ No está publicado ni aparece en buscadores.</p>
 
 <footer>
   <div class="envoltura">
-    <p>Boceto hecho por <span class="menta">CreaX</span> · Desarrollo web y automatización de procesos · hola@creax.pe</p>
-    <p>Todo lo que ve acá se cambia por lo suyo: textos, fotos, productos, precios y colores.
-    La página final se publica a su nombre, con su dominio.</p>
+    <p>Página de ejemplo diseñada por <span class="menta">CreaX</span> · Desarrollo web y automatización de procesos.</p>
+    <p>Los productos, precios y fotos son de muestra.</p>
   </div>
 </footer>
 
@@ -508,6 +560,7 @@ No está publicado ni aparece en buscadores.</p>
 // "?estatico" en la dirección deja la página quieta: sirve para sacarle capturas
 var quieto = location.search.indexOf('estatico') > -1;
 if (!quieto) document.documentElement.classList.add('con-js');
+else document.documentElement.classList.add('captura');
 document.addEventListener('DOMContentLoaded', function () {
   var barra = document.querySelector('.barra');
   var alSubir = function () { barra.classList.toggle('pegada', window.scrollY > 12); };

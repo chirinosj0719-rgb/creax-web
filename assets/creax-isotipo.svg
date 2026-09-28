@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="CreaX">
+  <!-- Isotipo de CreaX: cuatro bloques armados y el cursor arrastrando el último a su lugar -->
+  <rect x="8" y="8" width="24" height="24" rx="7" fill="#FF7A59"/>
+  <rect x="64" y="8" width="24" height="24" rx="7" fill="#B9A6FF"/>
+  <rect x="36" y="36" width="24" height="24" rx="7" fill="#101010"/>
+  <rect x="8" y="64" width="24" height="24" rx="7" fill="#FFD84D"/>
+  <rect x="64" y="64" width="24" height="24" rx="7" fill="none" stroke="#101010" stroke-width="2.5" stroke-dasharray="4 4"/>
+  <rect x="70" y="70" width="24" height="24" rx="7" fill="#C5F82A" transform="rotate(8 82 82)"/>
+  <path d="M80 80 L98 88 L90 90 L88 98 Z" fill="#101010" stroke="#F4F4F2" stroke-width="3" stroke-linejoin="round"/>
+</svg>

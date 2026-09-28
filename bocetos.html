@@ -5,31 +5,59 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">  <!-- borrador: quitar al publicar la web oficial -->
 <title>Bocetos · CreaX</title>
-<meta name="description" content="Antes de cobrar nada, el negocio ve su propia página funcionando en el celular. Acá hay tres bocetos de ejemplo, abiertos para recorrerlos completos.">
-<meta name="theme-color" content="#f5f4f2">
-<script>document.documentElement.classList.add("con-js");</script>
+<meta name="description" content="Cada página se diseña según lo que vende el negocio: sus secciones, sus colores y su forma de pedir. Tres ejemplos para recorrer.">
+<meta name="theme-color" content="#FFD84D">
+<script>
+  document.documentElement.classList.add("con-js");
+  /* la intro del logo: una vez por visita, y nunca si pidieron menos movimiento o es una captura */
+  try {
+    if (!sessionStorage.getItem("creax-intro") && !matchMedia("(prefers-reduced-motion: reduce)").matches &&
+        location.search.indexOf("estatico") < 0) {
+      document.documentElement.classList.add("con-intro");
+      setTimeout(function () { document.documentElement.classList.remove("con-intro"); }, 5000);
+    }
+  } catch (e) {}
+</script>
+<link rel="icon" href="assets/creax-isotipo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/iconos/style.css">
 <link rel="stylesheet" href="estilos.css">
 </head>
 
-<body>
+<body class="color-bocetos">
+
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="intro-caja">
+    <svg class="intro-logo" viewBox="0 0 100 100">
+      <rect class="ib" x="8" y="8" width="24" height="24" rx="7" fill="#FF7A59"/>
+      <rect class="ib" x="64" y="8" width="24" height="24" rx="7" fill="#B9A6FF"/>
+      <rect class="ib" x="36" y="36" width="24" height="24" rx="7" fill="#F4F4F2"/>
+      <rect class="ib" x="8" y="64" width="24" height="24" rx="7" fill="#FFD84D"/>
+      <rect class="ranura" x="64" y="64" width="24" height="24" rx="7" fill="none" stroke="#F4F4F2" stroke-width="2.5" stroke-dasharray="4 4"/>
+      <g class="arrastre">
+        <rect x="70" y="70" width="24" height="24" rx="7" fill="#C5F82A" transform="rotate(8 82 82)"/>
+        <path d="M80 80 L98 88 L90 90 L88 98 Z" fill="#F4F4F2" stroke="#101010" stroke-width="3" stroke-linejoin="round"/>
+      </g>
+    </svg>
+    <p class="intro-palabra">Crea<span>X</span></p>
+  </div>
+  <p class="intro-saltar">Toca para entrar</p>
+</div>
+
 
 <div class="avance" id="avance" aria-hidden="true"></div>
-<div class="reticula" aria-hidden="true"></div>
-<div class="grano" aria-hidden="true"></div>
 
 <header class="nav" id="nav">
   <div class="nav-caja">
     <a class="nav-marca" href="index.html" aria-label="CreaX, inicio">
-      <img class="logo" src="assets/creax-logo.svg" alt="CreaX" width="72" height="21">
+      <img class="isotipo" src="assets/creax-isotipo.svg" alt="" width="26" height="26"><img class="logo" src="assets/creax-logo.svg" alt="CreaX" width="72" height="21">
     </a>
     <nav class="nav-enlaces">
-      <a class="enlace" href="servicios.html">Servicios</a>
-      <a class="enlace" href="automatizaciones.html">Automatizaciones</a>
-      <a class="enlace" href="bocetos.html" aria-current="page">Bocetos</a>
-      <a class="enlace" href="nosotros.html">Nosotros</a>
+      <a class="enlace color-servicios" href="servicios.html">Servicios</a>
+      <a class="enlace color-automatizaciones" href="automatizaciones.html">Automatizaciones</a>
+      <a class="enlace color-bocetos" href="bocetos.html" aria-current="page">Bocetos</a>
+      <a class="enlace color-nosotros" href="nosotros.html">Nosotros</a>
       <!-- CONTACTO -->
-      <a class="boton boton-principal boton-chico brillo" href="https://wa.me/51000000000" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+      <a class="boton boton-principal boton-chico" href="https://wa.me/51000000000" target="_blank" rel="noopener">Escribir por WhatsApp</a>
     </nav>
   </div>
 </header>
@@ -38,72 +66,70 @@
 
   <section class="encabezado">
     <div class="envoltura">
-      <p class="migas"><a href="index.html">Inicio</a> · Bocetos</p>
       <p class="marca-seccion revelar">Bocetos</p>
-      <h1 class="revelar">La página se ve <em class="cursiva">antes</em> de cobrar</h1>
-      <p class="entrada revelar">CreaX arma el boceto con la información pública del negocio y se lo muestra funcionando. No es una imagen ni una presentación: es una página real que se abre en el celular y cuyo botón escribe al WhatsApp del negocio.</p>
+      <h1 class="revelar">Páginas a la <em class="cursiva">medida</em> de cada negocio</h1>
+      <p class="entrada revelar">Cada página se diseña según lo que vende el negocio y cómo le compran sus clientes: sus secciones, sus colores y su forma de pedir.</p>
     </div>
   </section>
 
-  <!-- ================= qué es y cómo se hace ================= -->
+  <!-- ================= cómo la diseñamos ================= -->
   <section>
     <div class="envoltura">
       <div class="metodo-grilla">
         <div>
           <p class="marca-seccion revelar">Cómo se hace</p>
-          <h2 class="revelar">Tres pasos y <em class="cursiva">una</em> respuesta</h2>
+          <h2 class="revelar">Cómo la <em class="cursiva">diseñamos</em></h2>
 
           <div class="pasos" id="pasos">
             <article class="paso revelar" data-paso="1">
               <div class="paso-numero">1</div>
               <div>
-                <h3>Se estudia el negocio</h3>
-                <p>Qué vende, cómo recibe los pedidos hoy y dónde se le traba la atención. Todo con información pública: su ficha de Google, sus redes y su carta.</p>
+                <h3>Conocemos el negocio</h3>
+                <p>Qué vende, cómo le piden hoy y en qué momento se le traba la atención.</p>
               </div>
             </article>
             <article class="paso revelar" data-paso="2">
               <div class="paso-numero">2</div>
               <div>
-                <h3>Se arma el boceto</h3>
-                <p>Con su marca, sus productos, su horario y su número de WhatsApp. Cada rubro tiene sus propias secciones, colores y tipografía.</p>
+                <h3>Diseñamos su página</h3>
+                <p>Con su marca, sus productos y su WhatsApp. Cada tipo de negocio tiene sus propias secciones, colores y tipografía.</p>
               </div>
             </article>
             <article class="paso revelar" data-paso="3">
               <div class="paso-numero">3</div>
               <div>
-                <h3>Se ve en el celular</h3>
-                <p>El boceto llega por WhatsApp y se abre como cualquier web. Si convence, ese mismo trabajo se convierte en la web final. Si no, ahí queda.</p>
+                <h3>La publicamos y la cuidamos</h3>
+                <p>Sale con su propio dominio y queda lista para recibir pedidos desde el primer día.</p>
               </div>
             </article>
           </div>
         </div>
 
         <aside class="tarjeta revelar">
-          <div class="icono"><i class="ph ph-hand-heart" aria-hidden="true"></i></div>
-          <h3>Reglas del boceto</h3>
+          <div class="icono"><i class="ph ph-paint-brush-broad" aria-hidden="true"></i></div>
+          <h3>Qué se personaliza</h3>
           <ul>
-            <li>No cuesta nada y no compromete a nada</li>
-            <li>Lleva la marca, los productos y los datos del negocio</li>
-            <li>Dice en la parte de arriba que es una demostración de CreaX</li>
-            <li>Queda fuera de los buscadores mientras es un boceto</li>
-            <li>Los precios y las fotos se reemplazan por los del negocio</li>
-            <li>Nunca se publica ni se presenta como la web oficial</li>
+            <li>Los colores y la tipografía de su marca</li>
+            <li>Las secciones, según lo que vende</li>
+            <li>La forma de pedir, reservar o consultar</li>
+            <li>Las fotos de sus productos y de su local</li>
+            <li>Los textos, en el tono del negocio</li>
           </ul>
         </aside>
       </div>
     </div>
   </section>
 
-  <!-- ================= los ejemplos ================= -->
+  <!-- ================= ejemplos ================= -->
   <section id="ejemplos">
     <div class="rubros-escenario">
       <div class="envoltura rubros-grilla">
         <div class="rubros-texto">
           <p class="marca-seccion revelar">Ejemplos</p>
-          <h2 class="rubros-titulo revelar">Un boceto <em class="cursiva">para cada</em> rubro.</h2>
-          <p class="entrada revelar">Un solo comando arma el boceto con los datos públicos del negocio. Cada rubro sale con sus secciones, su color y su tipografía: una panadería no se lee como un consultorio.</p>
+          <h2 class="rubros-titulo revelar">La personalización <em class="cursiva">depende</em> de tu negocio.</h2>
+          <p class="entrada revelar">No hay dos negocios iguales. Cada página se arma con las secciones, los colores y la tipografía que le corresponden.</p>
           <div class="acciones revelar">
-            <a class="boton boton-oscuro" href="#fichas">Ver los tres <i class="ph ph-arrow-down" aria-hidden="true"></i></a>
+            <a class="boton boton-oscuro" href="#fichas">Ver ejemplos <i class="ph ph-arrow-down" aria-hidden="true"></i></a>
             <a class="boton boton-secundario" href="assets/ejemplos/panaderia/index.html" target="_blank" rel="noopener">Abrir uno <i class="ph ph-arrow-up-right" aria-hidden="true"></i></a>
           </div>
         </div>
@@ -117,15 +143,15 @@
           </svg>
           <div class="pieza-terminal">
             <div class="pt-barra"><span class="ventana-puntos" aria-hidden="true"><i></i><i></i><i></i></span><span class="mono">Terminal</span></div>
-            <pre class="mono">&gt; python nuevo.py boceto "Panadería Aurora"
-<span class="ok">✓</span> Datos públicos del negocio
-<span class="ok">✓</span> Carta, pedidos y ubicación
-<span class="ok">✓</span> Color y tipografía del rubro
+            <pre class="mono">&gt; nueva página --negocio panadería
+<span class="ok">✓</span> Secciones del rubro
+<span class="ok">✓</span> Colores y tipografía propios
+<span class="ok">✓</span> Pedidos por WhatsApp
 
-<span class="tenue">Boceto listo para mandar por WhatsApp.</span></pre>
+<span class="tenue">Página lista para publicar.</span></pre>
           </div>
           <div class="pieza-secciones">
-            <p>Cada boceto trae</p>
+            <p>Cada página trae</p>
             <ul>
               <li><i class="ph ph-house-line" aria-hidden="true"></i> Portada con su marca</li>
               <li><i class="ph ph-list-bullets" aria-hidden="true"></i> Carta o servicios</li>
@@ -135,8 +161,8 @@
             </ul>
           </div>
           <div class="pieza-sello" aria-hidden="true"><span>X</span></div>
-          <div class="pieza-fono pf-1"><img src="assets/boceto-panaderia.png" width="390" height="760" alt="Boceto de una panadería"></div>
-          <div class="pieza-fono pf-2"><img src="assets/boceto-dental.png" width="390" height="760" alt="Boceto de una clínica dental"></div>
+          <div class="pieza-fono pf-1"><img src="assets/maqueta-panaderia-cel.png" width="390" height="760" alt="Dibujo de la web de una panadería en el celular"></div>
+          <div class="pieza-fono pf-2"><img src="assets/maqueta-dentista-cel.png" width="390" height="760" alt="Dibujo de la web de un consultorio dental en el celular"></div>
         </div>
       </div>
     </div>
@@ -144,29 +170,29 @@
     <div class="envoltura" id="fichas">
       <p class="marca-seccion revelar">Los tres, por dentro</p>
       <h2 class="revelar">Pasa el cursor por el <em class="cursiva">celular</em></h2>
-      <p class="entrada revelar">Cada vista previa recorre el boceto completo, de la portada al pie. Para tocarlo de verdad, ábrelo.</p>
+      <p class="entrada revelar">Cada vista previa recorre la página completa, de la portada al pie. Para tocarla de verdad, ábrela.</p>
 
       <div class="fichas">
         <article class="ficha-boceto revelar">
           <div>
             <div class="celular-marco">
-              <div class="recorrido" tabindex="0" aria-label="Vista previa del boceto completo">
-                <img src="assets/boceto-panaderia-completo.jpg" width="390" height="6393" alt="Boceto completo de la web de una panadería, visto en un celular" loading="lazy">
+              <div class="recorrido" tabindex="0" aria-label="Vista previa de la página completa">
+                <img src="assets/boceto-panaderia-completo.jpg" alt="Página completa de una panadería, vista en un celular" loading="lazy">
               </div>
             </div>
-            <p class="recorrido-pista"><i class="ph ph-cursor" aria-hidden="true"></i> Pasa el cursor para recorrerlo</p>
+            <p class="recorrido-pista"><i class="ph ph-cursor" aria-hidden="true"></i> Pasa el cursor para recorrerla</p>
           </div>
           <div>
             <p class="ficha-rubro">Gastronomía</p>
-            <h3>Panadería Aurora</h3>
+            <h3>Panadería</h3>
             <p>Para el negocio que vende productos y necesita que el pedido llegue armado. La carta completa, con foto y precio, y un botón que manda el pedido al WhatsApp.</p>
             <ul class="lista-marcada">
-              <li><i class="ph ph-check-circle" aria-hidden="true"></i> Carta con sus fotos y sus precios, lista para pedir</li>
-              <li><i class="ph ph-check-circle" aria-hidden="true"></i> El pedido llega armado al WhatsApp, sin audios</li>
+              <li><i class="ph ph-check-circle" aria-hidden="true"></i> Carta con fotos y precios, lista para pedir</li>
+              <li><i class="ph ph-check-circle" aria-hidden="true"></i> El pedido llega armado al WhatsApp</li>
               <li><i class="ph ph-check-circle" aria-hidden="true"></i> Galería, horario y ubicación del local</li>
             </ul>
             <p class="acciones">
-              <a class="boton boton-secundario boton-chico" href="assets/ejemplos/panaderia/index.html" target="_blank" rel="noopener">Abrir el boceto completo</a>
+              <a class="boton boton-secundario boton-chico" href="assets/ejemplos/panaderia/index.html" target="_blank" rel="noopener">Abrir la página completa</a>
             </p>
           </div>
         </article>
@@ -174,23 +200,23 @@
         <article class="ficha-boceto revelar">
           <div>
             <div class="celular-marco">
-              <div class="recorrido" tabindex="0" aria-label="Vista previa del boceto completo">
-                <img src="assets/boceto-dental-completo.jpg" width="390" height="6415" alt="Boceto completo de la web de una clínica dental, visto en un celular" loading="lazy">
+              <div class="recorrido" tabindex="0" aria-label="Vista previa de la página completa">
+                <img src="assets/boceto-dental-completo.jpg" alt="Página completa de un consultorio dental, vista en un celular" loading="lazy">
               </div>
             </div>
-            <p class="recorrido-pista"><i class="ph ph-cursor" aria-hidden="true"></i> Pasa el cursor para recorrerlo</p>
+            <p class="recorrido-pista"><i class="ph ph-cursor" aria-hidden="true"></i> Pasa el cursor para recorrerla</p>
           </div>
           <div>
             <p class="ficha-rubro">Salud</p>
-            <h3>Clínica Dental Nova</h3>
+            <h3>Dentista</h3>
             <p>Para el negocio que vende servicios y necesita llenar la agenda. Cada tratamiento explicado en palabras del paciente y la cita reservada por WhatsApp.</p>
             <ul class="lista-marcada">
-              <li><i class="ph ph-check-circle" aria-hidden="true"></i> Cada tratamiento con lo que incluye y cuánto cuesta</li>
+              <li><i class="ph ph-check-circle" aria-hidden="true"></i> Cada tratamiento con lo que incluye</li>
               <li><i class="ph ph-check-circle" aria-hidden="true"></i> La cita se reserva por WhatsApp, sin llamadas</li>
               <li><i class="ph ph-check-circle" aria-hidden="true"></i> El consultorio por dentro, horarios y cómo llegar</li>
             </ul>
             <p class="acciones">
-              <a class="boton boton-secundario boton-chico" href="assets/ejemplos/dental/index.html" target="_blank" rel="noopener">Abrir el boceto completo</a>
+              <a class="boton boton-secundario boton-chico" href="assets/ejemplos/dental/index.html" target="_blank" rel="noopener">Abrir la página completa</a>
             </p>
           </div>
         </article>
@@ -198,15 +224,15 @@
         <article class="ficha-boceto revelar">
           <div>
             <div class="celular-marco">
-              <div class="recorrido" tabindex="0" aria-label="Vista previa del boceto completo">
-                <img src="assets/boceto-gimnasio-completo.jpg" width="390" height="6391" alt="Boceto completo de la web de un gimnasio, visto en un celular" loading="lazy">
+              <div class="recorrido" tabindex="0" aria-label="Vista previa de la página completa">
+                <img src="assets/boceto-gimnasio-completo.jpg" alt="Página completa de un gimnasio, vista en un celular" loading="lazy">
               </div>
             </div>
-            <p class="recorrido-pista"><i class="ph ph-cursor" aria-hidden="true"></i> Pasa el cursor para recorrerlo</p>
+            <p class="recorrido-pista"><i class="ph ph-cursor" aria-hidden="true"></i> Pasa el cursor para recorrerla</p>
           </div>
           <div>
             <p class="ficha-rubro">Bienestar</p>
-            <h3>Gimnasio Impulso</h3>
+            <h3>Gimnasio</h3>
             <p>Para el negocio que vende planes y horarios. Todo a la vista, para que el cliente deje de preguntar el precio por mensaje privado.</p>
             <ul class="lista-marcada">
               <li><i class="ph ph-check-circle" aria-hidden="true"></i> Planes, clases y precios en una sola pantalla</li>
@@ -214,25 +240,25 @@
               <li><i class="ph ph-check-circle" aria-hidden="true"></i> Fotos del local, horarios y cómo llegar</li>
             </ul>
             <p class="acciones">
-              <a class="boton boton-secundario boton-chico" href="assets/ejemplos/gimnasio/index.html" target="_blank" rel="noopener">Abrir el boceto completo</a>
+              <a class="boton boton-secundario boton-chico" href="assets/ejemplos/gimnasio/index.html" target="_blank" rel="noopener">Abrir la página completa</a>
             </p>
           </div>
         </article>
       </div>
 
-      <p class="nota revelar">Los tres son negocios de muestra, no clientes: los nombres, los precios y las fotos son de ejemplo. El boceto de un negocio real se arma con sus propios datos.</p>
+      <p class="nota revelar">Páginas de ejemplo, con productos, precios y fotos de muestra.</p>
     </div>
   </section>
 
   <section id="contacto">
     <div class="envoltura">
       <div class="cierre-caja revelar">
-        <h2>¿Quieres ver el <em class="cursiva">del negocio</em>?</h2>
-        <p class="entrada">Mándanos el nombre y el Instagram o la ficha de Google. El boceto llega por WhatsApp, sin costo y sin compromiso.</p>
+        <h2>¿Quieres ver el de <em class="cursiva">TU</em> negocio?</h2>
+        <p class="entrada">Cuéntanos qué vendes y cómo te piden hoy. Te mostramos cómo se vería tu página.</p>
         <div class="acciones">
           <!-- CONTACTO -->
-          <a class="boton boton-principal brillo" href="https://wa.me/51000000000" target="_blank" rel="noopener">
-            <i class="ph ph-whatsapp-logo" aria-hidden="true"></i> Pedir el boceto
+          <a class="boton boton-principal" href="https://wa.me/51000000000" target="_blank" rel="noopener">
+            <i class="ph ph-whatsapp-logo" aria-hidden="true"></i> Escribir por WhatsApp
           </a>
           <a class="boton boton-secundario" href="servicios.html">Ver servicios</a>
         </div>
@@ -246,7 +272,7 @@
   <div class="envoltura">
     <div class="pie-grilla">
       <div>
-        <img class="logo-pie" src="assets/creax-logo.svg" alt="CreaX" width="90" height="26">
+        <span class="firma-pie"><img class="isotipo" src="assets/creax-isotipo.svg" alt="" width="30" height="30"><img class="logo-pie" src="assets/creax-logo.svg" alt="CreaX" width="90" height="26"></span>
         <p>Desarrollo web y automatización de procesos para negocios de Lima.</p>
       </div>
       <div>

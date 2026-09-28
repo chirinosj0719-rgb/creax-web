@@ -5,70 +5,123 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">  <!-- borrador: quitar al publicar la web oficial -->
 <title>Automatizaciones · CreaX</title>
-<meta name="description" content="Atención automática en WhatsApp e Instagram, confirmación de pedidos y citas, registro y reportes. Flujos armados con n8n sobre las herramientas que el negocio ya usa.">
-<meta name="theme-color" content="#f5f4f2">
-<script>document.documentElement.classList.add("con-js");</script>
+<meta name="description" content="El negocio responde, confirma y anota cada pedido a cualquier hora, en WhatsApp e Instagram.">
+<meta name="theme-color" content="#B9A6FF">
+<script>
+  document.documentElement.classList.add("con-js");
+  /* la intro del logo: una vez por visita, y nunca si pidieron menos movimiento o es una captura */
+  try {
+    if (!sessionStorage.getItem("creax-intro") && !matchMedia("(prefers-reduced-motion: reduce)").matches &&
+        location.search.indexOf("estatico") < 0) {
+      document.documentElement.classList.add("con-intro");
+      setTimeout(function () { document.documentElement.classList.remove("con-intro"); }, 5000);
+    }
+  } catch (e) {}
+</script>
+<link rel="icon" href="assets/creax-isotipo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/iconos/style.css">
 <link rel="stylesheet" href="estilos.css">
 </head>
 
-<body>
+<body class="color-automatizaciones">
+
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="intro-caja">
+    <svg class="intro-logo" viewBox="0 0 100 100">
+      <rect class="ib" x="8" y="8" width="24" height="24" rx="7" fill="#FF7A59"/>
+      <rect class="ib" x="64" y="8" width="24" height="24" rx="7" fill="#B9A6FF"/>
+      <rect class="ib" x="36" y="36" width="24" height="24" rx="7" fill="#F4F4F2"/>
+      <rect class="ib" x="8" y="64" width="24" height="24" rx="7" fill="#FFD84D"/>
+      <rect class="ranura" x="64" y="64" width="24" height="24" rx="7" fill="none" stroke="#F4F4F2" stroke-width="2.5" stroke-dasharray="4 4"/>
+      <g class="arrastre">
+        <rect x="70" y="70" width="24" height="24" rx="7" fill="#C5F82A" transform="rotate(8 82 82)"/>
+        <path d="M80 80 L98 88 L90 90 L88 98 Z" fill="#F4F4F2" stroke="#101010" stroke-width="3" stroke-linejoin="round"/>
+      </g>
+    </svg>
+    <p class="intro-palabra">Crea<span>X</span></p>
+  </div>
+  <p class="intro-saltar">Toca para entrar</p>
+</div>
+
 
 <div class="avance" id="avance" aria-hidden="true"></div>
-<div class="reticula" aria-hidden="true"></div>
-<div class="grano" aria-hidden="true"></div>
 
 <header class="nav" id="nav">
   <div class="nav-caja">
     <a class="nav-marca" href="index.html" aria-label="CreaX, inicio">
-      <img class="logo" src="assets/creax-logo.svg" alt="CreaX" width="72" height="21">
+      <img class="isotipo" src="assets/creax-isotipo.svg" alt="" width="26" height="26"><img class="logo" src="assets/creax-logo.svg" alt="CreaX" width="72" height="21">
     </a>
     <nav class="nav-enlaces">
-      <a class="enlace" href="servicios.html">Servicios</a>
-      <a class="enlace" href="automatizaciones.html" aria-current="page">Automatizaciones</a>
-      <a class="enlace" href="bocetos.html">Bocetos</a>
-      <a class="enlace" href="nosotros.html">Nosotros</a>
+      <a class="enlace color-servicios" href="servicios.html">Servicios</a>
+      <a class="enlace color-automatizaciones" href="automatizaciones.html" aria-current="page">Automatizaciones</a>
+      <a class="enlace color-bocetos" href="bocetos.html">Bocetos</a>
+      <a class="enlace color-nosotros" href="nosotros.html">Nosotros</a>
       <!-- CONTACTO -->
-      <a class="boton boton-principal boton-chico brillo" href="https://wa.me/51000000000" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+      <a class="boton boton-principal boton-chico" href="https://wa.me/51000000000" target="_blank" rel="noopener">Escribir por WhatsApp</a>
     </nav>
   </div>
 </header>
 
 <main>
 
-  <section class="encabezado">
+  <!-- ================= cabecera con el logo grande detrás ================= -->
+  <section class="encabezado encabezado-logo">
+    <span class="logo-fondo" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21.4737 5.6842c-1.1772 0-2.1663.8051-2.4468 1.8947h-2.8955c-1.235 0-2.289.893-2.492 2.111l-.1038.623a1.263 1.263 0 0 1-1.246 1.0555H11.289c-.2805-1.0896-1.2696-1.8947-2.4468-1.8947s-2.1663.8051-2.4467 1.8947H4.973c-.2805-1.0896-1.2696-1.8947-2.4468-1.8947C1.1311 9.4737 0 10.6047 0 12s1.131 2.5263 2.5263 2.5263c1.1772 0 2.1663-.8051 2.4468-1.8947h1.4223c.2804 1.0896 1.2696 1.8947 2.4467 1.8947 1.1772 0 2.1663-.8051 2.4468-1.8947h1.0008a1.263 1.263 0 0 1 1.2459 1.0555l.1038.623c.203 1.218 1.257 2.111 2.492 2.111h.3692c.2804 1.0895 1.2696 1.8947 2.4468 1.8947 1.3952 0 2.5263-1.131 2.5263-2.5263s-1.131-2.5263-2.5263-2.5263c-1.1772 0-2.1664.805-2.4468 1.8947h-.3692a1.263 1.263 0 0 1-1.246-1.0555l-.1037-.623A2.52 2.52 0 0 0 13.9607 12a2.52 2.52 0 0 0 .821-1.4794l.1038-.623a1.263 1.263 0 0 1 1.2459-1.0555h2.8955c.2805 1.0896 1.2696 1.8947 2.4468 1.8947 1.3952 0 2.5263-1.131 2.5263-2.5263s-1.131-2.5263-2.5263-2.5263m0 1.2632a1.263 1.263 0 0 1 1.2631 1.2631 1.263 1.263 0 0 1-1.2631 1.2632 1.263 1.263 0 0 1-1.2632-1.2632 1.263 1.263 0 0 1 1.2632-1.2631M2.5263 10.7368A1.263 1.263 0 0 1 3.7895 12a1.263 1.263 0 0 1-1.2632 1.2632A1.263 1.263 0 0 1 1.2632 12a1.263 1.263 0 0 1 1.2631-1.2632m6.3158 0A1.263 1.263 0 0 1 10.1053 12a1.263 1.263 0 0 1-1.2632 1.2632A1.263 1.263 0 0 1 7.579 12a1.263 1.263 0 0 1 1.2632-1.2632m10.1053 3.7895a1.263 1.263 0 0 1 1.2631 1.2632 1.263 1.263 0 0 1-1.2631 1.2631 1.263 1.263 0 0 1-1.2632-1.2631 1.263 1.263 0 0 1 1.2632-1.2632"/></svg></span>
     <div class="envoltura">
-      <p class="migas"><a href="index.html">Inicio</a> · Automatizaciones</p>
       <p class="marca-seccion revelar">Automatizaciones</p>
-      <h1 class="revelar">Los procesos también trabajan <em class="cursiva">solos</em></h1>
-      <p class="entrada revelar">Con n8n se conectan las herramientas que el negocio ya usa. La información pasa sola de una a otra, sin que nadie copie y pegue entre el WhatsApp, la hoja de cálculo y la agenda.</p>
+      <h1 class="titulo-gigante revelar">Tu negocio <em class="cursiva">atiende solo.</em></h1>
+      <p class="entrada revelar">Responde, confirma y anota cada pedido a cualquier hora. Tú te dedicas a vender.</p>
     </div>
   </section>
 
-  <!-- ================= el flujo ================= -->
+  <!-- ================= qué genera ================= -->
+  <section id="que-genera">
+    <div class="envoltura">
+      <p class="marca-seccion revelar">Qué genera</p>
+      <h2 class="revelar">Más ventas, <em class="cursiva">menos trabajo</em> a mano</h2>
+
+      <div class="beneficios">
+        <article class="beneficio revelar">
+          <i class="ph ph-lightning" aria-hidden="true"></i>
+          <h3>Responde en segundos</h3>
+          <p>El cliente no espera: tiene respuesta al instante, de día o de noche.</p>
+        </article>
+        <article class="beneficio revelar">
+          <i class="ph ph-moon-stars" aria-hidden="true"></i>
+          <h3>Vende fuera de horario</h3>
+          <p>Toma pedidos y reservas aunque el local esté cerrado.</p>
+        </article>
+        <article class="beneficio revelar">
+          <i class="ph ph-check-square-offset" aria-hidden="true"></i>
+          <h3>Ningún pedido se pierde</h3>
+          <p>Cada pedido queda anotado con sus datos, listo para atender.</p>
+        </article>
+        <article class="beneficio revelar">
+          <i class="ph ph-arrows-clockwise" aria-hidden="true"></i>
+          <h3>Clientes que vuelven</h3>
+          <p>Recordatorios y avisos que traen al cliente de nuevo.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= cómo funciona ================= -->
   <section id="flujo-seccion">
     <div class="envoltura">
       <div class="metodo-grilla">
         <div>
           <p class="marca-seccion revelar">Cómo funciona</p>
           <h2 class="revelar">Un mensaje entra, el sistema hace <em class="cursiva">el resto</em></h2>
-          <p class="entrada revelar">No es un robot que contesta frases sueltas. Es un flujo con las reglas del negocio: qué responder, cuándo pasar la conversación a una persona y dónde queda anotado cada pedido.</p>
-          <ul class="muestra-lista revelar">
-            <li>Atención automática en WhatsApp e Instagram, con las respuestas del propio negocio</li>
-            <li>Confirmación de pedidos, reservas y citas, con recordatorio al cliente</li>
-            <li>Cada pedido registrado solo en la hoja de cálculo o en el sistema que ya usan</li>
-            <li>Avisos al equipo cuando entra algo que necesita a una persona</li>
-            <li>Reportes automáticos de lo vendido y de lo que más preguntan</li>
-          </ul>
+          <p class="entrada revelar">Elige un tipo de negocio y toca cada paso para ver qué pasa.</p>
         </div>
 
         <div class="flujo revelar" id="flujo">
-          <p class="flujo-titulo">Un flujo típico, hecho con n8n</p>
-          <div class="flujo-pestanas" role="tablist" aria-label="Flujo por rubro">
+          <p class="flujo-titulo">Un flujo típico</p>
+          <div class="flujo-pestanas" role="tablist" aria-label="Flujo por tipo de negocio">
             <button class="pestana" role="tab" aria-selected="true" data-flujo="general">General</button>
-            <button class="pestana" role="tab" aria-selected="false" data-flujo="panaderia">Panadería</button>
-            <button class="pestana" role="tab" aria-selected="false" data-flujo="consultorio">Consultorio</button>
             <button class="pestana" role="tab" aria-selected="false" data-flujo="tienda">Tienda</button>
+            <button class="pestana" role="tab" aria-selected="false" data-flujo="servicios">Servicios</button>
+            <button class="pestana" role="tab" aria-selected="false" data-flujo="consultorio">Consultorio</button>
           </div>
           <div class="flujo-nodos">
             <article class="nodo" data-nodo="1">
@@ -78,7 +131,7 @@
             <div class="flujo-linea" aria-hidden="true"><i class="ph ph-arrow-down"></i></div>
             <article class="nodo" data-nodo="2">
               <div class="nodo-icono"><i class="ph ph-git-branch" aria-hidden="true"></i></div>
-              <div><b>n8n decide qué hacer</b><span>Según el horario, el producto o el tipo de consulta</span></div>
+              <div><b>El sistema decide qué hacer</b><span>Según el horario, el producto o el tipo de consulta</span></div>
             </article>
             <div class="flujo-linea" aria-hidden="true"><i class="ph ph-arrow-down"></i></div>
             <article class="nodo" data-nodo="3">
@@ -96,7 +149,6 @@
       </div>
 
       <div class="integraciones">
-        <div class="integracion revelar"><img src="assets/logos/n8n.svg" alt="n8n" width="26" height="26"><span>n8n</span></div>
         <div class="integracion revelar"><img src="assets/logos/whatsapp.svg" alt="WhatsApp" width="26" height="26"><span>WhatsApp</span></div>
         <div class="integracion revelar"><img src="assets/logos/instagram.svg" alt="Instagram" width="26" height="26"><span>Instagram</span></div>
         <div class="integracion revelar"><img src="assets/logos/meta.svg" alt="Meta" width="26" height="26"><span>Meta</span></div>
@@ -107,96 +159,63 @@
         <div class="integracion revelar"><img src="assets/logos/telegram.svg" alt="Telegram" width="26" height="26"><span>Telegram</span></div>
         <div class="integracion revelar"><img src="assets/logos/mercadopago.svg" alt="Mercado Pago" width="26" height="26"><span>Mercado Pago</span></div>
       </div>
-      <p class="nota revelar">Si el negocio ya usa otra herramienta, se conecta igual: n8n habla con cientos de servicios.</p>
+      <p class="nota revelar">Se conecta con las herramientas que el negocio ya usa.</p>
     </div>
   </section>
 
-  <!-- ================= qué se automatiza por rubro ================= -->
-  <section>
-    <div class="envoltura">
-      <p class="marca-seccion revelar">Por rubro</p>
-      <h2 class="revelar">Qué se automatiza en <em class="cursiva">cada</em> negocio</h2>
-      <p class="entrada revelar">La operación de una panadería no se parece a la de un consultorio. Estos son los flujos que más se repiten en cada rubro.</p>
+  <!-- ================= la conversación, del lado del cliente ================= -->
+  <section class="conversacion" id="conversacion">
+    <div class="conversacion-pista" id="conversacionPista">
+      <div class="conversacion-fija">
+        <div class="envoltura conversacion-grilla">
+          <div class="conversacion-texto">
+            <p class="marca-seccion">Del lado del cliente</p>
+            <h2>Así ve la automatización <em class="cursiva">tu cliente</em></h2>
+            <p class="entrada">Baja despacio: un cliente escribe y el asistente le responde, le muestra opciones y deja el pedido listo.</p>
+            <p class="conversacion-avance"><span id="convContador">1</span> de 7 mensajes</p>
+          </div>
 
-      <div class="resultados">
-        <article class="tarjeta brillo revelar">
-          <div class="icono"><i class="ph ph-fork-knife" aria-hidden="true"></i></div>
-          <h3>Gastronomía</h3>
-          <p>El pedido entra por la web o el WhatsApp, se confirma con hora de recojo o reparto y queda anotado con el total del día.</p>
-          <ul>
-            <li>Carta y promociones respondidas al instante</li>
-            <li>Pedidos por anticipado, con aviso a cocina</li>
-            <li>Cierre del día con lo vendido</li>
-          </ul>
-        </article>
-
-        <article class="tarjeta brillo revelar">
-          <div class="icono"><i class="ph ph-first-aid-kit" aria-hidden="true"></i></div>
-          <h3>Salud y bienestar</h3>
-          <p>La cita se reserva sola en la agenda, el paciente recibe el recordatorio y el consultorio ve el día completo sin llamadas.</p>
-          <ul>
-            <li>Reserva y reprogramación por WhatsApp</li>
-            <li>Recordatorio el día antes, para reducir ausencias</li>
-            <li>Ficha del paciente registrada al momento</li>
-          </ul>
-        </article>
-
-        <article class="tarjeta brillo revelar">
-          <div class="icono"><i class="ph ph-shopping-bag-open" aria-hidden="true"></i></div>
-          <h3>Comercio</h3>
-          <p>Consultas de stock y precio contestadas al toque, pedido armado y seguimiento del envío sin que nadie esté pendiente.</p>
-          <ul>
-            <li>Catálogo y disponibilidad en el chat</li>
-            <li>Pedido y datos de entrega en un mensaje</li>
-            <li>Aviso al cliente cuando sale su envío</li>
-          </ul>
-        </article>
-
-        <article class="tarjeta brillo revelar">
-          <div class="icono"><i class="ph ph-briefcase" aria-hidden="true"></i></div>
-          <h3>Servicios profesionales</h3>
-          <p>La consulta llega ordenada, con los datos que hacen falta para responder, y queda registrada como oportunidad.</p>
-          <ul>
-            <li>Preguntas iniciales respondidas por el flujo</li>
-            <li>Formulario que arma el caso antes de la llamada</li>
-            <li>Seguimiento automático a quien no contestó</li>
-          </ul>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= qué hace falta ================= -->
-  <section>
-    <div class="envoltura">
-      <div class="dos-columnas">
-        <div class="revelar">
-          <p class="marca-seccion">Qué hace falta</p>
-          <h2>Lo que tiene que poner <em class="cursiva">el negocio</em></h2>
-          <p class="entrada">Casi siempre ya lo tienen. Lo que falta se saca en la primera reunión.</p>
-          <ul class="lista-marcada">
-            <li><i class="ph ph-check-circle" aria-hidden="true"></i> Un número de WhatsApp de trabajo, distinto del personal</li>
-            <li><i class="ph ph-check-circle" aria-hidden="true"></i> Una cuenta de Google para la hoja de cálculo y la agenda</li>
-            <li><i class="ph ph-check-circle" aria-hidden="true"></i> Las respuestas de siempre: precios, horarios, formas de pago y de entrega</li>
-            <li><i class="ph ph-check-circle" aria-hidden="true"></i> Una persona del equipo que reciba los avisos y atienda lo que el flujo deriva</li>
-          </ul>
+          <div class="laptop" aria-label="Conversación de ejemplo entre un cliente y el asistente del negocio">
+            <div class="laptop-pantalla">
+              <div class="app">
+                <aside class="app-lista">
+                  <p class="app-titulo">Mensajes</p>
+                  <div class="app-contacto activo"><span class="app-avatar">C</span><div><b>Cliente nuevo</b><span>escribiendo…</span></div></div>
+                  <div class="app-contacto"><span class="app-avatar gris"></span><div><i class="b"></i><i class="b corta"></i></div></div>
+                  <div class="app-contacto"><span class="app-avatar gris"></span><div><i class="b"></i><i class="b corta"></i></div></div>
+                  <div class="app-contacto"><span class="app-avatar gris"></span><div><i class="b"></i><i class="b corta"></i></div></div>
+                </aside>
+                <div class="app-chat">
+                  <div class="app-cabecera">
+                    <span class="app-avatar">C</span>
+                    <div><b>Cliente nuevo</b><span>en línea</span></div>
+                    <span class="app-asistente"><i class="ph ph-robot" aria-hidden="true"></i> Asistente activo</span>
+                  </div>
+                  <div class="app-mensajes" id="convMensajes">
+                    <p class="msj cliente" data-paso="1">Hola, ¿tienen disponible el modelo que vi en Instagram?</p>
+                    <p class="msj asistente" data-paso="2">¡Hola! Sí, está disponible en dos colores. ¿Te muestro las opciones?</p>
+                    <p class="msj cliente" data-paso="3">Sí, porfa. ¿Hacen envíos a Surco?</p>
+                    <div class="msj asistente" data-paso="4">
+                      <p>Claro, enviamos a todo Lima. Estas son las opciones:</p>
+                      <div class="msj-opciones">
+                        <span><i class="ph ph-t-shirt" aria-hidden="true"></i> Color negro</span>
+                        <span><i class="ph ph-t-shirt" aria-hidden="true"></i> Color arena</span>
+                      </div>
+                    </div>
+                    <p class="msj cliente" data-paso="5">Quiero el negro. ¿Cómo pago?</p>
+                    <div class="msj asistente" data-paso="6">
+                      <p>Te dejo el enlace de pago. Apenas se confirme, preparamos tu pedido.</p>
+                      <span class="msj-enlace"><i class="ph ph-credit-card" aria-hidden="true"></i> Pagar pedido</span>
+                    </div>
+                    <div class="msj sistema" data-paso="7"><i class="ph ph-check-circle" aria-hidden="true"></i> Pedido registrado · el equipo ya recibió el aviso</div>
+                  </div>
+                  <div class="app-escribir"><span>Escribe un mensaje</span><i class="ph ph-paper-plane-right" aria-hidden="true"></i></div>
+                </div>
+              </div>
+            </div>
+            <div class="laptop-base"></div>
+          </div>
         </div>
-
-        <aside class="tarjeta revelar">
-          <div class="icono"><i class="ph ph-gear" aria-hidden="true"></i></div>
-          <h3>Cómo se pone en marcha</h3>
-          <ul>
-            <li>Se escribe la operación tal como funciona hoy, paso por paso</li>
-            <li>Se arma el flujo en n8n y se prueba con casos reales del negocio</li>
-            <li>Sale primero en paralelo, sin apagar la atención manual</li>
-            <li>Se ajusta con lo que aparece en la primera semana</li>
-            <li>Queda documentado, para que el negocio sepa qué hace cada paso</li>
-          </ul>
-          <p class="acciones">
-            <!-- CONTACTO -->
-            <a class="boton boton-principal boton-chico brillo" href="https://wa.me/51000000000" target="_blank" rel="noopener">Conversar la operación</a>
-          </p>
-        </aside>
       </div>
     </div>
   </section>
@@ -208,7 +227,7 @@
         <p class="entrada">Responder lo mismo veinte veces, copiar pedidos a una hoja, confirmar citas una por una. Eso es lo que se automatiza primero.</p>
         <div class="acciones">
           <!-- CONTACTO -->
-          <a class="boton boton-principal brillo" href="https://wa.me/51000000000" target="_blank" rel="noopener">
+          <a class="boton boton-principal" href="https://wa.me/51000000000" target="_blank" rel="noopener">
             <i class="ph ph-whatsapp-logo" aria-hidden="true"></i> Escribir por WhatsApp
           </a>
           <a class="boton boton-secundario" href="servicios.html">Ver servicios</a>
@@ -223,7 +242,7 @@
   <div class="envoltura">
     <div class="pie-grilla">
       <div>
-        <img class="logo-pie" src="assets/creax-logo.svg" alt="CreaX" width="90" height="26">
+        <span class="firma-pie"><img class="isotipo" src="assets/creax-isotipo.svg" alt="" width="30" height="30"><img class="logo-pie" src="assets/creax-logo.svg" alt="CreaX" width="90" height="26"></span>
         <p>Desarrollo web y automatización de procesos para negocios de Lima.</p>
       </div>
       <div>

@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Maqueta genérica</title>
+<!--
+  Dibujo genérico de una web, para mostrar "así se vería la tuya" sin enseñar un negocio real.
+  Se usa como imagen en la portada y en la página de bocetos:
+    maqueta.html?rubro=panaderia|gimnasio|dentista
+  Las capturas se sacan con Playwright a 1200x690 (computadora) y 390x760 (celular).
+-->
+<link rel="stylesheet" href="iconos/style.css">
+<style>
+  @font-face { font-family: "Space Grotesk"; src: url("fuentes/SpaceGrotesk-700.ttf"); font-weight: 700; }
+  @font-face { font-family: "Instrument Serif"; src: url("fuentes/InstrumentSerif-Italic.ttf"); font-style: italic; }
+  @font-face { font-family: "Inter"; src: url("fuentes/Inter-500.ttf"); font-weight: 500; }
+  :root { --c: #FF7A59; --t: #FFE4DC; --sobre: #101010; --tinta: #101010; --barra: #e7e5e0; --barra-2: #d9d6cf; --papel: #F7F7F4; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--papel); font-family: Inter, sans-serif; color: var(--tinta); overflow: hidden; }
+  .b { display: block; height: 12px; border-radius: 99px; background: var(--barra); }
+  .b.o { background: var(--barra-2); }
+
+  /* barra de navegación */
+  nav { display: flex; align-items: center; gap: 18px; padding: 22px 56px; border-bottom: 1px solid #eceae5; }
+  .marca { display: flex; align-items: center; gap: 12px; font-family: "Space Grotesk", sans-serif; font-weight: 700; font-size: 22px; letter-spacing: -0.02em; }
+  .marca i.ph { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: var(--c); color: var(--sobre); font-size: 22px; }
+  .menu { display: flex; gap: 16px; margin-left: auto; }
+  .menu .b { width: 70px; height: 10px; }
+  .accion { display: inline-flex; align-items: center; gap: 8px; background: var(--c); color: var(--sobre); border-radius: 99px; padding: 11px 20px; font-size: 15px; font-weight: 500; }
+
+  /* portada */
+  .portada { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 50px; padding: 56px 56px 40px; align-items: center; }
+  .chip { display: inline-flex; align-items: center; gap: 8px; background: var(--t); color: var(--sobre); border-radius: 99px; padding: 7px 14px; font-size: 13px; font-weight: 500; }
+  .chip .b { width: 90px; height: 8px; background: var(--sobre); opacity: .25; }
+  h1 { font-family: "Space Grotesk", sans-serif; font-size: 76px; letter-spacing: -0.045em; line-height: .98; margin: 20px 0 20px; }
+  h1 em { font-family: "Instrument Serif", serif; font-weight: 400; font-size: 1.08em; background: linear-gradient(transparent 58%, var(--c) 58%); padding: 0 .08em; }
+  .lineas { display: grid; gap: 10px; margin-bottom: 30px; }
+  .lineas .b:nth-child(1) { width: 92%; } .lineas .b:nth-child(2) { width: 78%; } .lineas .b:nth-child(3) { width: 54%; }
+  .botones { display: flex; gap: 12px; }
+  .boton { display: inline-flex; align-items: center; gap: 9px; border-radius: 99px; padding: 14px 24px; font-size: 16px; font-weight: 500; }
+  .boton.lleno { background: var(--c); color: var(--sobre); }
+  .boton.borde { border: 1.5px solid var(--barra-2); }
+  .boton.borde .b { width: 70px; height: 10px; }
+  .foto { position: relative; height: 380px; border-radius: 200px 200px 28px 28px; background: var(--c); display: grid; place-items: center; overflow: hidden; }
+  .foto > i.ph { font-size: 170px; color: var(--sobre); }
+  .foto::before { content: ""; position: absolute; inset: auto -40px -60px auto; width: 220px; height: 220px; border-radius: 50%; background: rgba(255,255,255,.14); }
+  .foto::after { content: ""; position: absolute; left: -50px; top: 40px; width: 140px; height: 140px; border-radius: 50%; background: rgba(0,0,0,.08); }
+  .nota { position: absolute; left: -34px; bottom: 34px; background: #fff; border: 1px solid #e6e3dd; border-radius: 18px; padding: 14px 16px; display: flex; align-items: center; gap: 12px; }
+  .nota i.ph { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: var(--t); color: var(--sobre); font-size: 20px; }
+  .nota .b { width: 110px; } .nota .b + .b { width: 70px; margin-top: 7px; height: 9px; }
+  .envoltura-foto { position: relative; }
+
+  /* productos */
+  .productos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 0 56px; }
+  .producto { background: #fff; border: 1px solid #ebe8e2; border-radius: 22px; padding: 16px; display: flex; gap: 14px; align-items: center; }
+  .producto > i.ph { flex: none; width: 62px; height: 62px; border-radius: 16px; background: var(--t); color: var(--sobre); display: grid; place-items: center; font-size: 30px; }
+  .producto .datos { flex: 1; display: grid; gap: 8px; }
+  .producto .datos .b:nth-child(1) { width: 80%; height: 13px; background: #cfccc5; }
+  .producto .datos .b:nth-child(2) { width: 60%; height: 9px; }
+  .producto .mas { flex: none; width: 34px; height: 34px; border-radius: 50%; background: var(--c); color: var(--sobre); display: grid; place-items: center; font-size: 18px; }
+
+  /* versión celular */
+  body.celular nav { padding: 18px 20px; }
+  body.celular .menu { display: none; }
+  body.celular .accion { display: none; }
+  body.celular .hamburguesa { margin-left: auto; font-size: 26px; }
+  body:not(.celular) .hamburguesa { display: none; }
+  body.celular .portada { grid-template-columns: 1fr; gap: 26px; padding: 26px 20px 22px; }
+  body.celular .envoltura-foto { order: -1; }
+  body.celular .foto { height: 250px; border-radius: 150px 150px 22px 22px; }
+  body.celular .foto > i.ph { font-size: 120px; }
+  body.celular .nota { left: 12px; bottom: 14px; padding: 10px 12px; }
+  body.celular h1 { font-size: 50px; margin: 14px 0; }
+  body.celular .lineas { margin-bottom: 20px; }
+  body.celular .botones .boton.lleno { flex: 1; justify-content: center; }
+  body.celular .botones .boton.borde { display: none; }
+  body.celular .productos { grid-template-columns: 1fr; gap: 12px; padding: 0 20px; }
+</style>
+</head>
+<body>
+  <nav>
+    <span class="marca"><i class="ph" id="iconoMarca"></i><span id="nombre">Panadería</span></span>
+    <span class="menu"><span class="b"></span><span class="b"></span><span class="b"></span></span>
+    <span class="accion"><i class="ph ph-whatsapp-logo"></i><span id="accion">Pedir</span></span>
+    <i class="ph ph-list hamburguesa"></i>
+  </nav>
+
+  <section class="portada">
+    <div>
+      <span class="chip"><i class="ph ph-map-pin"></i><span class="b"></span></span>
+      <h1 id="titulo">Panadería</h1>
+      <div class="lineas"><span class="b"></span><span class="b"></span><span class="b"></span></div>
+      <div class="botones">
+        <span class="boton lleno"><i class="ph ph-whatsapp-logo"></i><span id="boton">Hacer un pedido</span></span>
+        <span class="boton borde"><span class="b"></span></span>
+      </div>
+    </div>
+    <div class="envoltura-foto">
+      <div class="foto"><i class="ph" id="iconoGrande"></i></div>
+      <div class="nota"><i class="ph" id="iconoNota"></i><div><span class="b o"></span><span class="b"></span></div></div>
+    </div>
+  </section>
+
+  <section class="productos" id="productos"></section>
+
+<script>
+  var RUBROS = {
+    panaderia: { nombre: "Panadería", titulo: "Pan <em>del día</em>", accion: "Pedir", boton: "Hacer un pedido",
+                 c: "#FF7A59", t: "#FFE4DC", marca: "ph-bread", grande: "ph-bread", nota: "ph-clock",
+                 productos: ["ph-bread", "ph-cake", "ph-coffee"] },
+    gimnasio:  { nombre: "Gimnasio", titulo: "Entrena <em>a tu ritmo</em>", accion: "Inscribirme", boton: "Ver los planes",
+                 c: "#B9A6FF", t: "#EDE8FF", marca: "ph-barbell", grande: "ph-barbell", nota: "ph-timer",
+                 productos: ["ph-barbell", "ph-person-simple-run", "ph-heartbeat"] },
+    dentista:  { nombre: "Dentista", titulo: "Tu sonrisa, <em>sin esperas</em>", accion: "Reservar", boton: "Reservar una cita",
+                 c: "#63E2C6", t: "#DDF8F1", marca: "ph-tooth", grande: "ph-tooth", nota: "ph-calendar-check",
+                 productos: ["ph-tooth", "ph-sparkle", "ph-first-aid-kit"] }
+  };
+  var parametros = new URLSearchParams(location.search);
+  var r = RUBROS[parametros.get("rubro")] || RUBROS.panaderia;
+  if (parametros.get("vista") === "celular") document.body.classList.add("celular");
+  document.documentElement.style.setProperty("--c", r.c);
+  document.documentElement.style.setProperty("--t", r.t);
+  document.getElementById("nombre").textContent = r.nombre;
+  document.getElementById("titulo").innerHTML = r.titulo;
+  document.getElementById("accion").textContent = r.accion;
+  document.getElementById("boton").textContent = r.boton;
+  document.getElementById("iconoMarca").classList.add(r.marca);
+  document.getElementById("iconoGrande").classList.add(r.grande);
+  document.getElementById("iconoNota").classList.add(r.nota);
+  var cuantos = document.body.classList.contains("celular") ? 2 : 3;
+  document.getElementById("productos").innerHTML = r.productos.slice(0, cuantos).map(function (icono) {
+    return '<article class="producto"><i class="ph ' + icono + '"></i><div class="datos"><span class="b"></span><span class="b"></span></div><span class="mas"><i class="ph ph-plus"></i></span></article>';
+  }).join("");
+</script>
+</body>
+</html>

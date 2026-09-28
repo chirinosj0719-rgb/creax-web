@@ -4,7 +4,7 @@
 
 Usa el mismo generador que los bocetos de verdad (Desarrollo/nuevo.py), así que
 cualquier mejora en el boceto de un cliente se ve también acá. Los negocios son
-de muestra: no son clientes ni prospectos, y las fotos son libres (CC0), puestas
+de muestra y van sin nombre: no son clientes ni prospectos, y las fotos son libres (CC0), puestas
 en assets/ejemplos/<rubro>/fotos con su archivo de créditos.
 
 Después de correrlo, las capturas del celular se sacan con Playwright:
@@ -21,11 +21,12 @@ from nuevo import PERFILES, boceto_html, fotos_de   # noqa: E402
 
 EJEMPLOS = {
     "panaderia": dict(
-        negocio=dict(nombre="Panadería Aurora", categoria="Panadería y pastelería", distrito="Barranco",
+        negocio=dict(nombre="Panadería", categoria="Panadería y pastelería", distrito="Lima",
                      horario="Lun a Sáb · 7:00 a. m. – 9:00 p. m.",
-                     direccion="Av. de ejemplo 000"),
+                     direccion=""),
         rubro="Gastronomía",
         perfil=dict(
+            titular="Pan recién horneado, *todos los días.*",
             promesa="Pan del día, pasteles por encargo y tu pedido listo en un mensaje.",
             items=[("Pan de masa madre", "Fermentado 24 horas, horneado cada mañana", "S/ 14.00"),
                    ("Croissant de mantequilla", "Hojaldre recién salido del horno", "S/ 6.50"),
@@ -35,11 +36,12 @@ EJEMPLOS = {
                    ("Sándwich en baguette", "Jamón, queso y palta, hecho al momento", "S/ 16.00")],
             galeria=["La vitrina", "El horno", "Los salados del día", "El pan del día"])),
     "dental": dict(
-        negocio=dict(nombre="Clínica Dental Nova", categoria="Clínica dental", distrito="San Isidro",
+        negocio=dict(nombre="Dentista", categoria="Consultorio dental", distrito="Lima",
                      horario="Lun a Vie · 9:00 a. m. – 7:00 p. m.",
-                     direccion="Av. de ejemplo 000"),
+                     direccion=""),
         rubro="Salud",
         perfil=dict(
+            titular="Tu sonrisa, *sin esperas.*",
             promesa="Reserva tu cita por WhatsApp, sin llamadas ni esperas, y ven cuando te quede bien.",
             items=[("Consulta y diagnóstico", "Evaluación completa, incluye radiografía", "S/ 60.00"),
                    ("Limpieza dental", "Profilaxis y destartraje, 45 minutos", "S/ 120.00"),
@@ -49,11 +51,12 @@ EJEMPLOS = {
                    ("Odontopediatría", "Atención para niños, primera cita", "S/ 80.00")],
             galeria=["El consultorio", "La atención", "La sala de espera", "El equipo"])),
     "gimnasio": dict(
-        negocio=dict(nombre="Gimnasio Impulso", categoria="Gimnasio y entrenamiento", distrito="Miraflores",
+        negocio=dict(nombre="Gimnasio", categoria="Gimnasio y entrenamiento", distrito="Lima",
                      horario="Lun a Dom · 6:00 a. m. – 11:00 p. m.",
-                     direccion="Av. de ejemplo 000"),
+                     direccion=""),
         rubro="Bienestar",
         perfil=dict(
+            titular="Entrena fuerte, *a tu ritmo.*",
             promesa="Todos los planes y horarios a la vista, y tu hora reservada en un solo mensaje.",
             items=[("Pase del día", "Acceso libre a máquinas y clases", "S/ 25.00"),
                    ("Plan mensual", "Sin matrícula, acceso ilimitado", "S/ 140.00"),
@@ -76,7 +79,7 @@ def main():
         perfil = dict(PERFILES[receta["rubro"]], **receta["perfil"])
         fotos = fotos_de(carpeta / "fotos")
         pagina = carpeta / "index.html"
-        pagina.write_text(boceto_html(negocio, perfil=perfil, fotos=fotos), encoding="utf-8")
+        pagina.write_text(boceto_html(negocio, perfil=perfil, fotos=fotos, ejemplo=True), encoding="utf-8")
         print(f"{clave}: {pagina.relative_to(AQUI)} · {len(fotos.get('items', []))} fotos de producto,"
               f" {len(fotos.get('galeria', []))} de galería")
 

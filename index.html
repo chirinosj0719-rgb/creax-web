@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">  <!-- borrador: quitar al publicar la web oficial -->
 <title>CreaX · Desarrollo web y automatización para negocios de Lima</title>
-<meta name="description" content="CreaX construye la web donde el cliente compra solo y automatiza con n8n los procesos que hoy se hacen a mano. El boceto se muestra antes de cobrar.">
+<meta name="description" content="CreaX diseña la web donde el cliente compra solo y automatiza los procesos que hoy se hacen a mano.">
 <meta property="og:title" content="CreaX · Desarrollo web y automatización">
 <meta property="og:description" content="La web donde el cliente compra solo y los procesos que trabajan sin que nadie esté pendiente.">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#0c1116">
+<meta name="theme-color" content="#101010">
 
 <!-- ==========================================================================
      DATOS DE CONTACTO POR COMPLETAR
@@ -21,29 +21,57 @@
         LinkedIn   https://www.linkedin.com/company/creax
      ========================================================================== -->
 
-<script>document.documentElement.classList.add("con-js");</script>
+<script>
+  document.documentElement.classList.add("con-js");
+  /* la intro del logo: una vez por visita, y nunca si pidieron menos movimiento o es una captura */
+  try {
+    if (!sessionStorage.getItem("creax-intro") && !matchMedia("(prefers-reduced-motion: reduce)").matches &&
+        location.search.indexOf("estatico") < 0) {
+      document.documentElement.classList.add("con-intro");
+      setTimeout(function () { document.documentElement.classList.remove("con-intro"); }, 5000);
+    }
+  } catch (e) {}
+</script>
+<link rel="icon" href="assets/creax-isotipo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/iconos/style.css">
 <link rel="stylesheet" href="estilos.css">
 </head>
 
-<body>
+<body class="color-inicio">
+
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="intro-caja">
+    <svg class="intro-logo" viewBox="0 0 100 100">
+      <rect class="ib" x="8" y="8" width="24" height="24" rx="7" fill="#FF7A59"/>
+      <rect class="ib" x="64" y="8" width="24" height="24" rx="7" fill="#B9A6FF"/>
+      <rect class="ib" x="36" y="36" width="24" height="24" rx="7" fill="#F4F4F2"/>
+      <rect class="ib" x="8" y="64" width="24" height="24" rx="7" fill="#FFD84D"/>
+      <rect class="ranura" x="64" y="64" width="24" height="24" rx="7" fill="none" stroke="#F4F4F2" stroke-width="2.5" stroke-dasharray="4 4"/>
+      <g class="arrastre">
+        <rect x="70" y="70" width="24" height="24" rx="7" fill="#C5F82A" transform="rotate(8 82 82)"/>
+        <path d="M80 80 L98 88 L90 90 L88 98 Z" fill="#F4F4F2" stroke="#101010" stroke-width="3" stroke-linejoin="round"/>
+      </g>
+    </svg>
+    <p class="intro-palabra">Crea<span>X</span></p>
+  </div>
+  <p class="intro-saltar">Toca para entrar</p>
+</div>
+
 
 <div class="avance" id="avance" aria-hidden="true"></div>
-<div class="reticula" aria-hidden="true"></div>
-<div class="grano" aria-hidden="true"></div>
 
 <header class="nav" id="nav">
   <div class="nav-caja">
     <a class="nav-marca" href="index.html" aria-label="CreaX, inicio">
-      <img class="logo" src="assets/creax-logo.svg" alt="CreaX" width="72" height="21">
+      <img class="isotipo" src="assets/creax-isotipo.svg" alt="" width="26" height="26"><img class="logo" src="assets/creax-logo.svg" alt="CreaX" width="72" height="21">
     </a>
     <nav class="nav-enlaces">
-      <a class="enlace" href="servicios.html">Servicios</a>
-      <a class="enlace" href="automatizaciones.html">Automatizaciones</a>
-      <a class="enlace" href="bocetos.html">Bocetos</a>
-      <a class="enlace" href="nosotros.html">Nosotros</a>
+      <a class="enlace color-servicios" href="servicios.html">Servicios</a>
+      <a class="enlace color-automatizaciones" href="automatizaciones.html">Automatizaciones</a>
+      <a class="enlace color-bocetos" href="bocetos.html">Bocetos</a>
+      <a class="enlace color-nosotros" href="nosotros.html">Nosotros</a>
       <!-- CONTACTO -->
-      <a class="boton boton-principal boton-chico brillo" href="https://wa.me/51000000000" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+      <a class="boton boton-principal boton-chico" href="https://wa.me/51000000000" target="_blank" rel="noopener">Escribir por WhatsApp</a>
     </nav>
   </div>
 </header>
@@ -54,50 +82,49 @@
   <section class="portada" id="inicio">
     <div class="envoltura portada-grilla">
       <div class="portada-texto">
-        <p class="sello revelar"><span class="sello-luz"><span></span></span> El boceto se muestra <b>antes de cobrar</b></p>
-        <h1 id="titular">Pedidos que llegan ordenados.</h1>
+        <p class="sello revelar"><span class="sello-luz"><span></span></span> Páginas web y automatizaciones para <b>negocios de Lima</b></p>
+        <h1 id="titular" data-acento="3">¿Aún vendes sin tu propia web?</h1>
         <p class="entrada revelar">La web donde el cliente compra solo y los procesos que siguen trabajando cuando nadie está pendiente.</p>
         <div class="acciones revelar">
           <!-- CONTACTO -->
-          <a class="boton boton-principal brillo" href="https://wa.me/51000000000" target="_blank" rel="noopener">
+          <a class="boton boton-principal" href="https://wa.me/51000000000" target="_blank" rel="noopener">
             <i class="ph ph-whatsapp-logo" aria-hidden="true"></i> Escribir por WhatsApp
           </a>
-          <a class="boton boton-secundario" href="bocetos.html">Ver un boceto</a>
+          <a class="boton boton-secundario" href="bocetos.html">Ver ejemplos</a>
         </div>
       </div>
 
-      <figure class="escena-grande">
+      <figure class="escena-grande" id="escena">
         <div class="ventana">
           <div class="ventana-barra">
             <span class="ventana-puntos" aria-hidden="true"><i></i><i></i><i></i></span>
-            <span class="ventana-url">creax.pe/boceto/panaderia-aurora</span>
+            <span class="ventana-url">tunegocio.pe</span>
+            <span class="ventana-rubro" id="escenaRubro">Panadería</span>
           </div>
-          <img src="assets/escritorio-panaderia.jpg" width="1200" height="691" alt="Boceto de la web de una panadería hecho por CreaX, visto en computadora" fetchpriority="high">
+          <div class="ventana-pantallas">
+            <img class="activa" data-rubro="panaderia" src="assets/maqueta-panaderia.png" width="1200" height="690" alt="Dibujo de la web de una panadería, visto en computadora" fetchpriority="high">
+            <img data-rubro="gimnasio" src="assets/maqueta-gimnasio.png" width="1200" height="690" alt="Dibujo de la web de un gimnasio, visto en computadora">
+            <img data-rubro="dentista" src="assets/maqueta-dentista.png" width="1200" height="690" alt="Dibujo de la web de un consultorio dental, visto en computadora">
+          </div>
         </div>
 
-        <div class="fono">
+        <div class="fono color-servicios" id="fono">
           <div class="fono-panel">
             <div class="fono-barra">
-              <span class="fono-sello">PA</span>
-              <div><b>Panadería Aurora</b><span>en línea</span></div>
+              <span class="fono-sello"><i class="ph ph-bread" id="chatIcono" aria-hidden="true"></i></span>
+              <div><b id="chatNombre">Panadería</b><span>en línea</span></div>
             </div>
-            <div class="chat">
-              <p class="burbuja entra">Hola, ¿tienen torta de chocolate para hoy?</p>
-              <p class="burbuja sale">¡Hola! Sí, queda torta y pan del día. Te muestro:</p>
+            <div class="chat" id="chat">
+              <p class="burbuja entra" data-campo="pregunta">Hola, ¿tienen torta de chocolate para hoy?</p>
+              <p class="burbuja sale" data-campo="respuesta">¡Hola! Sí, te muestro lo que tenemos listo:</p>
               <div class="chat-fichas">
-                <article class="chat-ficha">
-                  <img src="assets/ejemplos/panaderia/fotos/item-3.jpg" alt="" loading="lazy">
-                  <div><b>Torta de chocolate</b><i>S/ 12.00 · porción</i></div>
-                </article>
-                <article class="chat-ficha">
-                  <img src="assets/ejemplos/panaderia/fotos/item-1.jpg" alt="" loading="lazy">
-                  <div><b>Pan de masa madre</b><i>S/ 14.00 · unidad</i></div>
-                </article>
+                <article class="chat-ficha"><span class="chat-ficha-icono"><i class="ph ph-cake" data-campo="icono1" aria-hidden="true"></i></span><div><b data-campo="opcion1">Torta de chocolate</b><i>Elegir</i></div></article>
+                <article class="chat-ficha"><span class="chat-ficha-icono"><i class="ph ph-bread" data-campo="icono2" aria-hidden="true"></i></span><div><b data-campo="opcion2">Pan del día</b><i>Elegir</i></div></article>
               </div>
-              <p class="burbuja entra">Quiero dos porciones y un pan</p>
+              <p class="burbuja entra" data-campo="eleccion">Quiero la torta, para recoger a las 6</p>
               <div class="chat-listo">
                 <i class="ph ph-check-circle" aria-hidden="true"></i>
-                <div><b>Pedido anotado · S/ 38.00</b><span>Listo a las 6:00 p. m., sin copiar nada a mano</span></div>
+                <div><b data-campo="listo">Pedido anotado</b><span data-campo="detalle">Listo para las 6:00 p. m., sin copiar nada a mano</span></div>
               </div>
             </div>
           </div>
@@ -126,7 +153,7 @@
           <span class="dato"><i class="ph ph-bell-ringing" aria-hidden="true"></i><span><b>El equipo se entera al toque</b><span>Con el pedido listo para atender</span></span></span>
         </div>
 
-        <figcaption class="escena-pie">Boceto de ejemplo. La web y la atención automática funcionan sobre el propio WhatsApp del negocio.</figcaption>
+        <figcaption class="escena-pie">Ejemplos ilustrativos. La web y la atención automática funcionan sobre el WhatsApp de cada negocio.</figcaption>
       </figure>
     </div>
   </section>
@@ -148,25 +175,25 @@
       <p class="entrada revelar">No se trata de tener una web bonita. Se trata de que el trabajo repetitivo deje de hacerse a mano.</p>
 
       <div class="resultados">
-        <article class="tarjeta brillo revelar">
+        <article class="tarjeta revelar">
           <span class="resultado-num">01</span>
           <div class="icono"><i class="ph ph-package" aria-hidden="true"></i></div>
           <h3>El pedido llega completo</h3>
-          <p>Producto, cantidad, dirección, fecha y total en un solo mensaje. Se terminan las cinco idas y vueltas para confirmar un dato.</p>
+          <p>Producto, cantidad, dirección, fecha y total en un solo mensaje. Se terminan las idas y vueltas para confirmar un dato.</p>
         </article>
-        <article class="tarjeta brillo revelar">
+        <article class="tarjeta revelar">
           <span class="resultado-num">02</span>
           <div class="icono"><i class="ph ph-moon-stars" aria-hidden="true"></i></div>
           <h3>El negocio atiende de noche</h3>
           <p>A las once de la noche el WhatsApp responde horarios, precios y ubicación, y toma el pedido. Al día siguiente ya está anotado.</p>
         </article>
-        <article class="tarjeta brillo revelar">
+        <article class="tarjeta revelar">
           <span class="resultado-num">03</span>
           <div class="icono"><i class="ph ph-storefront" aria-hidden="true"></i></div>
           <h3>El personal vuelve al mostrador</h3>
           <p>Nadie se queda copiando pedidos ni sumando a mano. El equipo atiende a quien está en la tienda, que es donde hace falta.</p>
         </article>
-        <article class="tarjeta brillo revelar">
+        <article class="tarjeta revelar">
           <span class="resultado-num">04</span>
           <div class="icono"><i class="ph ph-chart-line-up" aria-hidden="true"></i></div>
           <h3>Queda registro de todo</h3>
@@ -179,7 +206,7 @@
   <!-- ================= declaración ================= -->
   <section class="declaracion">
     <div class="envoltura">
-      <p class="declaracion-texto revelar">Llegamos con el trabajo <em class="cursiva">hecho</em>. <span class="tenue">El negocio ve su página funcionando antes de que hablemos de precio.</span></p>
+      <p class="declaracion-texto revelar">Cada negocio vende <em class="cursiva">distinto</em>. <span class="tenue">Por eso cada página se diseña a su medida: sus colores, sus productos y su forma de atender.</span></p>
       <p class="declaracion-firma revelar">— Así trabaja CreaX</p>
     </div>
   </section>
@@ -189,26 +216,26 @@
     <div class="envoltura">
       <p class="marca-seccion revelar">Qué hacemos</p>
       <h2 class="revelar">Tres frentes, una sola <em class="cursiva">operación</em></h2>
-      <p class="entrada revelar">La web, la atención automática y el boceto con el que empieza todo. Cada uno tiene su página con el detalle.</p>
+      <p class="entrada revelar">Cada uno tiene su página, con su color, para ver el detalle.</p>
 
       <div class="resultados">
-        <article class="tarjeta brillo revelar">
+        <article class="tarjeta con-franja color-servicios revelar">
           <div class="icono"><i class="ph ph-browsers" aria-hidden="true"></i></div>
           <h3>Sitios web</h3>
           <p>Presentación, catálogo con pedidos al WhatsApp o tienda con pago en línea. Siempre pensados primero para el celular.</p>
-          <p class="acciones"><a class="boton boton-secundario boton-chico" href="servicios.html">Ver servicios</a></p>
+          <p class="acciones"><a class="boton boton-principal boton-chico" href="servicios.html">Ver servicios</a></p>
         </article>
-        <article class="tarjeta brillo revelar">
+        <article class="tarjeta con-franja color-automatizaciones revelar">
           <div class="icono"><i class="ph ph-lightning" aria-hidden="true"></i></div>
           <h3>Automatizaciones</h3>
-          <p>Atención en WhatsApp e Instagram, confirmación de pedidos y citas, registro y reportes, armados con n8n sobre lo que ya usan.</p>
-          <p class="acciones"><a class="boton boton-secundario boton-chico" href="automatizaciones.html">Ver automatizaciones</a></p>
+          <p>Atención en WhatsApp e Instagram, confirmación de pedidos y citas, registro y reportes, sobre las herramientas que ya usan.</p>
+          <p class="acciones"><a class="boton boton-principal boton-chico" href="automatizaciones.html">Ver automatizaciones</a></p>
         </article>
-        <article class="tarjeta tarjeta-oscura revelar">
-          <div class="icono"><i class="ph ph-hand-heart" aria-hidden="true"></i></div>
-          <h3>El boceto</h3>
-          <p>Antes de cobrar nada, el negocio ve su propia página funcionando en el celular. Si no convence, ahí queda.</p>
-          <p class="acciones"><a class="boton boton-secundario boton-chico" href="bocetos.html">Ver los bocetos</a></p>
+        <article class="tarjeta con-franja color-bocetos revelar">
+          <div class="icono"><i class="ph ph-paint-brush-broad" aria-hidden="true"></i></div>
+          <h3>Ejemplos</h3>
+          <p>Así se ven las páginas que diseñamos, adaptadas a lo que vende cada tipo de negocio.</p>
+          <p class="acciones"><a class="boton boton-principal boton-chico" href="bocetos.html">Ver ejemplos</a></p>
         </article>
       </div>
     </div>
@@ -218,11 +245,11 @@
   <section id="contacto">
     <div class="envoltura">
       <div class="cierre-caja revelar">
-        <h2>Conversemos sobre <em class="cursiva">el negocio</em></h2>
-        <p class="entrada">Una llamada de veinte minutos alcanza para entender la operación. De ahí sale el boceto, sin compromiso.</p>
+        <h2>Conversemos sobre <em class="cursiva">tu</em> negocio</h2>
+        <p class="entrada">Una llamada de veinte minutos alcanza para entender la operación y proponer lo que necesita.</p>
         <div class="acciones">
           <!-- CONTACTO -->
-          <a class="boton boton-principal brillo" href="https://wa.me/51000000000" target="_blank" rel="noopener">
+          <a class="boton boton-principal" href="https://wa.me/51000000000" target="_blank" rel="noopener">
             <i class="ph ph-whatsapp-logo" aria-hidden="true"></i> Escribir por WhatsApp
           </a>
           <!-- CONTACTO -->
@@ -245,7 +272,7 @@
   <div class="envoltura">
     <div class="pie-grilla">
       <div>
-        <img class="logo-pie" src="assets/creax-logo.svg" alt="CreaX" width="90" height="26">
+        <span class="firma-pie"><img class="isotipo" src="assets/creax-isotipo.svg" alt="" width="30" height="30"><img class="logo-pie" src="assets/creax-logo.svg" alt="CreaX" width="90" height="26"></span>
         <p>Desarrollo web y automatización de procesos para negocios de Lima.</p>
       </div>
       <div>
