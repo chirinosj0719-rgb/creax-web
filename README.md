@@ -29,3 +29,6 @@ Sus fotos son libres (CC0); los créditos están en cada carpeta `fotos/CREDITOS
 Es HTML, CSS y JavaScript sin compilación: se abre `index.html` en el navegador.
 Estilos en `estilos.css`, movimiento e interacción en `animacion.js` (usa anime.js, copiado en `assets/`).
 `ejemplos.py` regenera los bocetos de muestra y se corre desde la carpeta `Desarrollo` de CreaX, porque usa `nuevo.py`.
+
+Cada vez que se publica, se cambia el número `?v=` de `estilos.css` y `animacion.js` en las cinco páginas:
+así el navegador de quien entra baja los estilos nuevos en vez de usar los que tenía guardados.
