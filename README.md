@@ -20,7 +20,7 @@ Sus fotos son libres (CC0); los créditos están en cada carpeta `fotos/CREDITOS
 
 ## Pendiente
 
-- Datos de contacto reales: WhatsApp, correo, Instagram y LinkedIn (marcados con `<!-- CONTACTO -->` en cada página).
+- Datos de contacto reales: correo, Instagram y LinkedIn (marcados con `<!-- CONTACTO -->` en cada página). El WhatsApp ya es el de Juan Diego.
 - Vista de celular.
 - Quitar el `noindex` cuando se publique como web oficial, con el dominio propio.
 
