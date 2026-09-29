@@ -1417,3 +1417,46 @@ html.con-intro, html.con-intro body { overflow: hidden; }
 /* la caja del chat tiene alto fijo y se desplaza sola hasta el último mensaje */
 .app-chat { min-height: 0; overflow: hidden; }
 .app-mensajes { min-height: 0; }
+
+/* =============================================================================
+   PANEL DE CONTACTO  ·  se abre desde cualquier botón "Contáctanos"
+   ========================================================================== */
+.contacto-fondo { position: fixed; inset: 0; z-index: 250; background: rgba(16, 16, 16, 0.45); opacity: 0; transition: opacity 0.35s ease; }
+.contacto-panel {
+  position: fixed; top: 0; right: 0; bottom: 0; z-index: 260; width: min(440px, 100%);
+  background: var(--hueso); border-left: 1px solid var(--borde-fuerte);
+  display: flex; flex-direction: column; transform: translateX(100%); transition: transform 0.5s var(--salida);
+  overflow-y: auto;
+}
+.contacto-abierto .contacto-fondo { opacity: 1; }
+.contacto-abierto .contacto-panel { transform: none; }
+.contacto-cabeza { padding: 28px 28px 22px; background: var(--c-inicio); color: var(--tinta); position: relative; }
+.contacto-cabeza h2 { font-size: 40px; margin: 0 0 6px; }
+.contacto-cabeza h2 .cursiva { color: var(--tinta); }
+.contacto-cabeza p { font-size: 15.5px; color: rgba(16, 16, 16, 0.75); }
+.contacto-cerrar {
+  position: absolute; top: 18px; right: 18px; width: 40px; height: 40px; border-radius: 50%;
+  border: 1px solid rgba(16, 16, 16, 0.25); background: transparent; color: var(--tinta); font-size: 20px;
+  display: grid; place-items: center; cursor: pointer; transition: background-color 0.25s ease, transform 0.3s var(--rebote);
+}
+.contacto-cerrar:hover { background: var(--tinta); color: #fff; transform: rotate(90deg); }
+.contacto-lista { list-style: none; display: grid; gap: 10px; padding: 22px 22px 28px; margin: 0; }
+.canal {
+  display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: var(--radio);
+  background: var(--blanco); border: 1px solid var(--borde); color: var(--tinta); text-decoration: none;
+  transition: border-color 0.25s ease, transform 0.35s var(--salida), background-color 0.25s ease;
+}
+a.canal:hover { border-color: var(--tinta); transform: translateX(-4px); }
+.canal-icono { flex: none; width: 44px; height: 44px; border-radius: 13px; display: grid; place-items: center; font-size: 22px; background: var(--color-canal, var(--hueso-2)); color: var(--tinta); }
+.canal b { display: block; font-size: 16px; }
+.canal small { display: block; font-size: 13px; color: var(--tinta-suave); }
+.canal-ir { margin-left: auto; font-size: 18px; color: var(--tinta-suave); transition: transform 0.3s var(--salida); }
+a.canal:hover .canal-ir { transform: translate(3px, -3px); color: var(--tinta); }
+.canal.pronto { opacity: 0.6; }
+.canal.pronto .canal-icono { background: var(--hueso-2); }
+.canal-pronto { margin-left: auto; font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; padding: 5px 9px; border-radius: 999px; border: 1px solid var(--borde-fuerte); color: var(--tinta-suave); }
+html.contacto-abierto, html.contacto-abierto body { overflow: hidden; }
+.enlace-boton { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.enlace-boton:hover { color: var(--menta-texto); }
+@media (prefers-reduced-motion: reduce) { .contacto-panel, .contacto-fondo { transition: none; } }
+

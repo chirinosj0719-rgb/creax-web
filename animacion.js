@@ -348,6 +348,71 @@
     }
   }
 
+  /* --------------------------------------------------------------
+     5i. Contáctanos: cada botón abre el panel con los canales.
+         Los canales se definen solo acá. Los que todavía no existen
+         van como "Próximamente" y sin enlace. Sin JavaScript, el botón
+         lleva directo al WhatsApp.
+     -------------------------------------------------------------- */
+  var CANALES = [
+    { icono: "ph-whatsapp-logo", nombre: "WhatsApp", detalle: "966 980 388 · la vía más rápida", color: "var(--c-automatizaciones-tenue)",
+      enlace: "https://wa.me/51966980388?text=Hola%20CreaX%2C%20vengo%20de%20la%20web%20y%20quisiera%20m%C3%A1s%20informaci%C3%B3n.", externo: true },
+    { icono: "ph-phone", nombre: "Llamada", detalle: "966 980 388", color: "var(--c-nosotros-tenue)", enlace: "tel:+51966980388" },
+    { icono: "ph-envelope-simple", nombre: "Correo", detalle: "Correo de la empresa" },
+    { icono: "ph-instagram-logo", nombre: "Instagram", detalle: "Cuenta de CreaX" },
+    { icono: "ph-linkedin-logo", nombre: "LinkedIn", detalle: "Página de la empresa" }
+  ];
+  var disparadores = document.querySelectorAll("[data-contacto]");
+  if (disparadores.length) {
+    var fondoContacto = document.createElement("div");
+    fondoContacto.className = "contacto-fondo";
+    fondoContacto.hidden = true;
+    var panelContacto = document.createElement("aside");
+    panelContacto.className = "contacto-panel";
+    panelContacto.setAttribute("role", "dialog");
+    panelContacto.setAttribute("aria-modal", "true");
+    panelContacto.setAttribute("aria-labelledby", "contactoTitulo");
+    panelContacto.hidden = true;
+    panelContacto.innerHTML =
+      '<div class="contacto-cabeza">' +
+        '<h2 id="contactoTitulo">Contáctanos</h2>' +
+        '<p>Elige el canal que prefieras.</p>' +
+        '<button type="button" class="contacto-cerrar" aria-label="Cerrar"><i class="ph ph-x" aria-hidden="true"></i></button>' +
+      '</div>' +
+      '<ul class="contacto-lista">' + CANALES.map(function (c) {
+        var icono = '<span class="canal-icono"' + (c.color ? ' style="--color-canal: ' + c.color + '"' : '') + '><i class="ph ' + c.icono + '" aria-hidden="true"></i></span>';
+        var texto = '<span><b>' + c.nombre + '</b><small>' + c.detalle + '</small></span>';
+        if (!c.enlace) return '<li><div class="canal pronto">' + icono + texto + '<span class="canal-pronto">Próximamente</span></div></li>';
+        return '<li><a class="canal" href="' + c.enlace + '"' + (c.externo ? ' target="_blank" rel="noopener"' : '') + '>' +
+               icono + texto + '<i class="ph ph-arrow-up-right canal-ir" aria-hidden="true"></i></a></li>';
+      }).join("") + '</ul>';
+    document.body.appendChild(fondoContacto);
+    document.body.appendChild(panelContacto);
+
+    var quienAbrio = null;
+    var cerrarContacto = function () {
+      document.documentElement.classList.remove("contacto-abierto");
+      setTimeout(function () { panelContacto.hidden = true; fondoContacto.hidden = true; }, quieto ? 0 : 450);
+      if (quienAbrio) quienAbrio.focus();
+    };
+    var abrirContacto = function (evento) {
+      evento.preventDefault();
+      quienAbrio = evento.currentTarget;
+      panelContacto.hidden = false;
+      fondoContacto.hidden = false;
+      requestAnimationFrame(function () {
+        document.documentElement.classList.add("contacto-abierto");
+        panelContacto.querySelector(".contacto-cerrar").focus();
+      });
+    };
+    disparadores.forEach(function (boton) { boton.addEventListener("click", abrirContacto); });
+    fondoContacto.addEventListener("click", cerrarContacto);
+    panelContacto.querySelector(".contacto-cerrar").addEventListener("click", cerrarContacto);
+    document.addEventListener("keydown", function (evento) {
+      if (evento.key === "Escape" && document.documentElement.classList.contains("contacto-abierto")) cerrarContacto();
+    });
+  }
+
   /* ==============================================================
      De acá para abajo, solo si hay movimiento permitido
      ============================================================== */
