@@ -66,7 +66,8 @@
 
 <main>
 
-  <section class="encabezado">
+  <section class="encabezado encabezado-logo">
+    <span class="logo-fondo icono-fondo" aria-hidden="true"><i class="ph ph-browsers"></i></span>
     <div class="envoltura">
       <p class="marca-seccion revelar">Servicios</p>
       <h1 class="revelar">Lo que se <em class="cursiva">construye</em></h1>
@@ -94,7 +95,7 @@
           <h3>Web de presentación</h3>
           <p>Para el negocio que necesita que lo encuentren, lo entiendan y le escriban.</p>
           <ul>
-            <li>Diseño con su marca, pensado para el celular</li>
+            <li>Diseño con su marca</li>
             <li>Ficha en Google con horario y ubicación</li>
             <li>Botón directo al WhatsApp</li>
             <li>Formulario de contacto que llega al correo</li>
@@ -132,8 +133,7 @@
   <section>
     <div class="envoltura">
       <p class="marca-seccion revelar">Comparación</p>
-      <h2 class="revelar">¿Cuál le toca <em class="cursiva">al suyo</em>?</h2>
-      <p class="entrada revelar">Tres preguntas y la respuesta queda marcada en la tabla. La diferencia no es el diseño: es qué tiene que poder hacer el cliente cuando entra.</p>
+      <h2 class="revelar">¿Cuál le toca a <em class="cursiva">tu negocio</em>?</h2>
 
       <div class="elegidor revelar" id="elegidor">
         <div>
@@ -235,10 +235,9 @@
           <p class="marca-seccion">Siempre incluido</p>
           <h2>Lo que va en <em class="cursiva">todos</em> los proyectos</h2>
           <ul class="lista-marcada">
-            <li><i class="ph ph-check-circle" aria-hidden="true"></i> Diseño propio con la marca del negocio, pensado primero para el celular</li>
+            <li><i class="ph ph-check-circle" aria-hidden="true"></i> Diseño propio con la marca del negocio</li>
             <li><i class="ph ph-check-circle" aria-hidden="true"></i> Dominio, hosting y certificado de seguridad configurados</li>
             <li><i class="ph ph-check-circle" aria-hidden="true"></i> Ficha de Google al día, con horario, fotos y ubicación</li>
-            <li><i class="ph ph-check-circle" aria-hidden="true"></i> Textos redactados con el negocio, no rellenos genéricos</li>
             <li><i class="ph ph-check-circle" aria-hidden="true"></i> Carga rápida y buenas prácticas para aparecer en búsquedas</li>
             <li><i class="ph ph-check-circle" aria-hidden="true"></i> Capacitación al equipo para cambiar precios y productos</li>
           </ul>
@@ -250,7 +249,6 @@
           <ul>
             <li>50% de adelanto y 50% contra entrega, antes de publicar</li>
             <li>Dos rondas de ajustes incluidas en el precio</li>
-            <li>Garantía de 30 días sobre lo entregado</li>
             <li>El precio sale después de conocer el negocio: no hay lista de paquetes</li>
             <li>La web se publica a nombre del negocio, con su propio dominio</li>
           </ul>
@@ -263,28 +261,74 @@
     </div>
   </section>
 
-  <!-- ================= mantenimiento ================= -->
-  <section>
+  <!-- ================= plan cuidado ================= -->
+  <section id="cuidado">
     <div class="envoltura">
-      <p class="marca-seccion revelar">Después de publicar</p>
-      <h2 class="revelar">La web no se deja <em class="cursiva">sola</em></h2>
-      <p class="entrada revelar">Una web que nadie toca se desactualiza en meses. El Plan Cuidado mantiene todo al día con un costo mensual fijo.</p>
-      <div class="resultados">
-        <article class="tarjeta revelar">
-          <div class="icono"><i class="ph ph-shield-check" aria-hidden="true"></i></div>
-          <h3>Mantenimiento</h3>
-          <p>Hosting, certificado, respaldos y actualizaciones. Si algo se cae, lo vemos nosotros.</p>
-        </article>
-        <article class="tarjeta revelar">
-          <div class="icono"><i class="ph ph-pencil-simple" aria-hidden="true"></i></div>
-          <h3>Cambios del mes</h3>
-          <p>Precios, productos, horarios y promociones. Se avisa por WhatsApp y queda hecho.</p>
-        </article>
-        <article class="tarjeta revelar">
-          <div class="icono"><i class="ph ph-chart-line-up" aria-hidden="true"></i></div>
-          <h3>Reporte mensual</h3>
-          <p>Cuántos entraron, qué buscaron y cuántos escribieron. En una página, sin tecnicismos.</p>
-        </article>
+      <div class="cuidado-grilla">
+        <div>
+          <p class="marca-seccion revelar">Después de publicar</p>
+          <h2 class="revelar">La web no se deja <em class="cursiva">sola</em></h2>
+          <p class="entrada revelar">Con el Plan Cuidado, tu web se mantiene al día por un costo mensual fijo.</p>
+
+          <div class="cuidado-opciones" role="tablist" aria-label="Qué incluye el Plan Cuidado">
+            <button class="cuidado-opcion revelar" role="tab" aria-selected="true" data-vista="mantenimiento">
+              <i class="ph ph-shield-check" aria-hidden="true"></i>
+              <span><b>Mantenimiento</b><small>Hosting, seguridad y respaldos. Si algo se cae, lo vemos nosotros.</small></span>
+            </button>
+            <button class="cuidado-opcion revelar" role="tab" aria-selected="false" data-vista="cambios">
+              <i class="ph ph-pencil-simple-line" aria-hidden="true"></i>
+              <span><b>Cambios del mes</b><small>Precios, productos y promociones. Nos escribes y queda hecho.</small></span>
+            </button>
+            <button class="cuidado-opcion revelar" role="tab" aria-selected="false" data-vista="reporte">
+              <i class="ph ph-chart-bar" aria-hidden="true"></i>
+              <span><b>Reporte mensual</b><small>Visitas, búsquedas y mensajes, en una sola página.</small></span>
+            </button>
+          </div>
+        </div>
+
+        <div class="panel-app revelar" aria-live="polite">
+          <div class="panel-barra">
+            <span class="ventana-puntos" aria-hidden="true"><i></i><i></i><i></i></span>
+            <b>Plan Cuidado</b>
+            <span class="panel-estado"><i></i> Todo en orden</span>
+          </div>
+
+          <div class="panel-vista activa" data-vista="mantenimiento">
+            <p class="panel-titulo">tunegocio.pe</p>
+            <div class="estado-fila"><i class="ph ph-lock-simple" aria-hidden="true"></i><span><b>Certificado de seguridad</b><small>Candado activo en el navegador</small></span><span class="interruptor encendido" aria-label="Activo"></span></div>
+            <div class="estado-fila"><i class="ph ph-cloud-check" aria-hidden="true"></i><span><b>Respaldo automático</b><small>Copia diaria de toda la web</small></span><span class="interruptor encendido" aria-label="Activo"></span></div>
+            <div class="estado-fila"><i class="ph ph-arrows-clockwise" aria-hidden="true"></i><span><b>Actualizaciones</b><small>Siempre en la última versión</small></span><span class="interruptor encendido" aria-label="Activo"></span></div>
+            <div class="estado-fila"><i class="ph ph-heartbeat" aria-hidden="true"></i><span><b>Monitoreo</b><small>Si la web se cae, nos enteramos primero</small></span><span class="interruptor encendido" aria-label="Activo"></span></div>
+          </div>
+
+          <div class="panel-vista" data-vista="cambios">
+            <p class="panel-titulo">Pedidos de cambio</p>
+            <div class="mini-chat">
+              <p class="mini-msj cliente">Hola, subimos el precio de la torta. ¿Lo pueden cambiar?</p>
+              <p class="mini-msj nosotros">Listo, ya está actualizado en la web.</p>
+              <p class="mini-msj cliente">¿Y agregar la promoción del fin de semana?</p>
+              <p class="mini-msj nosotros">Hecho. Ya aparece en la portada.</p>
+            </div>
+            <div class="cambios-lista">
+              <span><i class="ph ph-check" aria-hidden="true"></i> Precio actualizado</span>
+              <span><i class="ph ph-check" aria-hidden="true"></i> Promoción publicada</span>
+            </div>
+          </div>
+
+          <div class="panel-vista" data-vista="reporte">
+            <p class="panel-titulo">Reporte del mes</p>
+            <div class="mini-grafico" aria-hidden="true">
+              <span style="--alto: 38%"></span><span style="--alto: 52%"></span><span style="--alto: 47%"></span>
+              <span style="--alto: 66%"></span><span style="--alto: 60%"></span><span style="--alto: 78%"></span>
+              <span style="--alto: 92%"></span>
+            </div>
+            <div class="reporte-datos">
+              <span><i class="ph ph-eye" aria-hidden="true"></i> Visitas a la web</span>
+              <span><i class="ph ph-magnifying-glass" aria-hidden="true"></i> Lo que más buscaron</span>
+              <span><i class="ph ph-chat-circle-dots" aria-hidden="true"></i> Mensajes recibidos</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>

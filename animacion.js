@@ -324,6 +324,31 @@
     }
   }
 
+  /* --------------------------------------------------------------
+     5h. Plan Cuidado: cada opción muestra su vista en el panel
+     -------------------------------------------------------------- */
+  var opcionesCuidado = document.querySelectorAll(".cuidado-opcion");
+  var vistasCuidado = document.querySelectorAll(".panel-vista");
+  if (opcionesCuidado.length && vistasCuidado.length) {
+    var elegirVista = function (clave) {
+      opcionesCuidado.forEach(function (o) { o.setAttribute("aria-selected", o.dataset.vista === clave ? "true" : "false"); });
+      vistasCuidado.forEach(function (v) { v.classList.toggle("activa", v.dataset.vista === clave); });
+    };
+    var tocadoCuidado = false;
+    opcionesCuidado.forEach(function (opcion) {
+      opcion.addEventListener("click", function () { tocadoCuidado = true; elegirVista(opcion.dataset.vista); });
+    });
+    if (!quieto) {                            // mientras nadie la toque, la interfaz se muestra sola
+      var ordenCuidado = ["mantenimiento", "cambios", "reporte"];
+      var pasoCuidado = 0;
+      setInterval(function () {
+        if (tocadoCuidado || document.hidden) return;
+        pasoCuidado = (pasoCuidado + 1) % ordenCuidado.length;
+        elegirVista(ordenCuidado[pasoCuidado]);
+      }, 5200);
+    }
+  }
+
   /* ==============================================================
      De acá para abajo, solo si hay movimiento permitido
      ============================================================== */
