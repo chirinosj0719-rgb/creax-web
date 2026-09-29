@@ -382,15 +382,13 @@
     alTerminarIntro.push(function () { entrada.play(); });
   }
   if (hayPortada) entrada
-    .add(".portada .sello", { opacity: [0, 1], y: [14, 0], duration: 700 }, 0)
     .add(piezas, { opacity: [0, 1], y: ["105%", "0%"], rotate: [4, 0], delay: A.stagger(80) }, 120)
     .add(".portada .entrada", { opacity: [0, 1], y: [18, 0] }, 480)
     .add(".portada .acciones .boton", { opacity: [0, 1], y: [16, 0], delay: A.stagger(80) }, 600)
     .add(".escena-grande .ventana", { opacity: [0, 1], y: [56, 0], scale: [0.985, 1], duration: 1150 }, 340)
     .add(".escena-grande .fono", { opacity: [0, 1], y: [44, 0], duration: 1000 }, 560)
     .add(".escena-grande .dato", { opacity: [0, 1], scale: [0.88, 1], delay: A.stagger(120), ease: rebote }, 820)
-    .add(".escena-grande .marca-flotante", { opacity: [0, 1], scale: [0.72, 1], delay: A.stagger(110), ease: rebote }, 960)
-    .add(".escena-pie", { opacity: [0, 1] }, 1180);
+    .add(".escena-grande .marca-flotante", { opacity: [0, 1], scale: [0.72, 1], delay: A.stagger(110), ease: rebote }, 960);
 
   /* --------------------------------------------------------------
      7. Las tarjetas flotan: la escena se siente viva

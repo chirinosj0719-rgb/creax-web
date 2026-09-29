@@ -1282,3 +1282,9 @@ html.con-intro, html.con-intro body { overflow: hidden; }
 .firma-pie .isotipo { width: 30px; height: 30px; display: block; }
 .firma-pie .logo-pie { margin-bottom: 0; }
 
+/* ajustes 2026-09-28: menú sin borde y resultados en versión corta */
+.nav-caja, .nav.encogida .nav-caja { border: 0; }
+.resultados-simples .tarjeta h3 { font-size: 24px; margin-bottom: 6px; }
+.resultados-simples .tarjeta p { font-size: 15px; color: var(--tinta-media); }
+@media (min-width: 900px) { .lineas-tres { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1000px) { .resultados-simples { grid-template-columns: repeat(4, 1fr); } }
