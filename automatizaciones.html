@@ -112,7 +112,7 @@
         <div>
           <p class="marca-seccion revelar">Cómo funciona</p>
           <h2 class="revelar">Un mensaje entra, el sistema hace <em class="cursiva">el resto</em></h2>
-          <p class="entrada revelar">Elige un tipo de negocio y toca cada paso para ver qué pasa.</p>
+          <p class="entrada revelar">Elige un tipo de negocio y mira cómo trabaja solo.</p>
         </div>
 
         <div class="flujo revelar" id="flujo">
@@ -144,22 +144,33 @@
               <div><b>Avisa al equipo</b><span>El encargado recibe el pedido listo para atender</span></div>
             </article>
           </div>
-          <p class="nodo-detalle" id="nodoDetalle" aria-live="polite"><b>Toca un paso</b> para ver qué pasa ahí.</p>
         </div>
       </div>
 
-      <div class="integraciones">
-        <div class="integracion revelar"><img src="assets/logos/whatsapp.svg" alt="WhatsApp" width="26" height="26"><span>WhatsApp</span></div>
-        <div class="integracion revelar"><img src="assets/logos/instagram.svg" alt="Instagram" width="26" height="26"><span>Instagram</span></div>
-        <div class="integracion revelar"><img src="assets/logos/meta.svg" alt="Meta" width="26" height="26"><span>Meta</span></div>
-        <div class="integracion revelar"><img src="assets/logos/googlesheets.svg" alt="Google Sheets" width="26" height="26"><span>Sheets</span></div>
-        <div class="integracion revelar"><img src="assets/logos/googlecalendar.svg" alt="Google Calendar" width="26" height="26"><span>Calendar</span></div>
-        <div class="integracion revelar"><img src="assets/logos/gmail.svg" alt="Gmail" width="26" height="26"><span>Gmail</span></div>
-        <div class="integracion revelar"><img src="assets/logos/notion.svg" alt="Notion" width="26" height="26"><span>Notion</span></div>
-        <div class="integracion revelar"><img src="assets/logos/telegram.svg" alt="Telegram" width="26" height="26"><span>Telegram</span></div>
-        <div class="integracion revelar"><img src="assets/logos/mercadopago.svg" alt="Mercado Pago" width="26" height="26"><span>Mercado Pago</span></div>
+      <div class="conexiones">
+        <div class="conexiones-texto">
+          <p class="marca-seccion revelar">Integraciones</p>
+          <p class="conexiones-frase revelar">Se conecta con las herramientas que el negocio <em class="cursiva">ya usa.</em></p>
+        </div>
+
+        <div class="orbita revelar" role="img" aria-label="WhatsApp, Instagram, Sheets, Gmail, Meta, Calendar, Notion, Telegram y Mercado Pago conectados al negocio">
+          <span class="orbita-onda" aria-hidden="true"></span>
+          <div class="orbita-centro"><i class="ph ph-storefront" aria-hidden="true"></i><span>Tu negocio</span></div>
+          <div class="anillo anillo-1" aria-hidden="true">
+            <span class="lugar" style="--a: 45deg"><span class="herramienta"><img src="assets/logos/whatsapp.svg" alt="" width="20" height="20">WhatsApp</span></span>
+            <span class="lugar" style="--a: 135deg"><span class="herramienta"><img src="assets/logos/instagram.svg" alt="" width="20" height="20">Instagram</span></span>
+            <span class="lugar" style="--a: 225deg"><span class="herramienta"><img src="assets/logos/googlesheets.svg" alt="" width="20" height="20">Sheets</span></span>
+            <span class="lugar" style="--a: 315deg"><span class="herramienta"><img src="assets/logos/gmail.svg" alt="" width="20" height="20">Gmail</span></span>
+          </div>
+          <div class="anillo anillo-2" aria-hidden="true">
+            <span class="lugar" style="--a: 0deg"><span class="herramienta"><img src="assets/logos/meta.svg" alt="" width="20" height="20">Meta</span></span>
+            <span class="lugar" style="--a: 72deg"><span class="herramienta"><img src="assets/logos/googlecalendar.svg" alt="" width="20" height="20">Calendar</span></span>
+            <span class="lugar" style="--a: 144deg"><span class="herramienta"><img src="assets/logos/notion.svg" alt="" width="20" height="20">Notion</span></span>
+            <span class="lugar" style="--a: 216deg"><span class="herramienta"><img src="assets/logos/telegram.svg" alt="" width="20" height="20">Telegram</span></span>
+            <span class="lugar" style="--a: 288deg"><span class="herramienta"><img src="assets/logos/mercadopago.svg" alt="" width="20" height="20">Mercado Pago</span></span>
+          </div>
+        </div>
       </div>
-      <p class="nota revelar">Se conecta con las herramientas que el negocio ya usa.</p>
     </div>
   </section>
 
@@ -171,8 +182,9 @@
           <div class="conversacion-texto">
             <p class="marca-seccion">Del lado del cliente</p>
             <h2>Así ve la automatización <em class="cursiva">tu cliente</em></h2>
-            <p class="entrada">Baja despacio: un cliente escribe y el asistente le responde, le muestra opciones y deja el pedido listo.</p>
-            <p class="conversacion-avance"><span id="convContador">1</span> de 7 mensajes</p>
+            <p class="entrada">Un cliente escribe y el asistente le responde, le muestra opciones y deja el pedido listo. Todo en segundos.</p>
+            <p class="conversacion-avance"><span id="convContador">0</span> de 7 mensajes</p>
+            <button type="button" class="boton boton-secundario boton-chico conversacion-repetir" id="convRepetir" hidden><i class="ph ph-arrow-counter-clockwise" aria-hidden="true"></i> Ver de nuevo</button>
           </div>
 
           <div class="laptop" aria-label="Conversación de ejemplo entre un cliente y el asistente del negocio">
@@ -224,7 +236,7 @@
     <div class="envoltura">
       <div class="cierre-caja revelar">
         <h2>¿Qué se está haciendo <em class="cursiva">a mano</em> hoy?</h2>
-        <p class="entrada">Responder lo mismo veinte veces, copiar pedidos a una hoja, confirmar citas una por una. Eso es lo que se automatiza primero.</p>
+        <p class="entrada">Responder lo mismo veinte veces, copiar pedidos a una hoja, confirmar citas una por una. Con CreaX te olvidas de eso: los procesos se automatizan y te despides de ese trabajo.</p>
         <div class="acciones">
           <!-- CONTACTO -->
           <a class="boton boton-principal" href="https://wa.me/51966980388?text=Hola%20CreaX%2C%20vengo%20de%20la%20web%20y%20quisiera%20m%C3%A1s%20informaci%C3%B3n." target="_blank" rel="noopener">

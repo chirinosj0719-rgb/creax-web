@@ -1358,3 +1358,62 @@ html.con-intro, html.con-intro body { overflow: hidden; }
 .icono-fondo { display: grid; place-items: center; }
 .icono-fondo .ph { font-size: min(600px, 60vw); line-height: 1; }
 
+/* =============================================================================
+   INTEGRACIONES EN ÓRBITA  ·  el negocio al centro y sus herramientas girando
+   ========================================================================== */
+.conexiones { display: grid; gap: 36px; align-items: center; margin-top: clamp(56px, 7vw, 100px); }
+@media (min-width: 960px) { .conexiones { grid-template-columns: 0.85fr 1.15fr; gap: 40px; } }
+.conexiones-frase {
+  font-family: "Space Grotesk", Inter, sans-serif; font-weight: 700; letter-spacing: -0.04em;
+  font-size: clamp(34px, 4.4vw, 60px); line-height: 1.02; max-width: 12ch;
+}
+.conexiones-frase .cursiva { color: var(--menta-texto); }
+
+.orbita { position: relative; width: min(560px, 100%); aspect-ratio: 1; margin: 0 auto; container-type: inline-size; }
+.orbita-centro {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 2;
+  width: 28cqw; aspect-ratio: 1; border-radius: 50%; background: var(--menta); color: var(--sobre-color);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+  font-family: "Space Grotesk", Inter, sans-serif; font-weight: 700; font-size: 15px; text-align: center;
+}
+.orbita-centro .ph { font-size: 34px; }
+.orbita-onda {
+  position: absolute; left: 50%; top: 50%; width: 28cqw; aspect-ratio: 1; border-radius: 50%;
+  border: 2px solid var(--menta); transform: translate(-50%, -50%); animation: onda-sale 3.2s ease-out infinite;
+}
+@keyframes onda-sale { to { width: 62cqw; opacity: 0; } }
+
+.anillo { position: absolute; left: 50%; top: 50%; border-radius: 50%; border: 1.5px dashed var(--borde-fuerte); transform: translate(-50%, -50%); }
+.anillo-1 { width: 54cqw; aspect-ratio: 1; --r: 27cqw; animation: gira 48s linear infinite; }
+.anillo-2 { width: 86cqw; aspect-ratio: 1; --r: 43cqw; animation: gira-al-reves 64s linear infinite; }
+@keyframes gira { to { transform: translate(-50%, -50%) rotate(360deg); } }
+@keyframes gira-al-reves { to { transform: translate(-50%, -50%) rotate(-360deg); } }
+.lugar { position: absolute; left: 50%; top: 50%; width: 0; height: 0; transform: rotate(var(--a)) translateY(calc(var(--r) * -1)) rotate(calc(var(--a) * -1)); }
+.herramienta {
+  position: absolute; left: 0; top: 0; translate: -50% -50%; white-space: nowrap; width: max-content;
+  display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px 9px 10px; border-radius: 999px;
+  background: var(--blanco); border: 1px solid var(--borde-fuerte); font-size: 13.5px; font-weight: 600;
+  transition: background-color 0.3s ease, border-color 0.3s ease, scale 0.35s var(--rebote);
+}
+.herramienta img { width: 20px; height: 20px; filter: brightness(0); }
+.anillo-1 .herramienta { animation: contra 48s linear infinite; }
+.anillo-2 .herramienta { animation: contra-al-reves 64s linear infinite; }
+@keyframes contra { to { rotate: -360deg; } }
+@keyframes contra-al-reves { to { rotate: 360deg; } }
+.orbita:hover .anillo, .orbita:hover .herramienta { animation-play-state: paused; }
+.herramienta:hover { background: var(--menta); border-color: var(--menta); scale: 1.08; }
+@media (prefers-reduced-motion: reduce) { .anillo, .herramienta, .orbita-onda { animation: none !important; } }
+
+/* la laptop: sin quedarse pegada al bajar; el chat crece desde arriba y baja solo */
+.conversacion-pista { height: auto; }
+.conversacion-fija { position: static; height: auto; padding: clamp(40px, 6vw, 80px) 0; }
+.app .app-avatar { color: #fff; font-size: 13px; }
+.app .app-avatar.gris { color: transparent; }
+.app-mensajes { justify-content: flex-start; overflow-y: auto; scroll-behavior: smooth; scrollbar-width: none; }
+.app-mensajes::-webkit-scrollbar { display: none; }
+.conversacion-repetir { margin-top: 18px; }
+.conversacion-repetir[hidden] { display: none; }
+.nodo { cursor: default; }
+/* la caja del chat tiene alto fijo y se desplaza sola hasta el último mensaje */
+.app-chat { min-height: 0; overflow: hidden; }
+.app-mensajes { min-height: 0; }

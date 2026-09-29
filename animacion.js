@@ -175,7 +175,7 @@
   var nodosFlujo = document.querySelectorAll(".nodo");
   var nodoDetalle = document.getElementById("nodoDetalle");
   var flujoActual = "general";
-  if (nodosFlujo.length && nodoDetalle) {
+  if (nodosFlujo.length) {
     var pintarFlujo = function (clave) {
       flujoActual = clave;
       nodosFlujo.forEach(function (nodo, i) {
@@ -188,7 +188,6 @@
           nodo.classList.remove("cambiando");
         }, quieto ? 0 : 220 + i * 70);
       });
-      nodoDetalle.innerHTML = "<b>Toca un paso</b> para ver qué pasa ahí.";
     };
     var pestanasFlujo = document.querySelectorAll(".pestana[data-flujo]");
     pestanasFlujo.forEach(function (boton) {
@@ -196,17 +195,6 @@
         pestanasFlujo.forEach(function (otra) { otra.setAttribute("aria-selected", "false"); });
         boton.setAttribute("aria-selected", "true");
         pintarFlujo(boton.dataset.flujo);
-      });
-    });
-    nodosFlujo.forEach(function (nodo, i) {
-      nodo.setAttribute("tabindex", "0");
-      var explicar = function () {
-        var datos = FLUJOS[flujoActual][i];
-        nodoDetalle.innerHTML = "<b>" + (i + 1) + ". " + datos[0] + ".</b> " + datos[2];
-      };
-      nodo.addEventListener("click", explicar);
-      nodo.addEventListener("keydown", function (evento) {
-        if (evento.key === "Enter" || evento.key === " ") { evento.preventDefault(); explicar(); }
       });
     });
   }
@@ -280,47 +268,58 @@
   }
 
   /* --------------------------------------------------------------
-     5g. La conversación de la laptop avanza a medida que se baja
+     5g. La conversación de la laptop se reproduce sola cuando aparece
+         en pantalla: el cliente escribe, el asistente "escribe…" y
+         responde, y el chat baja solo. Al final se puede ver de nuevo.
      -------------------------------------------------------------- */
-  var pistaConversacion = document.getElementById("conversacionPista");
+  var laptopChat = document.querySelector(".laptop");
+  var cajaMensajes = document.getElementById("convMensajes");
   var mensajesConversacion = document.querySelectorAll("#convMensajes [data-paso]");
   var contadorConversacion = document.getElementById("convContador");
-  if (pistaConversacion && mensajesConversacion.length) {
+  var repetirConversacion = document.getElementById("convRepetir");
+  if (laptopChat && cajaMensajes && mensajesConversacion.length) {
     var totalMensajes = mensajesConversacion.length;
-    var visibles = 0;
-    var mostrarHasta = function (n) {
-      if (n === visibles) return;
+    var relojes = [];
+    var bajarAlFinal = function () { cajaMensajes.scrollTop = cajaMensajes.scrollHeight; };
+    var contar = function (n) { if (contadorConversacion) contadorConversacion.textContent = n; };
+    var reiniciar = function () {
+      relojes.forEach(clearTimeout);
+      relojes = [];
+      mensajesConversacion.forEach(function (m) { m.classList.remove("visto", "escribiendo"); });
+      contar(0);
+      if (repetirConversacion) repetirConversacion.hidden = true;
+    };
+    var reproducir = function () {
+      reiniciar();
+      var t = 400;
       mensajesConversacion.forEach(function (msj, i) {
-        var toca = i < n;
-        if (toca && !msj.classList.contains("visto")) {
-          msj.classList.add("visto");
-          if (!quieto && msj.classList.contains("asistente") && i === n - 1) {
-            msj.classList.add("escribiendo");
-            setTimeout(function () { msj.classList.remove("escribiendo"); }, 750);
-          }
-        } else if (!toca) {
-          msj.classList.remove("visto", "escribiendo");
+        if (msj.classList.contains("asistente")) {
+          relojes.push(setTimeout(function () { msj.classList.add("visto", "escribiendo"); contar(i + 1); bajarAlFinal(); }, t));
+          t += 1150;
+          relojes.push(setTimeout(function () { msj.classList.remove("escribiendo"); bajarAlFinal(); }, t));
+          t += 1000;
+        } else {
+          relojes.push(setTimeout(function () { msj.classList.add("visto"); contar(i + 1); bajarAlFinal(); }, t));
+          t += 1400;
         }
       });
-      visibles = n;
-      if (contadorConversacion) contadorConversacion.textContent = n;
+      relojes.push(setTimeout(function () { if (repetirConversacion) repetirConversacion.hidden = false; }, t));
     };
     if (quieto) {
-      document.documentElement.classList.add("sin-movimiento");
-      mostrarHasta(totalMensajes);
+      mensajesConversacion.forEach(function (m) { m.classList.add("visto"); });
+      contar(totalMensajes);
     } else {
-      var esperando = false;
-      var segunScroll = function () {
-        esperando = false;
-        var caja = pistaConversacion.getBoundingClientRect();
-        var recorrido = caja.height - window.innerHeight;
-        var avance = recorrido > 0 ? Math.min(1, Math.max(0, -caja.top / recorrido)) : 1;
-        mostrarHasta(Math.max(1, Math.min(totalMensajes, Math.ceil(avance * totalMensajes))));
-      };
-      window.addEventListener("scroll", function () {
-        if (!esperando) { esperando = true; requestAnimationFrame(segunScroll); }
-      }, { passive: true });
-      segunScroll();
+      var yaSeVio = false;
+      if ("IntersectionObserver" in window) {
+        new IntersectionObserver(function (entradas) {
+          entradas.forEach(function (entrada) {
+            if (entrada.isIntersecting && !yaSeVio) { yaSeVio = true; reproducir(); }
+          });
+        }, { threshold: 0.4 }).observe(laptopChat);
+      } else {
+        reproducir();
+      }
+      if (repetirConversacion) repetirConversacion.addEventListener("click", reproducir);
     }
   }
 
