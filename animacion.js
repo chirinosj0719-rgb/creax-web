@@ -96,11 +96,11 @@
   if (elegidor) {
     var respuestas = {};
     var PLANES = {
-      presentacion: { columna: 1, nombre: "Web de presentación",
+      presentacion: { columna: 1, nombre: "Vitrina",
         porque: "El cliente necesita entender qué hace el negocio y escribirle. Con la web de presentación y el botón directo al WhatsApp alcanza." },
-      pedidos: { columna: 2, nombre: "Web con pedidos",
+      pedidos: { columna: 2, nombre: "Pedidos",
         porque: "El cliente arma su pedido en la web y llega completo al WhatsApp. Se cobra como hoy, sin comisiones de pasarela." },
-      tienda: { columna: 3, nombre: "Tienda en línea",
+      tienda: { columna: 3, nombre: "Tienda",
         porque: "El cliente paga en la misma web y el stock se descuenta solo. Conviene cuando el volumen justifica la pasarela de pago." }
     };
     var tablaComparacion = document.getElementById("tablaComparacion");
@@ -114,7 +114,7 @@
       else if (respuestas.vende === "productos") clave = "pedidos";
       var plan = PLANES[clave];
       var extra = (clave !== "tienda" && respuestas.volumen !== "pocos")
-        ? " Con ese volumen, conviene sumarle la automatización de WhatsApp." : "";
+        ? " Con ese volumen, conviene mirar también Piloto automático." : "";
       veredictoNombre.textContent = plan.nombre;
       veredictoPorque.textContent = plan.porque + extra;
       if (tablaComparacion) {
@@ -355,12 +355,12 @@
          lleva directo al WhatsApp.
      -------------------------------------------------------------- */
   var CANALES = [
-    { icono: "ph-whatsapp-logo", nombre: "WhatsApp", detalle: "966 980 388 · la vía más rápida", color: "var(--c-automatizaciones-tenue)",
+    { icono: "ph-phone", nombre: "Llámanos", color: "var(--c-nosotros-tenue)", enlace: "tel:+51966980388" },
+    { icono: "ph-whatsapp-logo", nombre: "WhatsApp", color: "var(--c-automatizaciones-tenue)",
       enlace: "https://wa.me/51966980388?text=Hola%20CreaX%2C%20vengo%20de%20la%20web%20y%20quisiera%20m%C3%A1s%20informaci%C3%B3n.", externo: true },
-    { icono: "ph-phone", nombre: "Llamada", detalle: "966 980 388", color: "var(--c-nosotros-tenue)", enlace: "tel:+51966980388" },
-    { icono: "ph-envelope-simple", nombre: "Correo", detalle: "Correo de la empresa" },
-    { icono: "ph-instagram-logo", nombre: "Instagram", detalle: "Cuenta de CreaX" },
-    { icono: "ph-linkedin-logo", nombre: "LinkedIn", detalle: "Página de la empresa" }
+    { icono: "ph-envelope-simple", nombre: "Correo" },
+    { icono: "ph-instagram-logo", nombre: "Instagram" },
+    { icono: "ph-linkedin-logo", nombre: "LinkedIn" }
   ];
   var disparadores = document.querySelectorAll("[data-contacto]");
   if (disparadores.length) {
@@ -381,7 +381,7 @@
       '</div>' +
       '<ul class="contacto-lista">' + CANALES.map(function (c) {
         var icono = '<span class="canal-icono"' + (c.color ? ' style="--color-canal: ' + c.color + '"' : '') + '><i class="ph ' + c.icono + '" aria-hidden="true"></i></span>';
-        var texto = '<span><b>' + c.nombre + '</b><small>' + c.detalle + '</small></span>';
+        var texto = '<span><b>' + c.nombre + '</b>' + (c.detalle ? '<small>' + c.detalle + '</small>' : '') + '</span>';
         if (!c.enlace) return '<li><div class="canal pronto">' + icono + texto + '<span class="canal-pronto">Próximamente</span></div></li>';
         return '<li><a class="canal" href="' + c.enlace + '"' + (c.externo ? ' target="_blank" rel="noopener"' : '') + '>' +
                icono + texto + '<i class="ph ph-arrow-up-right canal-ir" aria-hidden="true"></i></a></li>';

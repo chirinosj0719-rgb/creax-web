@@ -1460,3 +1460,68 @@ html.contacto-abierto, html.contacto-abierto body { overflow: hidden; }
 .enlace-boton:hover { color: var(--menta-texto); }
 @media (prefers-reduced-motion: reduce) { .contacto-panel, .contacto-fondo { transition: none; } }
 
+/* =============================================================================
+   CUATRO NIVELES DE WEB  ·  de blanco a coral: el color y la altura dicen cuál da más
+   ========================================================================== */
+.planes { display: grid; gap: 16px; margin-top: 44px; align-items: end; }
+@media (min-width: 720px) { .planes { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1100px) { .planes { grid-template-columns: repeat(4, 1fr); } }
+.plan {
+  position: relative; display: flex; flex-direction: column; border-radius: 24px; padding: 26px 24px 24px;
+  border: 1px solid var(--borde); transition: transform 0.45s var(--salida);
+}
+.plan:hover { transform: translateY(-6px); }
+@media (min-width: 1100px) {
+  .plan-a { min-height: 520px; } .plan-b { min-height: 560px; }
+  .plan-c { min-height: 600px; } .plan-d { min-height: 650px; }
+}
+.plan-a { background: var(--blanco); }
+.plan-b { background: #E6E4DE; border-color: transparent; }
+.plan-c { background: #1C1C1C; color: #fff; border-color: transparent; }
+.plan-d { background: var(--c-servicios); color: var(--tinta); border: 2px solid var(--tinta); }
+
+.plan-cabeza { display: flex; align-items: center; justify-content: space-between; margin-bottom: 26px; }
+.plan-icono { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; font-size: 24px; background: var(--hueso); color: var(--tinta); }
+.plan-b .plan-icono { background: var(--blanco); }
+.plan-c .plan-icono { background: rgba(255, 255, 255, 0.1); color: var(--c-servicios); }
+.plan-d .plan-icono { background: var(--tinta); color: var(--c-servicios); }
+.plan-nivel { display: inline-flex; gap: 4px; align-items: flex-end; }
+.plan-nivel i { width: 7px; border-radius: 3px; background: currentColor; opacity: 0.18; }
+.plan-nivel i:nth-child(1) { height: 10px; } .plan-nivel i:nth-child(2) { height: 15px; }
+.plan-nivel i:nth-child(3) { height: 20px; } .plan-nivel i:nth-child(4) { height: 25px; }
+.plan-nivel i.lleno { opacity: 1; }
+.plan-c .plan-nivel i.lleno { background: var(--c-servicios); }
+
+.plan-lema { font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.7; margin-bottom: 6px; }
+.plan-nombre { font-size: clamp(26px, 2.2vw, 32px); letter-spacing: -0.035em; line-height: 1.05; margin-bottom: 10px; }
+.plan-resumen { font-size: 15px; line-height: 1.5; opacity: 0.8; margin-bottom: 18px; }
+.plan-previo { font-size: 13.5px; font-weight: 600; margin-bottom: 8px; }
+.plan-c .plan-previo { color: var(--c-servicios); }
+.plan-lista { list-style: none; display: grid; gap: 9px; margin: 0 0 26px; padding: 0; }
+.plan-lista li { display: flex; gap: 9px; align-items: flex-start; font-size: 14.5px; line-height: 1.45; }
+.plan-lista .ph { flex: none; margin-top: 2px; font-size: 15px; }
+.plan-a .plan-lista .ph, .plan-b .plan-lista .ph { color: var(--c-servicios-texto); }
+.plan-c .plan-lista .ph { color: var(--c-servicios); }
+.plan-c .plan-lista li { color: rgba(255, 255, 255, 0.82); }
+.plan-d .plan-lista .ph { color: var(--tinta); }
+
+.plan-boton { margin-top: auto; align-self: flex-start; border: 1px solid var(--tinta); background: transparent; color: var(--tinta); }
+.plan-boton:hover { background: var(--tinta); color: #fff; }
+.plan-c .plan-boton { border-color: rgba(255, 255, 255, 0.4); color: #fff; }
+.plan-c .plan-boton:hover { background: var(--c-servicios); border-color: var(--c-servicios); color: var(--tinta); }
+.plan-d .plan-boton { background: var(--tinta); color: #fff; }
+.plan-d .plan-boton:hover { background: #fff; color: var(--tinta); }
+.plan-sello {
+  position: absolute; top: -13px; left: 24px; font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; background: var(--tinta); color: #fff;
+  padding: 6px 12px; border-radius: 999px;
+}
+/* textos de cada nivel con buen contraste sobre su fondo */
+.plan .plan-resumen, .plan .plan-lema { opacity: 1; }
+.plan-a .plan-resumen, .plan-b .plan-resumen { color: var(--tinta-media); }
+.plan-a .plan-lema, .plan-b .plan-lema { color: var(--tinta-suave); }
+.plan-c .plan-resumen { color: rgba(255, 255, 255, 0.78); }
+.plan-c .plan-lema { color: rgba(255, 255, 255, 0.6); }
+.plan-d .plan-resumen { color: rgba(16, 16, 16, 0.78); }
+.plan-d .plan-lema { color: rgba(16, 16, 16, 0.65); }
+
