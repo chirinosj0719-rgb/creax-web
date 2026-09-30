@@ -484,7 +484,7 @@ footer p { font-size: 13.5px; color: var(--tinta-suave); }
 .ventana-url {
   margin: 0 auto;
   font-size: 12px;
-  color: #79828d;
+  color: #636B75;
   background: #fff;
   border: 1px solid #e4e6ea;
   border-radius: 999px;
@@ -1233,7 +1233,7 @@ h1 .cursiva, h2 .cursiva { color: var(--menta-texto); }
 .msj-opciones { display: flex; gap: 8px; margin-top: 8px; }
 .msj-opciones span { display: inline-flex; align-items: center; gap: 6px; background: #fff; color: var(--tinta); border-radius: 10px; padding: 7px 10px; font-size: 12px; font-weight: 600; }
 .msj-enlace { display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; background: var(--tinta); color: #fff; border-radius: 999px; padding: 6px 12px; font-size: 12px; }
-.app-escribir { display: flex; align-items: center; justify-content: space-between; margin: 0 14px 14px; padding: 10px 14px; border: 1px solid #e6e6e2; border-radius: 999px; color: #a3a39e; font-size: 12.5px; }
+.app-escribir { display: flex; align-items: center; justify-content: space-between; margin: 0 14px 14px; padding: 10px 14px; border: 1px solid #e6e6e2; border-radius: 999px; color: #6F6F6B; font-size: 12.5px; }
 .app-escribir .ph { color: var(--menta-texto); font-size: 17px; }
 .con-js .msj:not(.visto) { display: none; }
 .msj.visto { animation: msj-entra 0.45s var(--salida); }
@@ -1272,7 +1272,7 @@ html.con-intro, html.con-intro body { overflow: hidden; }
 .intro .ib, .intro .ib-ultimo, .intro .onda, .intro .punta { transform-box: fill-box; transform-origin: center; }
 /* punto de partida de "Encendido": así no se ve el logo terminado antes de que arranque */
 .intro .ib-ultimo, .intro .onda, .intro .corte, .intro .punta, .intro .barra, .intro .asta, .intro .letra { opacity: 0; }
-.intro-saltar { position: absolute; bottom: 28px; left: 0; right: 0; text-align: center; font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255, 255, 255, 0.38); }
+.intro-saltar { position: absolute; bottom: 28px; left: 0; right: 0; text-align: center; font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255, 255, 255, 0.6); }
 
 .nav-marca { display: inline-flex; align-items: center; gap: 9px; }
 .nav .isotipo { width: 26px; height: 26px; display: block; }
@@ -1775,7 +1775,8 @@ html.contacto-abierto, html.contacto-abierto body { overflow: hidden; }
 .construimos-lista .sep:nth-of-type(5n+2) { background: var(--c-automatizaciones); }
 .construimos-lista .sep:nth-of-type(5n+3) { background: var(--c-bocetos); }
 .construimos-lista .sep:nth-of-type(5n+4) { background: var(--c-nosotros); }
-[data-iluminar] .palabra { opacity: 0.2; transition: opacity 0.4s ease; }
+[data-iluminar] .palabra { opacity: 0.5; transition: opacity 0.4s ease; }   /* apagada, pero legible: texto grande sobre papel, 3,5:1 */
+.hoja-oscura [data-iluminar] .palabra { opacity: 0.42; }
 [data-iluminar] .palabra.encendida { opacity: 1; }
 
 /* el muro de bocetos: los ejemplos, inclinados, moviéndose en columnas al bajar */

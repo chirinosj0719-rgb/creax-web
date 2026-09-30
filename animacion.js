@@ -160,7 +160,7 @@
     var veredictoNombre = document.getElementById("veredictoNombre");
     var veredictoPorque = document.getElementById("veredictoPorque");
 
-    var decidir = function () {
+    var decidir = function (porRespuesta) {
       var clave = "presentacion";
       if (respuestas.cobro === "web") clave = "tienda";
       else if (respuestas.vende === "productos" && respuestas.volumen === "muchos") clave = "tienda";
@@ -179,7 +179,8 @@
         // en el celular la tabla se desliza de lado: se lleva a la vista la columna que le toca
         var envolturaTabla = tablaComparacion.parentElement;
         var celdaActiva = tablaComparacion.querySelector("thead th.col-activa");
-        if (celdaActiva && envolturaTabla.scrollWidth > envolturaTabla.clientWidth + 1) {
+        // solo cuando la persona responde: si se desliza al cargar, Chrome deja de medir la velocidad (LCP)
+        if (porRespuesta && celdaActiva && envolturaTabla.scrollWidth > envolturaTabla.clientWidth + 1) {
           var fija = tablaComparacion.querySelector("thead th").offsetWidth;
           envolturaTabla.scrollTo({ left: Math.max(0, celdaActiva.offsetLeft - fija), behavior: quieto ? "auto" : "smooth" });
         }
@@ -196,7 +197,7 @@
           botones.forEach(function (otro) { otro.setAttribute("aria-pressed", "false"); });
           boton.setAttribute("aria-pressed", "true");
           respuestas[clave] = boton.dataset.valor;
-          decidir();
+          decidir(true);
         });
       });
     });
