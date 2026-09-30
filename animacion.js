@@ -35,6 +35,59 @@
   }
 
   /* --------------------------------------------------------------
+     1b. En el celular, los enlaces de la barra no caben: van en un
+         menú que se abre con un botón. En pantallas grandes, el CSS
+         esconde el botón y el menú.
+     -------------------------------------------------------------- */
+  var enlacesNav = nav && nav.querySelector(".nav-enlaces");
+  if (enlacesNav) {
+    var botonMenu = document.createElement("button");
+    botonMenu.type = "button";
+    botonMenu.className = "boton-menu";
+    botonMenu.setAttribute("aria-controls", "menuMovil");
+    var iconoMenu = document.createElement("i");
+    iconoMenu.setAttribute("aria-hidden", "true");
+    botonMenu.appendChild(iconoMenu);
+    enlacesNav.appendChild(botonMenu);
+
+    var menuMovil = document.createElement("nav");
+    menuMovil.className = "menu-movil";
+    menuMovil.id = "menuMovil";
+    menuMovil.setAttribute("aria-label", "Páginas");
+    enlacesNav.querySelectorAll("a.enlace").forEach(function (enlace) {
+      var item = document.createElement("a");
+      var colorSector = enlace.className.match(/color-[a-z]+/);
+      item.href = enlace.getAttribute("href");
+      item.className = "menu-item" + (colorSector ? " " + colorSector[0] : "");
+      if (enlace.getAttribute("aria-current")) item.setAttribute("aria-current", enlace.getAttribute("aria-current"));
+      item.appendChild(document.createTextNode(enlace.textContent));
+      var flecha = document.createElement("i");
+      flecha.className = "ph ph-arrow-right";
+      flecha.setAttribute("aria-hidden", "true");
+      item.appendChild(flecha);
+      menuMovil.appendChild(item);
+    });
+    nav.appendChild(menuMovil);
+
+    var ponerMenu = function (abierto) {
+      nav.classList.toggle("menu-abierto", abierto);
+      botonMenu.setAttribute("aria-expanded", String(abierto));
+      botonMenu.setAttribute("aria-label", abierto ? "Cerrar el menú" : "Abrir el menú");
+      iconoMenu.className = "ph " + (abierto ? "ph-x" : "ph-list");
+    };
+    ponerMenu(false);
+    botonMenu.addEventListener("click", function () { ponerMenu(!nav.classList.contains("menu-abierto")); });
+    // se cierra al tocar fuera de la barra o al abrir el panel de contacto
+    document.addEventListener("click", function (evento) {
+      if (!nav.classList.contains("menu-abierto")) return;
+      if (!nav.contains(evento.target) || evento.target.closest("[data-contacto]")) ponerMenu(false);
+    });
+    document.addEventListener("keydown", function (evento) {
+      if (evento.key === "Escape" && nav.classList.contains("menu-abierto")) { ponerMenu(false); botonMenu.focus(); }
+    });
+  }
+
+  /* --------------------------------------------------------------
      2. El titular se parte en palabras para poder escalonarlo
      -------------------------------------------------------------- */
   var titular = document.getElementById("titular");
@@ -123,6 +176,13 @@
             celda.classList.toggle("col-activa", i === plan.columna);
           });
         });
+        // en el celular la tabla se desliza de lado: se lleva a la vista la columna que le toca
+        var envolturaTabla = tablaComparacion.parentElement;
+        var celdaActiva = tablaComparacion.querySelector("thead th.col-activa");
+        if (celdaActiva && envolturaTabla.scrollWidth > envolturaTabla.clientWidth + 1) {
+          var fija = tablaComparacion.querySelector("thead th").offsetWidth;
+          envolturaTabla.scrollTo({ left: Math.max(0, celdaActiva.offsetLeft - fija), behavior: quieto ? "auto" : "smooth" });
+        }
       }
       if (!quieto) A.animate(veredictoNombre, { opacity: [0, 1], y: [12, 0], duration: 520, ease: salida });
     };

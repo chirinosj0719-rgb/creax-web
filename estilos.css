@@ -1586,3 +1586,76 @@ html.contacto-abierto, html.contacto-abierto body { overflow: hidden; }
 .socio-detalle + .socio-pista { margin-top: auto; }
 .socio-pista .ph { font-size: 15px; color: var(--tinta); transition: transform 0.4s var(--salida); }
 .socio:hover .socio-pista .ph, .socio.abierto .socio-pista .ph { transform: rotate(180deg); }
+
+/* =============================================================================
+   Celular (30/09/2026): menú desplegable, vistas previas que se recorren con el
+   dedo, órbita solo con logos, tabla con la primera columna fija y toques cómodos.
+   ========================================================================== */
+.boton-menu, .menu-movil, .tabla-pista, .solo-tactil { display: none; }
+
+/* pantallas táctiles: sin cursor, lo que se hacía pasando el mouse se hace con el dedo */
+@media (hover: none) {
+  .solo-cursor { display: none; }
+  .solo-tactil { display: inline; }
+  .recorrido { overflow-y: auto; cursor: auto; scrollbar-width: none; }
+  .recorrido::-webkit-scrollbar { display: none; }
+  .recorrido img, .recorrido:hover img, .recorrido:focus-visible img { position: static; display: block; top: auto; transform: none; transition: none; }
+}
+
+@media (max-width: 759px) {
+  /* la barra: logo, Contáctanos y el botón del menú */
+  .nav-caja { gap: 10px; padding: 7px 7px 7px 14px; }
+  .nav-enlaces { gap: 8px; }
+  .boton-menu {
+    display: grid; place-items: center; flex: none; width: 42px; height: 42px; padding: 0;
+    border-radius: 999px; border: 1px solid var(--borde-fuerte); background: var(--blanco);
+    color: var(--tinta); font-size: 20px; cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+  .nav.menu-abierto .boton-menu { background: var(--tinta); border-color: var(--tinta); color: var(--blanco); }
+  .menu-movil {
+    display: grid; gap: 2px; pointer-events: auto; max-width: var(--ancho); margin: 8px auto 0; padding: 8px;
+    background: var(--blanco); border: 1px solid var(--borde-fuerte); border-radius: 26px;
+    opacity: 0; visibility: hidden; transform: translateY(-8px) scale(0.98); transform-origin: top right;
+    transition: opacity 0.2s var(--salida), transform 0.2s var(--salida), visibility 0s linear 0.2s;
+  }
+  .nav.menu-abierto .menu-movil {
+    opacity: 1; visibility: visible; transform: none;
+    transition: opacity 0.2s var(--salida), transform 0.2s var(--salida), visibility 0s;
+  }
+  .menu-item {
+    display: flex; align-items: center; gap: 12px; min-height: 54px; padding: 10px 14px; border-radius: 18px;
+    font-family: "Space Grotesk", Inter, sans-serif; font-weight: 700; font-size: 21px; letter-spacing: -0.02em; color: var(--tinta);
+  }
+  .menu-item::before { content: ""; flex: none; width: 12px; height: 12px; border-radius: 4px; background: var(--menta); }
+  .menu-item[aria-current="page"] { background: var(--menta-tenue); }
+  .menu-item .ph { margin-left: auto; font-size: 18px; color: var(--tinta-suave); }
+  .menu-item:active { background: var(--hueso); }
+
+  /* la tabla comparativa: la primera columna queda fija y una pista avisa que se desliza */
+  .tabla-pista {
+    display: flex; align-items: center; gap: 8px; margin-top: 22px;
+    font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: 11.5px; letter-spacing: 0.08em; color: var(--tinta-suave);
+  }
+  .tabla-pista .ph { font-size: 17px; }
+  .tabla-pista + .tabla-envoltura { margin-top: 10px !important; }
+  .tabla tbody th, .tabla thead th:first-child { position: sticky; left: 0; z-index: 1; background: var(--blanco); box-shadow: inset -1px 0 0 var(--borde); }
+  .tabla thead th:first-child { background: var(--hueso-2); }
+
+  /* la laptop de la conversación no se sale del ancho */
+  .laptop-base { width: 104%; margin-left: -2%; }
+
+  /* el pie: enlaces más altos, cómodos para el dedo */
+  .pie-grilla ul { gap: 0; }
+  .pie-grilla li a { display: inline-block; padding: 8px 0; }
+}
+
+@media (max-width: 759px) and (prefers-reduced-motion: reduce) {
+  .menu-movil, .nav.menu-abierto .menu-movil { transform: none; transition: opacity 0.15s ease, visibility 0s; }
+}
+
+/* la órbita de integraciones, cuando es angosta: solo los logos, en círculos, para que no se encimen */
+@container (max-width: 480px) {
+  .herramienta { gap: 0; padding: 0; width: 44px; height: 44px; justify-content: center; font-size: 0; }
+  .herramienta img { width: 21px; height: 21px; }
+}
