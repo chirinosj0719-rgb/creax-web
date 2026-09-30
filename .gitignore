@@ -1,3 +1,10 @@
 node_modules/
 __pycache__/
 *.pyc
+
+# secretos: nunca al repositorio, que es público
+.env
+.env.*
+*.pem
+*.key
+*-token.txt

@@ -400,19 +400,51 @@
     panelContacto.setAttribute("aria-modal", "true");
     panelContacto.setAttribute("aria-labelledby", "contactoTitulo");
     panelContacto.hidden = true;
-    panelContacto.innerHTML =
-      '<div class="contacto-cabeza">' +
-        '<h2 id="contactoTitulo">Contáctanos</h2>' +
-        '<p>Elige el canal que prefieras.</p>' +
-        '<button type="button" class="contacto-cerrar" aria-label="Cerrar"><i class="ph ph-x" aria-hidden="true"></i></button>' +
-      '</div>' +
-      '<ul class="contacto-lista">' + CANALES.map(function (c) {
-        var icono = '<span class="canal-icono"' + (c.color ? ' style="--color-canal: ' + c.color + '"' : '') + '><i class="ph ' + c.icono + '" aria-hidden="true"></i></span>';
-        var texto = '<span><b>' + c.nombre + '</b>' + (c.detalle ? '<small>' + c.detalle + '</small>' : '') + '</span>';
-        if (!c.enlace) return '<li><div class="canal pronto">' + icono + texto + '<span class="canal-pronto">Próximamente</span></div></li>';
-        return '<li><a class="canal" href="' + c.enlace + '"' + (c.externo ? ' target="_blank" rel="noopener"' : '') + '>' +
-               icono + texto + '<i class="ph ph-arrow-up-right canal-ir" aria-hidden="true"></i></a></li>';
-      }).join("") + '</ul>';
+    // Se arma con elementos del DOM y textContent (nada de innerHTML con datos), así un
+    // canal nuevo con un texto raro nunca puede convertirse en código.
+    var crear = function (etiqueta, clase, texto) {
+      var el = document.createElement(etiqueta);
+      if (clase) el.className = clase;
+      if (texto) el.textContent = texto;
+      return el;
+    };
+    var icono = function (nombre, clase) {
+      var i = crear("i", "ph " + nombre + (clase ? " " + clase : ""));
+      i.setAttribute("aria-hidden", "true");
+      return i;
+    };
+    var cabezaContacto = crear("div", "contacto-cabeza");
+    var tituloContacto = crear("h2", "", "Contáctanos");
+    tituloContacto.id = "contactoTitulo";
+    var botonCerrarContacto = crear("button", "contacto-cerrar");
+    botonCerrarContacto.type = "button";
+    botonCerrarContacto.setAttribute("aria-label", "Cerrar");
+    botonCerrarContacto.appendChild(icono("ph-x"));
+    cabezaContacto.appendChild(tituloContacto);
+    cabezaContacto.appendChild(crear("p", "", "Elige el canal que prefieras."));
+    cabezaContacto.appendChild(botonCerrarContacto);
+    var listaCanales = crear("ul", "contacto-lista");
+    CANALES.forEach(function (c) {
+      var caja = crear(c.enlace ? "a" : "div", c.enlace ? "canal" : "canal pronto");
+      if (c.enlace) {
+        caja.href = c.enlace;
+        if (c.externo) { caja.target = "_blank"; caja.rel = "noopener"; }
+      }
+      var fondoIcono = crear("span", "canal-icono");
+      if (c.color) fondoIcono.style.setProperty("--color-canal", c.color);
+      fondoIcono.appendChild(icono(c.icono));
+      var textos = crear("span");
+      textos.appendChild(crear("b", "", c.nombre));
+      if (c.detalle) textos.appendChild(crear("small", "", c.detalle));
+      caja.appendChild(fondoIcono);
+      caja.appendChild(textos);
+      caja.appendChild(c.enlace ? icono("ph-arrow-up-right", "canal-ir") : crear("span", "canal-pronto", "Próximamente"));
+      var fila = crear("li");
+      fila.appendChild(caja);
+      listaCanales.appendChild(fila);
+    });
+    panelContacto.appendChild(cabezaContacto);
+    panelContacto.appendChild(listaCanales);
     document.body.appendChild(fondoContacto);
     document.body.appendChild(panelContacto);
 
@@ -548,7 +580,11 @@
      -------------------------------------------------------------- */
   var cinta = document.getElementById("cinta");
   if (cinta) {
-    cinta.innerHTML += cinta.innerHTML;          // se duplica para que el bucle no tenga costura
+    [].slice.call(cinta.children).forEach(function (pieza) {   // se duplica para que el bucle no tenga costura
+      var copia = pieza.cloneNode(true);
+      copia.setAttribute("aria-hidden", "true");
+      cinta.appendChild(copia);
+    });
     var marcha = A.animate(cinta, { x: ["0%", "-50%"], duration: 38000, loop: true, ease: "linear" });
     cinta.parentElement.addEventListener("pointerenter", function () { marcha.pause(); });
     cinta.parentElement.addEventListener("pointerleave", function () { marcha.play(); });

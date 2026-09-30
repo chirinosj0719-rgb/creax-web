@@ -3,24 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="robots" content="noindex, nofollow">  <!-- borrador: quitar al publicar la web oficial -->
 <title>Nosotros · CreaX</title>
 <meta name="description" content="CreaX es una empresa peruana de desarrollo y automatización de procesos, formada por cuatro socios.">
 <meta name="theme-color" content="#63E2C6">
-<script>
-  document.documentElement.classList.add("con-js");
-  /* la intro del logo: una vez por visita, y nunca si pidieron menos movimiento o es una captura */
-  try {
-    if (!sessionStorage.getItem("creax-intro") && !matchMedia("(prefers-reduced-motion: reduce)").matches &&
-        location.search.indexOf("estatico") < 0) {
-      document.documentElement.classList.add("con-intro");
-      setTimeout(function () { document.documentElement.classList.remove("con-intro"); }, 5000);
-    }
-  } catch (e) {}
-</script>
+<script src="inicio.js?v=202609301328"></script>
 <link rel="icon" href="assets/creax-isotipo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/iconos/style.css">
-<link rel="stylesheet" href="estilos.css?v=202609301245">
+<link rel="stylesheet" href="estilos.css?v=202609301328">
 </head>
 
 <body class="color-nosotros">
@@ -243,6 +235,6 @@
 </footer>
 
 <script src="assets/anime.min.js"></script>
-<script src="animacion.js?v=202609301245" defer></script>
+<script src="animacion.js?v=202609301328" defer></script>
 </body>
 </html>

@@ -30,5 +30,28 @@ Es HTML, CSS y JavaScript sin compilación: se abre `index.html` en el navegador
 Estilos en `estilos.css`, movimiento e interacción en `animacion.js` (usa anime.js, copiado en `assets/`).
 `ejemplos.py` regenera los bocetos de muestra y se corre desde la carpeta `Desarrollo` de CreaX, porque usa `nuevo.py`.
 
-Cada vez que se publica, se cambia el número `?v=` de `estilos.css` y `animacion.js` en las cinco páginas:
+Cada vez que se publica, se cambia el número `?v=` de `estilos.css`, `animacion.js` e `inicio.js` en las cinco páginas:
 así el navegador de quien entra baja los estilos nuevos en vez de usar los que tenía guardados.
+
+## Seguridad
+
+La web es estática y la sirve GitHub Pages. No hay servidor, base de datos, cuentas ni
+contraseñas. El repositorio es público: todo lo que se sube, se ve.
+
+- **Secretos:** ninguna clave, token ni contraseña va en este repositorio. El `.gitignore`
+  bloquea `.env`, `*.key`, `*.pem` y `*-token.txt`.
+- **Política de seguridad de contenido (CSP)** en el `<head>` de las cinco páginas:
+  - solo se cargan archivos del propio sitio;
+  - no corren scripts escritos dentro del HTML: todo el JavaScript va en `inicio.js`
+    (lo primero, en el `<head>`) o en `animacion.js`;
+  - no se permiten formularios, iframes ni plugins.
+- **Si algún día se carga algo de afuera** (fuentes, un video, un formulario), hay que
+  agregar ese dominio a la CSP de las cinco páginas. Si no, no carga.
+- **Contenido dinámico:** se arma con elementos del DOM y `textContent`, nunca con
+  `innerHTML` y datos.
+- **Almacenamiento en el navegador:** solo `creax-intro` en `sessionStorage`, para no
+  repetir la intro. Nunca datos personales ni tokens.
+- **Enlaces que abren pestaña nueva:** siempre con `rel="noopener"`.
+- **Pendiente para cuando haya dominio y hosting propio:** encabezados HTTP que GitHub
+  Pages no permite poner, como `frame-ancestors` (evitar que otra web la muestre dentro
+  de un marco), `X-Content-Type-Options` y `Strict-Transport-Security`.
