@@ -7,10 +7,21 @@
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="robots" content="noindex, nofollow">  <!-- borrador: quitar al publicar la web oficial -->
 <title>CreaX · Agencia de webs, automatizaciones con IA y agentes</title>
-<meta name="description" content="Transformamos visitantes en clientes y automatizamos tu negocio para ahorrarte tiempo.">
-<meta property="og:title" content="CreaX · Agencia de webs, automatizaciones con IA y agentes">
-<meta property="og:description" content="Transformamos visitantes en clientes y automatizamos tu negocio para ahorrarte tiempo.">
+<meta name="description" content="Agencia peruana de páginas web, automatizaciones con IA y agentes para empresas. Transformamos visitantes en clientes y automatizamos tu negocio.">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="CreaX">
+<meta property="og:locale" content="es_PE">
+<meta property="og:url" content="https://chirinosj0719-rgb.github.io/creax-web/">
+<meta property="og:title" content="CreaX · Agencia de webs, automatizaciones con IA y agentes">
+<meta property="og:description" content="Agencia peruana de páginas web, automatizaciones con IA y agentes para empresas. Transformamos visitantes en clientes y automatizamos tu negocio.">
+<meta property="og:image" content="https://chirinosj0719-rgb.github.io/creax-web/assets/social.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="CreaX: webs, automatizaciones con IA y agentes para empresas">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="CreaX · Agencia de webs, automatizaciones con IA y agentes">
+<meta name="twitter:description" content="Agencia peruana de páginas web, automatizaciones con IA y agentes para empresas. Transformamos visitantes en clientes y automatizamos tu negocio.">
+<meta name="twitter:image" content="https://chirinosj0719-rgb.github.io/creax-web/assets/social.png">
 <meta name="theme-color" content="#101010">
 
 <!-- ==========================================================================
@@ -25,10 +36,15 @@
         LinkedIn   pendiente
      ========================================================================== -->
 
-<script src="inicio.js?v=202609301650"></script>
-<link rel="icon" href="assets/creax-isotipo.svg?v=202609301650" type="image/svg+xml">
-<link rel="stylesheet" href="assets/iconos/style.css">
-<link rel="stylesheet" href="estilos.css?v=202609301650">
+<script src="inicio.js?v=202609301830"></script>
+<link rel="icon" href="assets/creax-isotipo.svg?v=202609301830" type="image/svg+xml">
+<link rel="icon" href="assets/favicon-32.png?v=202609301830" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=202609301830">
+<link rel="manifest" href="site.webmanifest">
+<link rel="preload" href="assets/fuentes/SpaceGrotesk-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fuentes/Inter-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/iconos/iconos.css?v=202609301830">
+<link rel="stylesheet" href="estilos.css?v=202609301830">
 </head>
 
 <body class="color-inicio">
@@ -63,7 +79,7 @@
 <header class="nav" id="nav">
   <div class="nav-caja">
     <a class="nav-marca" href="index.html" aria-label="CreaX, inicio">
-      <img class="logo-completo" src="assets/creax-logo.svg?v=202609301650" alt="CreaX" width="113" height="24">
+      <img class="logo-completo" src="assets/creax-logo.svg?v=202609301830" alt="CreaX" width="113" height="24">
     </a>
     <nav class="nav-enlaces">
       <a class="enlace color-servicios" href="servicios.html">Servicios</a>
@@ -87,7 +103,7 @@
         <div class="acciones revelar">
           <!-- CONTACTO -->
           <a class="boton boton-principal" href="https://wa.me/51966980388?text=Hola%20CreaX%2C%20vengo%20de%20la%20web%20y%20quisiera%20m%C3%A1s%20informaci%C3%B3n." target="_blank" rel="noopener" data-contacto><i class="ph ph-chat-circle-dots" aria-hidden="true"></i> Contáctanos</a>
-          <a class="boton boton-secundario" href="bocetos.html">Ver ejemplos</a>
+          <a class="boton boton-secundario boton-flecha" href="bocetos.html">Ver ejemplos <span class="boton-circulo" aria-hidden="true"><i class="ph ph-arrow-up-right"></i></span></a>
         </div>
       </div>
 
@@ -152,6 +168,14 @@
 
       </figure>
     </div>
+    <div class="envoltura portada-franja revelar">
+      <ul class="franja-lineas">
+        <li class="color-servicios">Páginas web</li>
+        <li class="color-automatizaciones">Automatizaciones con IA</li>
+        <li class="color-nosotros">Agentes de IA</li>
+      </ul>
+      <a class="bajar" href="#resultados"><span>Desliza</span><i aria-hidden="true"></i></a>
+    </div>
   </section>
 
   <!-- ================= cinta de rubros ================= -->
@@ -202,37 +226,90 @@
   <!-- ================= declaración ================= -->
   <section class="declaracion">
     <div class="envoltura">
-      <p class="declaracion-texto revelar">Cada negocio vende <em class="cursiva">distinto</em>. <span class="tenue">Por eso cada página se diseña a su medida: sus colores y sus productos.</span></p>
+      <p class="declaracion-texto revelar" data-iluminar>Cada negocio vende <em class="cursiva">distinto</em>. <span class="tenue">Por eso cada página se diseña a su medida: sus colores y sus productos.</span></p>
       <p class="declaracion-firma revelar">— Así trabaja CreaX</p>
     </div>
   </section>
 
-  <!-- ================= las tres líneas de trabajo ================= -->
-  <section id="lineas">
+  <!-- ================= qué hacemos: los servicios en filas (idea de fraxbit) ================= -->
+  <section id="lineas" class="hoja-oscura">
     <div class="envoltura">
-      <p class="marca-seccion revelar">Qué hacemos</p>
-      <h2 class="revelar">Tres servicios, una sola <em class="cursiva">operación</em></h2>
+      <div class="filas-cabeza">
+        <div>
+          <p class="marca-seccion revelar">Qué hacemos</p>
+          <h2 class="revelar">Cuatro servicios, una sola <em class="cursiva">operación</em></h2>
+        </div>
+        <p class="entrada revelar">Cada proyecto se arma alrededor de un resultado: que tu negocio venda más y atienda mejor.</p>
+      </div>
+      <ol class="filas-servicios">
+        <li class="fila-servicio color-servicios revelar">
+          <a href="servicios.html">
+            <span class="fila-num">01</span>
+            <span class="fila-titulo"><span class="fila-nombre">Páginas web</span><span class="fila-sub">Landing Page · Pedidos · Tienda</span></span>
+            <span class="fila-etiquetas"><span>Tu marca y tus fotos</span><span>Catálogo con precios</span><span>Pedidos al WhatsApp</span><span>Pago en línea</span></span>
+            <span class="fila-flecha" aria-hidden="true"><i class="ph ph-arrow-up-right"></i></span>
+          </a>
+        </li>
+        <li class="fila-servicio color-automatizaciones revelar">
+          <a href="automatizaciones.html">
+            <span class="fila-num">02</span>
+            <span class="fila-titulo"><span class="fila-nombre">Automatizaciones con IA</span><span class="fila-sub">Atención y operación</span></span>
+            <span class="fila-etiquetas"><span>Responde en WhatsApp e Instagram</span><span>Confirma pedidos y citas</span><span>Anota en tu hoja o sistema</span><span>Avisa a tu equipo</span></span>
+            <span class="fila-flecha" aria-hidden="true"><i class="ph ph-arrow-up-right"></i></span>
+          </a>
+        </li>
+        <li class="fila-servicio color-nosotros revelar">
+          <a href="https://wa.me/51966980388?text=Hola%20CreaX%2C%20vengo%20de%20la%20web%20y%20quisiera%20m%C3%A1s%20informaci%C3%B3n." target="_blank" rel="noopener" data-contacto>
+            <span class="fila-num">03</span>
+            <span class="fila-titulo"><span class="fila-nombre">Agentes de IA</span><span class="fila-sub">A la medida</span></span>
+            <span class="fila-etiquetas"><span>Atienden a tus clientes</span><span>Con la información de tu negocio</span><span>Conectados a tus herramientas</span></span>
+            <span class="fila-flecha" aria-hidden="true"><i class="ph ph-arrow-up-right"></i></span>
+          </a>
+        </li>
+        <li class="fila-servicio color-bocetos revelar">
+          <a href="https://wa.me/51966980388?text=Hola%20CreaX%2C%20vengo%20de%20la%20web%20y%20quisiera%20m%C3%A1s%20informaci%C3%B3n." target="_blank" rel="noopener" data-contacto>
+            <span class="fila-num">04</span>
+            <span class="fila-titulo"><span class="fila-nombre">Proyectos a medida</span><span class="fila-sub">Necesidades puntuales</span></span>
+            <span class="fila-etiquetas"><span>Reservas</span><span>Reportes</span><span>Integraciones</span><span>Lo que haga falta</span></span>
+            <span class="fila-flecha" aria-hidden="true"><i class="ph ph-arrow-up-right"></i></span>
+          </a>
+        </li>
+      </ol>
 
-      <div class="resultados lineas-tres">
-        <article class="tarjeta con-franja color-servicios revelar">
-          <div class="icono"><i class="ph ph-browsers" aria-hidden="true"></i></div>
-          <h3>TU sitio web</h3>
-          <p>Presentación, catálogo con pedidos al WhatsApp o tienda con pago en línea.</p>
-          <p class="acciones"><a class="boton boton-principal boton-chico" href="servicios.html">Ver servicios</a></p>
-        </article>
-        <article class="tarjeta con-franja color-automatizaciones revelar">
-          <div class="icono"><i class="ph ph-lightning" aria-hidden="true"></i></div>
-          <h3>TU negocio vendiendo en automático</h3>
-          <p>Responde, toma pedidos y confirma citas por WhatsApp e Instagram, a cualquier hora.</p>
-          <p class="acciones"><a class="boton boton-principal boton-chico" href="automatizaciones.html">Ver automatizaciones</a></p>
-        </article>
-        <article class="tarjeta con-franja color-bocetos revelar">
-          <div class="icono"><i class="ph ph-puzzle-piece" aria-hidden="true"></i></div>
-          <h3>Personalización para necesidades puntuales</h3>
-          <p>¿Tu negocio necesita algo específico? Lo diseñamos a la medida: reservas, reportes, integraciones o lo que haga falta.</p>
-          <!-- CONTACTO -->
-          <p class="acciones"><a class="boton boton-principal boton-chico" href="https://wa.me/51966980388?text=Hola%20CreaX%2C%20vengo%20de%20la%20web%20y%20quisiera%20m%C3%A1s%20informaci%C3%B3n." target="_blank" rel="noopener">Cuéntanos qué necesitas</a></p>
-        </article>
+      <div class="construimos">
+        <p class="marca-seccion revelar">Qué construimos</p>
+        <p class="construimos-lista" data-iluminar>Landing pages<i class="sep" aria-hidden="true"></i> Catálogos con pedidos<i class="sep" aria-hidden="true"></i> Tiendas en línea<i class="sep" aria-hidden="true"></i> Atención por WhatsApp e Instagram<i class="sep" aria-hidden="true"></i> Confirmación de pedidos y citas<i class="sep" aria-hidden="true"></i> Reportes automáticos<i class="sep" aria-hidden="true"></i> Agentes de IA<i class="sep" aria-hidden="true"></i> Integraciones</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= muro de bocetos (idea de fraxbit) ================= -->
+  <section class="muro color-bocetos" id="muro">
+    <div class="envoltura muro-grilla">
+      <div class="muro-texto">
+        <p class="marca-seccion revelar">Bocetos</p>
+        <h2 class="revelar">Cada negocio, su propia <em class="cursiva">página</em></h2>
+        <p class="entrada revelar">Cada página se diseña según lo que vende el negocio: sus secciones, sus colores y su forma de pedir.</p>
+        <p class="acciones revelar"><a class="boton boton-oscuro boton-flecha" href="bocetos.html">Ver los ejemplos <span class="boton-circulo" aria-hidden="true"><i class="ph ph-arrow-up-right"></i></span></a></p>
+      </div>
+      <div class="muro-escena" aria-hidden="true">
+        <div class="muro-plano">
+          <div class="muro-columna">
+            <img src="assets/maqueta-panaderia.png" alt="" width="1200" height="690" loading="lazy">
+            <img class="recorte" src="assets/boceto-dental-completo.jpg" alt="" width="390" height="620" loading="lazy">
+            <img src="assets/maqueta-gimnasio-cel.png" alt="" width="390" height="760" loading="lazy">
+          </div>
+          <div class="muro-columna">
+            <img src="assets/maqueta-dentista-cel.png" alt="" width="390" height="760" loading="lazy">
+            <img src="assets/maqueta-gimnasio.png" alt="" width="1200" height="690" loading="lazy">
+            <img class="recorte" src="assets/boceto-panaderia-completo.jpg" alt="" width="390" height="620" loading="lazy">
+          </div>
+          <div class="muro-columna">
+            <img src="assets/maqueta-dentista.png" alt="" width="1200" height="690" loading="lazy">
+            <img src="assets/maqueta-panaderia-cel.png" alt="" width="390" height="760" loading="lazy">
+            <img class="recorte" src="assets/boceto-gimnasio-completo.jpg" alt="" width="390" height="620" loading="lazy">
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -240,11 +317,34 @@
   <!-- ================= cierre ================= -->
   <section id="contacto">
     <div class="envoltura">
-      <div class="cierre-caja revelar">
-        <h2>Conversemos sobre <em class="cursiva">tu</em> negocio</h2>
-        <div class="acciones">
-          <!-- CONTACTO -->
-          <a class="boton boton-principal" href="https://wa.me/51966980388?text=Hola%20CreaX%2C%20vengo%20de%20la%20web%20y%20quisiera%20m%C3%A1s%20informaci%C3%B3n." target="_blank" rel="noopener" data-contacto><i class="ph ph-chat-circle-dots" aria-hidden="true"></i> Contáctanos</a>
+      <div class="cierre-caja cierre-doble revelar">
+        <div class="cierre-texto">
+          <p class="marca-seccion">Empecemos</p>
+          <h2>Conversemos sobre <em class="cursiva">tu</em> negocio</h2>
+          <p class="entrada">Cuéntanos qué necesitas y lo vemos juntos por WhatsApp.</p>
+          <ul class="cierre-canales">
+            <li><a href="tel:+51966980388"><i class="ph ph-phone" aria-hidden="true"></i> Llámanos</a></li>
+            <li><a href="https://wa.me/51966980388?text=Hola%20CreaX%2C%20vengo%20de%20la%20web%20y%20quisiera%20m%C3%A1s%20informaci%C3%B3n." target="_blank" rel="noopener"><i class="ph ph-whatsapp-logo" aria-hidden="true"></i> WhatsApp</a></li>
+          </ul>
+        </div>
+        <div class="proyecto" id="proyecto">
+          <h3>Cuéntanos de tu proyecto</h3>
+          <p class="proyecto-nota">Con unos datos alcanza. El mensaje se abre en tu WhatsApp.</p>
+          <p class="proyecto-etiqueta" id="proyectoInteres">Me interesa</p>
+          <div class="proyecto-chips" role="group" aria-labelledby="proyectoInteres">
+            <button type="button" class="chip-proyecto" aria-pressed="false" data-valor="una página web">Página web</button>
+            <button type="button" class="chip-proyecto" aria-pressed="false" data-valor="automatizaciones con IA">Automatización con IA</button>
+            <button type="button" class="chip-proyecto" aria-pressed="false" data-valor="un agente de IA">Agente de IA</button>
+            <button type="button" class="chip-proyecto" aria-pressed="false" data-valor="otra cosa">Otro</button>
+          </div>
+          <div class="proyecto-campos">
+            <label><span>Tu nombre</span><input type="text" id="proyectoNombre" autocomplete="name" maxlength="60" aria-describedby="errorNombre"><small class="campo-error" id="errorNombre" hidden></small></label>
+            <label><span>Tu negocio</span><input type="text" id="proyectoNegocio" autocomplete="organization" maxlength="80" aria-describedby="errorNegocio"><small class="campo-error" id="errorNegocio" hidden></small></label>
+          </div>
+          <label class="proyecto-mensaje"><span>¿Qué necesitas?</span><textarea id="proyectoMensaje" rows="3" maxlength="600" aria-describedby="errorMensaje"></textarea><small class="campo-error" id="errorMensaje" hidden></small></label>
+          <label class="trampa" aria-hidden="true">Tu sitio web<input type="text" id="proyectoSitio" tabindex="-1" autocomplete="off"></label>
+          <p class="proyecto-aviso" id="proyectoAviso" role="status" hidden></p>
+          <button type="button" class="boton boton-oscuro boton-flecha" id="proyectoEnviar">Enviar por WhatsApp <span class="boton-circulo" aria-hidden="true"><i class="ph ph-arrow-up-right"></i></span></button>
         </div>
       </div>
     </div>
@@ -256,11 +356,11 @@
   <div class="envoltura">
     <div class="pie-grilla">
       <div>
-        <span class="firma-pie"><img class="logo-completo" src="assets/creax-logo.svg?v=202609301650" alt="CreaX" width="142" height="30"></span>
+        <span class="firma-pie"><img class="logo-completo" src="assets/creax-logo.svg?v=202609301830" alt="CreaX" width="142" height="30"></span>
         <p>Agencia de webs, automatizaciones con IA y agentes para empresas.</p>
       </div>
       <div>
-        <h4>Qué hacemos</h4>
+        <p class="pie-titulo">Qué hacemos</p>
         <ul>
           <li><a href="servicios.html">Servicios</a></li>
           <li><a href="automatizaciones.html">Automatizaciones</a></li>
@@ -269,7 +369,7 @@
         </ul>
       </div>
       <div>
-        <h4>Contacto</h4>
+        <p class="pie-titulo">Contacto</p>
         <ul>
           <li><a href="tel:+51966980388">Llámanos</a></li>
           <li><a href="https://wa.me/51966980388?text=Hola%20CreaX%2C%20vengo%20de%20la%20web%20y%20quisiera%20m%C3%A1s%20informaci%C3%B3n." target="_blank" rel="noopener">WhatsApp</a></li>
@@ -280,11 +380,16 @@
     <div class="pie-legal">
       <span>&copy; <span id="anio">2026</span> CreaX</span>
       <span>Perú</span>
+      <a href="privacidad.html">Privacidad</a>
+      <a href="terminos.html">Términos</a>
+      <button type="button" class="enlace-boton" data-cookies>Cookies</button>
+      <a class="volver-arriba" href="#">Volver arriba <i class="ph ph-arrow-up" aria-hidden="true"></i></a>
     </div>
+    <div class="pie-gigante revelar" aria-hidden="true"></div>
   </div>
 </footer>
 
-<script src="assets/anime.min.js"></script>
-<script src="animacion.js?v=202609301650" defer></script>
+<script src="assets/anime.min.js" defer></script>
+<script src="animacion.js?v=202609301830" defer></script>
 </body>
 </html>

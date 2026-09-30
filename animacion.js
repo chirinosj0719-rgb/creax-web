@@ -454,7 +454,7 @@
     var fondoContacto = document.createElement("div");
     fondoContacto.className = "contacto-fondo";
     fondoContacto.hidden = true;
-    var panelContacto = document.createElement("aside");
+    var panelContacto = document.createElement("div");
     panelContacto.className = "contacto-panel";
     panelContacto.setAttribute("role", "dialog");
     panelContacto.setAttribute("aria-modal", "true");
@@ -530,6 +530,150 @@
     document.addEventListener("keydown", function (evento) {
       if (evento.key === "Escape" && document.documentElement.classList.contains("contacto-abierto")) cerrarContacto();
     });
+  }
+
+  /* --------------------------------------------------------------
+     5c. "Cuéntanos de tu proyecto": la tarjeta no guarda ni envía nada.
+         Arma el mensaje con lo que la persona eligió y escribió, y lo
+         abre en su WhatsApp; ella decide si lo manda.
+     -------------------------------------------------------------- */
+  var proyecto = document.getElementById("proyecto");
+  if (proyecto) {
+    var chipsProyecto = [].slice.call(proyecto.querySelectorAll(".chip-proyecto"));
+    var avisoProyecto = document.getElementById("proyectoAviso");
+    var botonProyecto = document.getElementById("proyectoEnviar");
+    var cargadaEn = Date.now();
+    // validación: cada campo dice qué le falta, debajo de sí mismo
+    var CAMPOS = [
+      { id: "proyectoNombre", error: "errorNombre", revisar: function (v) {
+        return !v || /^[\p{L}][\p{L} .'-]{1,59}$/u.test(v) ? "" : "Escribe tu nombre solo con letras.";
+      } },
+      { id: "proyectoNegocio", error: "errorNegocio", revisar: function (v) {
+        return !v || (v.length >= 2 && /[\p{L}\p{N}]/u.test(v)) ? "" : "Escribe el nombre de tu negocio.";
+      } },
+      { id: "proyectoMensaje", error: "errorMensaje", revisar: function (v) {
+        return !v || v.length >= 10 ? "" : "Cuéntanos un poco más (al menos 10 letras).";
+      } }
+    ];
+    var limpio = function (id) { return document.getElementById(id).value.replace(/\s+/g, " ").trim(); };
+    var marcar = function (campo, mensaje) {
+      var entrada = document.getElementById(campo.id), error = document.getElementById(campo.error);
+      error.textContent = mensaje;
+      error.hidden = !mensaje;
+      if (mensaje) entrada.setAttribute("aria-invalid", "true"); else entrada.removeAttribute("aria-invalid");
+    };
+    CAMPOS.forEach(function (campo) {
+      // al corregir, el error se va
+      document.getElementById(campo.id).addEventListener("input", function () {
+        if (this.getAttribute("aria-invalid")) marcar(campo, campo.revisar(limpio(campo.id)));
+      });
+    });
+    chipsProyecto.forEach(function (chip) {
+      chip.addEventListener("click", function () {
+        chip.setAttribute("aria-pressed", chip.getAttribute("aria-pressed") === "true" ? "false" : "true");
+        avisoProyecto.hidden = true;
+      });
+    });
+    botonProyecto.addEventListener("click", function () {
+      // antispam: un robot llena el campo trampa (invisible para las personas) o aprieta el botón al instante
+      if (document.getElementById("proyectoSitio").value) return;
+      if (Date.now() - cargadaEn < 2500) {
+        avisoProyecto.textContent = "Un momento, vuelve a intentarlo.";
+        avisoProyecto.hidden = false;
+        return;
+      }
+      var primero = null;
+      CAMPOS.forEach(function (campo) {
+        var mensaje = campo.revisar(limpio(campo.id));
+        marcar(campo, mensaje);
+        if (mensaje && !primero) primero = document.getElementById(campo.id);
+      });
+      var intereses = chipsProyecto.filter(function (chip) { return chip.getAttribute("aria-pressed") === "true"; })
+        .map(function (chip) { return chip.dataset.valor; });
+      var nombre = limpio("proyectoNombre"), negocio = limpio("proyectoNegocio"), necesidad = limpio("proyectoMensaje");
+      if (!primero && !intereses.length && !necesidad) {
+        avisoProyecto.textContent = "Elige qué te interesa o cuéntanos qué necesitas.";
+        avisoProyecto.hidden = false;
+        chipsProyecto[0].focus();
+        return;
+      }
+      if (primero) { primero.focus(); return; }
+      avisoProyecto.hidden = true;
+      var lineas = ["Hola CreaX, vengo de la web."];
+      if (nombre) lineas.push("Soy " + nombre + (negocio ? ", de " + negocio : "") + ".");
+      else if (negocio) lineas.push("Les escribo por " + negocio + ".");
+      if (intereses.length) lineas.push("Me interesa " + intereses.join(", ") + ".");
+      if (necesidad) lineas.push(necesidad.slice(0, 600));
+      window.open("https://wa.me/51966980388?text=" + encodeURIComponent(lineas.join("\n")), "_blank", "noopener");
+      // y no deja abrir diez ventanas seguidas
+      botonProyecto.disabled = true;
+      setTimeout(function () { botonProyecto.disabled = false; }, 4000);
+    });
+  }
+
+  /* --------------------------------------------------------------
+     5d. Aviso de cookies. Esta web no usa cookies de publicidad ni de
+         análisis: solo guarda lo necesario para funcionar. El aviso lo
+         cuenta, deja elegir y recuerda la elección. Desde el pie
+         ("Cookies") se vuelve a abrir. No sale en las capturas (?estatico).
+     -------------------------------------------------------------- */
+  var CLAVE_COOKIES = "creax-cookies";
+  var leerEleccion = function () { try { return localStorage.getItem(CLAVE_COOKIES); } catch (e) { return null; } };
+  var guardarEleccion = function (valor) { try { localStorage.setItem(CLAVE_COOKIES, valor); } catch (e) { /* sin memoria: volverá a salir */ } };
+  var avisoCookies = null;
+  var cerrarAviso = function () {
+    if (!avisoCookies) return;
+    var saliente = avisoCookies;
+    avisoCookies = null;
+    saliente.classList.remove("visible");
+    setTimeout(function () { if (saliente.parentNode) saliente.parentNode.removeChild(saliente); }, 400);
+  };
+  var abrirAviso = function (enfocar) {
+    if (avisoCookies) return;
+    avisoCookies = document.createElement("section");
+    avisoCookies.className = "aviso-cookies";
+    avisoCookies.setAttribute("aria-label", "Aviso de cookies");
+    var tituloAviso = document.createElement("p");
+    tituloAviso.className = "aviso-titulo";
+    tituloAviso.textContent = "Cookies";
+    var textoAviso = document.createElement("p");
+    textoAviso.className = "aviso-texto";
+    textoAviso.textContent = "No usamos cookies de publicidad ni de análisis: solo guardamos lo necesario para que la web funcione. ";
+    var enlaceAviso = document.createElement("a");
+    enlaceAviso.href = "privacidad.html#cookies";
+    enlaceAviso.textContent = "Más información";
+    textoAviso.appendChild(enlaceAviso);
+    var botonesAviso = document.createElement("div");
+    botonesAviso.className = "aviso-botones";
+    [["Aceptar", "todas", "boton-oscuro"], ["Solo las necesarias", "necesarias", "boton-secundario"]].forEach(function (opcion, i) {
+      var boton = document.createElement("button");
+      boton.type = "button";
+      boton.className = "boton boton-chico " + opcion[2];
+      boton.textContent = opcion[0];
+      boton.addEventListener("click", function () { guardarEleccion(opcion[1]); cerrarAviso(); });
+      botonesAviso.appendChild(boton);
+      if (i === 0 && enfocar) setTimeout(function () { boton.focus(); }, 50);
+    });
+    avisoCookies.appendChild(tituloAviso);
+    avisoCookies.appendChild(textoAviso);
+    avisoCookies.appendChild(botonesAviso);
+    document.body.appendChild(avisoCookies);
+    requestAnimationFrame(function () { requestAnimationFrame(function () { if (avisoCookies) avisoCookies.classList.add("visible"); }); });
+  };
+  document.querySelectorAll("[data-cookies]").forEach(function (boton) {
+    boton.addEventListener("click", function (evento) { evento.preventDefault(); abrirAviso(true); });
+  });
+  if (!leerEleccion() && location.search.indexOf("estatico") < 0) {
+    var mostrarAviso = function () { setTimeout(function () { abrirAviso(false); }, 700); };
+    if (document.documentElement.classList.contains("con-intro")) {
+      // con la intro en pantalla, el aviso espera a que suba la cortina
+      var vigiaIntro = new MutationObserver(function () {
+        if (!document.documentElement.classList.contains("con-intro")) { vigiaIntro.disconnect(); mostrarAviso(); }
+      });
+      vigiaIntro.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+    } else {
+      mostrarAviso();
+    }
   }
 
   /* ==============================================================
@@ -669,9 +813,11 @@
         vaciando = setTimeout(function () {
           var lote = cola.slice();
           cola.length = 0;
-          A.animate(lote, {
-            opacity: [0, 1], y: [26, 0], duration: 760, delay: A.stagger(70), ease: salida
-          });
+          // los del encabezado ya se ven desde el principio (velocidad percibida): solo se deslizan un poco
+          var arriba = lote.filter(function (el) { return el.closest(".encabezado"); });
+          var resto = lote.filter(function (el) { return !el.closest(".encabezado"); });
+          if (arriba.length) A.animate(arriba, { y: [14, 0], duration: 760, delay: A.stagger(70), ease: salida });
+          if (resto.length) A.animate(resto, { opacity: [0, 1], y: [26, 0], duration: 760, delay: A.stagger(70), ease: salida });
         }, 60);
       });
     }, { rootMargin: "0px 0px -12% 0px" });
@@ -772,5 +918,74 @@
       giroConstelacion.rotateY(0);
       giroConstelacion.rotateX(0);
     });
+  }
+
+  /* --------------------------------------------------------------
+     15. Las frases grandes se encienden palabra por palabra al bajar
+         (idea de fraxbit). Se parte el texto en palabras sin tocar las
+         etiquetas de adentro (la cursiva, los separadores).
+     -------------------------------------------------------------- */
+  var partirEnPalabras = function (raizTexto) {
+    var palabras = [];
+    var recorrer = function (nodo) {
+      [].slice.call(nodo.childNodes).forEach(function (hijo) {
+        if (hijo.nodeType === 3) {
+          var fragmento = document.createDocumentFragment();
+          hijo.textContent.split(/(\s+)/).forEach(function (parte) {
+            if (!parte) return;
+            if (/^\s+$/.test(parte)) { fragmento.appendChild(document.createTextNode(parte)); return; }
+            var palabra = document.createElement("span");
+            palabra.className = "palabra";
+            palabra.textContent = parte;
+            fragmento.appendChild(palabra);
+            palabras.push(palabra);
+          });
+          nodo.replaceChild(fragmento, hijo);
+        } else if (hijo.nodeType === 1 && !hijo.classList.contains("sep")) {
+          recorrer(hijo);
+        }
+      });
+    };
+    recorrer(raizTexto);
+    return palabras;
+  };
+  var frasesQueEncienden = [].map.call(document.querySelectorAll("[data-iluminar]"), function (frase) {
+    return { frase: frase, palabras: partirEnPalabras(frase) };
+  });
+
+  /* --------------------------------------------------------------
+     16. El muro de bocetos: sus columnas se deslizan en sentidos
+         opuestos mientras la sección pasa por la pantalla
+     -------------------------------------------------------------- */
+  var muro = document.getElementById("muro");
+  var columnasMuro = muro ? [].slice.call(muro.querySelectorAll(".muro-columna")) : [];
+  var recorridoMuro = [-70, 70, -45];
+
+  var alBajar = function () {
+    var altoVentana = window.innerHeight;
+    frasesQueEncienden.forEach(function (grupo) {
+      var caja = grupo.frase.getBoundingClientRect();
+      // empieza cuando la frase asoma por abajo y termina cuando llega a un tercio de la pantalla
+      var avance = (altoVentana * 0.92 - caja.top) / (caja.height + altoVentana * 0.4);
+      var encendidas = Math.round(Math.max(0, Math.min(1, avance)) * grupo.palabras.length);
+      grupo.palabras.forEach(function (palabra, i) { palabra.classList.toggle("encendida", i < encendidas); });
+    });
+    if (columnasMuro.length) {
+      var cajaMuro = muro.getBoundingClientRect();
+      var paso = Math.max(0, Math.min(1, (altoVentana - cajaMuro.top) / (altoVentana + cajaMuro.height))) - 0.5;
+      columnasMuro.forEach(function (columna, i) {
+        columna.style.transform = "translate3d(0," + (paso * 2 * recorridoMuro[i % recorridoMuro.length]).toFixed(1) + "px,0)";
+      });
+    }
+  };
+  if (frasesQueEncienden.length || columnasMuro.length) {
+    var cuadroPedido = false;
+    window.addEventListener("scroll", function () {
+      if (cuadroPedido) return;
+      cuadroPedido = true;
+      requestAnimationFrame(function () { cuadroPedido = false; alBajar(); });
+    }, { passive: true });
+    window.addEventListener("resize", alBajar);
+    alBajar();
   }
 })();

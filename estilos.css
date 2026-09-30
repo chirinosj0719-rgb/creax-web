@@ -6,15 +6,15 @@
    ========================================================================== */
 
 /* ---------- tipografías propias, sin depender de Google en producción ------ */
-@font-face { font-family: "Space Grotesk"; src: url("assets/fuentes/SpaceGrotesk-700.ttf") format("truetype");
+@font-face { font-family: "Space Grotesk"; src: url("assets/fuentes/SpaceGrotesk-700.woff2") format("woff2");
   font-weight: 700; font-display: swap; }
-@font-face { font-family: "Space Grotesk"; src: url("assets/fuentes/SpaceGrotesk-500.ttf") format("truetype");
+@font-face { font-family: "Space Grotesk"; src: url("assets/fuentes/SpaceGrotesk-500.woff2") format("woff2");
   font-weight: 500; font-display: swap; }
-@font-face { font-family: "Inter"; src: url("assets/fuentes/Inter-400.ttf") format("truetype");
+@font-face { font-family: "Inter"; src: url("assets/fuentes/Inter-400.woff2") format("woff2");
   font-weight: 400; font-display: swap; }
-@font-face { font-family: "Inter"; src: url("assets/fuentes/Inter-500.ttf") format("truetype");
+@font-face { font-family: "Inter"; src: url("assets/fuentes/Inter-500.woff2") format("woff2");
   font-weight: 500; font-display: swap; }
-@font-face { font-family: "Inter"; src: url("assets/fuentes/Inter-600.ttf") format("truetype");
+@font-face { font-family: "Inter"; src: url("assets/fuentes/Inter-600.woff2") format("woff2");
   font-weight: 600; font-display: swap; }
 
 :root {
@@ -519,7 +519,7 @@ footer p { font-size: 13.5px; color: var(--tinta-suave); }
   background: linear-gradient(140deg, #b4451f, #6e2810);
 }
 .fono-barra b { font-size: 12.5px; display: block; line-height: 1.2; color: var(--tinta); }
-.fono-barra span { font-size: 10.5px; color: #17a34a; }
+.fono-barra span { font-size: 10.5px; color: #157A3A; }
 .chat { padding: 12px 12px 14px; display: flex; flex-direction: column; gap: 8px; }
 .burbuja {
   max-width: 88%;
@@ -665,7 +665,7 @@ footer p { font-size: 13.5px; color: var(--tinta-suave); }
 /* pie con enlaces */
 .pie-grilla { display: grid; gap: 28px; text-align: left; }
 @media (min-width: 760px) { .pie-grilla { grid-template-columns: 1.5fr 1fr 1fr; } }
-.pie-grilla h4 { font-family: "Space Grotesk", Inter, sans-serif; font-size: 14px; margin-bottom: 12px; }
+.pie-grilla h4, .pie-grilla .pie-titulo { font-family: "Space Grotesk", Inter, sans-serif; font-size: 14px; margin-bottom: 12px; }
 .pie-grilla ul { display: grid; gap: 9px; font-size: 14.5px; color: var(--tinta-media); list-style: none; }
 .pie-grilla a:hover { color: var(--menta-texto); }
 .pie-legal { margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--borde); display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 13px; color: var(--tinta-suave); }
@@ -679,7 +679,7 @@ footer .pie-grilla p { margin-bottom: 10px; }
    serif en cursiva (Instrument Serif) marca la palabra que importa. La mono del
    sistema queda para lo que es comando o código.
    ========================================================================== */
-@font-face { font-family: "Instrument Serif"; src: url("assets/fuentes/InstrumentSerif-Italic.ttf") format("truetype");
+@font-face { font-family: "Instrument Serif"; src: url("assets/fuentes/InstrumentSerif-Italic.woff2") format("woff2");
   font-weight: 400; font-style: italic; font-display: swap; }
 
 .cursiva,
@@ -854,7 +854,7 @@ h2 { font-size: clamp(38px, 4.9vw, 66px); line-height: 1; letter-spacing: -0.042
   letter-spacing: 0.02em;
 }
 .nota { font-size: 12.5px; }
-.pie-grilla h4 {
+.pie-grilla h4, .pie-grilla .pie-titulo {
   font-family: ui-monospace, "Cascadia Code", "SF Mono", Consolas, monospace;
   font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--tinta-suave);
 }
@@ -1032,7 +1032,7 @@ h2 { font-size: clamp(38px, 4.9vw, 66px); line-height: 1; letter-spacing: -0.042
   --c-inicio: #C5F82A;           --c-inicio-texto: #4F6B00;           --c-inicio-tenue: #EEFCCB;
   --c-servicios: #FF7A59;        --c-servicios-texto: #B83E20;        --c-servicios-tenue: #FFE4DC;
   --c-automatizaciones: #B9A6FF; --c-automatizaciones-texto: #5A43C9; --c-automatizaciones-tenue: #EDE8FF;
-  --c-bocetos: #FFD84D;          --c-bocetos-texto: #8A6D00;          --c-bocetos-tenue: #FFF5CC;
+  --c-bocetos: #FFD84D;          --c-bocetos-texto: #826700;          --c-bocetos-tenue: #FFF5CC;
   --c-nosotros: #63E2C6;         --c-nosotros-texto: #0E7C66;         --c-nosotros-tenue: #DDF8F1;
 }
 :root, .color-inicio {
@@ -1221,7 +1221,7 @@ h1 .cursiva, h2 .cursiva { color: var(--menta-texto); }
 .app-chat { display: flex; flex-direction: column; min-width: 0; }
 .app-cabecera { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-bottom: 1px solid #ebebe8; }
 .app-cabecera b { display: block; font-size: 13.5px; }
-.app-cabecera span { font-size: 11px; color: #17a34a; }
+.app-cabecera span { font-size: 11px; color: #157A3A; }
 .app-cabecera .app-asistente { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 600; color: var(--sobre-color); background: var(--menta); padding: 5px 11px; border-radius: 999px; }
 .app-mensajes { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; gap: 9px; padding: 16px; overflow: hidden; background: #fafaf8; }
 .msj { max-width: 74%; padding: 10px 13px; border-radius: 15px; line-height: 1.45; font-size: 13px; margin: 0; }
@@ -1659,3 +1659,285 @@ html.contacto-abierto, html.contacto-abierto body { overflow: hidden; }
   .herramienta { gap: 0; padding: 0; width: 44px; height: 44px; justify-content: center; font-size: 0; }
   .herramienta img { width: 21px; height: 21px; }
 }
+
+/* =============================================================================
+   Ideas tomadas de fraxbit.com (30/09/2026), con la paleta y las reglas de CreaX:
+   etiqueta con un bloque del logo, botones con la flecha en un círculo, franja al
+   pie de la portada, servicios en filas grandes sobre una hoja oscura, palabras
+   que se encienden al bajar, muro de bocetos inclinado, tarjeta de proyecto que
+   arma el mensaje de WhatsApp y el logo gigante al pie de cada página.
+   ========================================================================== */
+
+/* la etiqueta de sección lleva un bloque, como los del logo */
+.marca-seccion::before { width: 9px; height: 9px; border-radius: 3px; background: var(--menta); }
+
+/* botón con la flecha en un círculo: al pasar el mouse, la flecha gira hacia adelante */
+.boton-flecha { gap: 12px; padding-right: 6px; }
+.boton-circulo {
+  display: grid; place-items: center; flex: none; width: 36px; height: 36px; margin: -6px 0; border-radius: 50%;
+  background: var(--tinta); color: var(--c-inicio); font-size: 16px;
+  transition: transform 0.45s var(--rebote), background-color 0.3s ease, color 0.3s ease;
+}
+.boton-oscuro .boton-circulo, .portada .boton-circulo { background: var(--c-inicio); color: var(--tinta); }
+@media (hover: hover) and (pointer: fine) {
+  .boton-flecha:hover .boton-circulo { transform: rotate(45deg); }
+}
+
+/* la franja al pie de la portada: las tres líneas de CreaX y la señal para bajar */
+.portada-franja {
+  display: flex; align-items: flex-end; justify-content: space-between; gap: 20px;
+  margin-top: clamp(44px, 6vw, 80px); padding-top: 22px; border-top: 1px solid rgba(244, 244, 242, 0.14);
+}
+.franja-lineas {
+  display: flex; flex-wrap: wrap; gap: 12px 28px; list-style: none;
+  font-family: ui-monospace, "Cascadia Code", "SF Mono", Consolas, monospace; font-size: 11.5px;
+  letter-spacing: 0.16em; text-transform: uppercase; color: rgba(244, 244, 242, 0.72);
+}
+.franja-lineas li { display: inline-flex; align-items: center; gap: 10px; }
+.franja-lineas li::before { content: ""; width: 9px; height: 9px; border-radius: 3px; background: var(--menta); }
+.bajar {
+  display: inline-flex; flex-direction: column; align-items: center; gap: 10px; flex: none;
+  font-family: ui-monospace, "Cascadia Code", "SF Mono", Consolas, monospace; font-size: 10.5px;
+  letter-spacing: 0.22em; text-transform: uppercase; color: rgba(244, 244, 242, 0.55);
+}
+.bajar i { position: relative; width: 1px; height: 40px; overflow: hidden; background: rgba(244, 244, 242, 0.2); }
+.bajar i::after {
+  content: ""; position: absolute; left: 0; top: -40%; width: 1px; height: 40%; background: var(--c-inicio);
+  animation: bajar-linea 1.8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+@keyframes bajar-linea { to { top: 100%; } }
+
+/* una hoja oscura con las esquinas redondeadas, que corta el ritmo de la página */
+.hoja-oscura { background: var(--tinta); color: var(--hueso); border-radius: clamp(28px, 4vw, 48px); }
+.hoja-oscura h2 { color: var(--hueso); }
+.hoja-oscura h2 .cursiva { color: var(--c-inicio); }
+.hoja-oscura .entrada { color: rgba(244, 244, 242, 0.7); }
+.hoja-oscura .marca-seccion { color: rgba(244, 244, 242, 0.62); }
+
+/* los servicios en filas grandes: número, nombre, etiquetas y una flecha que invita a entrar */
+.filas-cabeza { display: grid; gap: 8px 48px; align-items: end; margin-bottom: clamp(34px, 5vw, 64px); }
+.filas-cabeza h2 { margin-bottom: 0; }
+@media (min-width: 900px) {
+  .filas-cabeza { grid-template-columns: 1.35fr 0.65fr; }
+  .filas-cabeza .entrada { padding-bottom: 8px; }
+}
+.filas-servicios { list-style: none; border-top: 1px solid rgba(244, 244, 242, 0.14); }
+.fila-servicio { border-bottom: 1px solid rgba(244, 244, 242, 0.14); }
+.fila-servicio > a {
+  display: grid; grid-template-columns: 38px minmax(0, 1fr) auto; align-items: center; gap: 16px 14px;
+  padding: clamp(22px, 3vw, 36px) 0; color: var(--hueso);
+}
+.fila-num {
+  align-self: start; padding-top: 0.9em; font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-size: 12px; letter-spacing: 0.1em; color: rgba(244, 244, 242, 0.58);
+}
+.fila-nombre {
+  display: block; font-family: "Space Grotesk", Inter, sans-serif; font-weight: 700;
+  font-size: clamp(34px, 5.4vw, 76px); line-height: 1; letter-spacing: -0.045em;
+  transition: transform 0.55s var(--salida), color 0.3s ease;
+}
+.fila-sub {
+  display: block; margin-top: 12px; font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--menta);
+}
+.fila-etiquetas { grid-column: 2 / -1; display: flex; flex-wrap: wrap; gap: 8px; }
+.fila-etiquetas span {
+  padding: 7px 12px; border-radius: 999px; border: 1px solid rgba(244, 244, 242, 0.16);
+  font-size: 13px; color: rgba(244, 244, 242, 0.76);
+}
+.fila-flecha {
+  grid-row: 1; grid-column: 3; display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%;
+  border: 1px solid rgba(244, 244, 242, 0.24); font-size: 20px; color: var(--hueso);
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.45s var(--rebote);
+}
+@media (min-width: 900px) {
+  .fila-servicio > a { grid-template-columns: 56px minmax(0, 1.1fr) minmax(0, 1fr) 56px; gap: 28px; }
+  .fila-etiquetas { grid-column: 3; }
+  .fila-flecha { grid-column: 4; }
+}
+@media (hover: hover) and (pointer: fine) {
+  .fila-servicio > a:hover .fila-nombre { transform: translateX(12px); color: var(--menta); }
+  .fila-servicio > a:hover .fila-flecha { background: var(--menta); border-color: var(--menta); color: var(--tinta); transform: rotate(45deg); }
+}
+.fila-servicio > a:focus-visible { outline: 2px solid var(--menta); outline-offset: 4px; border-radius: 12px; }
+
+/* "qué construimos": una lista grande que se enciende palabra por palabra al bajar */
+.construimos { margin-top: clamp(64px, 9vw, 120px); padding-top: clamp(28px, 4vw, 40px); border-top: 1px solid rgba(244, 244, 242, 0.14); }
+.construimos-lista {
+  font-family: "Space Grotesk", Inter, sans-serif; font-weight: 500;
+  font-size: clamp(30px, 4.8vw, 66px); line-height: 1.1; letter-spacing: -0.035em; color: var(--hueso);
+}
+.construimos-lista .sep {
+  display: inline-block; width: 0.26em; height: 0.26em; margin: 0 0.3em 0 0.34em; border-radius: 0.07em;
+  vertical-align: 0.2em; background: var(--c-inicio);
+}
+.construimos-lista .sep:nth-of-type(5n+1) { background: var(--c-servicios); }
+.construimos-lista .sep:nth-of-type(5n+2) { background: var(--c-automatizaciones); }
+.construimos-lista .sep:nth-of-type(5n+3) { background: var(--c-bocetos); }
+.construimos-lista .sep:nth-of-type(5n+4) { background: var(--c-nosotros); }
+[data-iluminar] .palabra { opacity: 0.2; transition: opacity 0.4s ease; }
+[data-iluminar] .palabra.encendida { opacity: 1; }
+
+/* el muro de bocetos: los ejemplos, inclinados, moviéndose en columnas al bajar */
+.muro { margin-top: clamp(14px, 2vw, 24px); background: var(--menta); color: var(--tinta); border-radius: clamp(28px, 4vw, 48px); overflow: hidden; }
+.muro h2, .muro h2 .cursiva, .muro .marca-seccion { color: var(--tinta); }
+.muro .marca-seccion::before { background: var(--tinta); }
+.muro .entrada { color: var(--tinta); opacity: 0.8; max-width: 34ch; }
+.muro-grilla { display: grid; gap: 28px; align-items: center; }
+.muro-texto { position: relative; z-index: 2; }
+@media (min-width: 960px) { .muro-grilla { grid-template-columns: 0.78fr 1.22fr; gap: 40px; } }
+.muro-escena { position: relative; height: clamp(360px, 46vw, 600px); perspective: 1400px; }
+.muro-plano {
+  position: absolute; top: -18%; left: -6%; width: 128%; height: 150%;
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(10px, 1.4vw, 18px);
+  transform: rotateX(24deg) rotateY(-10deg) rotateZ(-12deg); transform-origin: 50% 40%;
+}
+.muro-columna { display: flex; flex-direction: column; gap: clamp(10px, 1.4vw, 18px); will-change: transform; }
+.muro-columna:nth-child(2) { margin-top: -18%; }
+.muro-columna img { display: block; width: 100%; height: auto; border-radius: 14px; background: var(--blanco); border: 1px solid rgba(16, 16, 16, 0.14); }
+.muro-columna img.recorte { aspect-ratio: 390 / 620; object-fit: cover; object-position: top; }
+
+/* el cierre: el texto a un lado y, al otro, la tarjeta que arma el mensaje de WhatsApp */
+.cierre-doble { display: grid; gap: 30px; text-align: left; padding: clamp(24px, 4vw, 56px); }
+@media (min-width: 960px) { .cierre-doble { grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; } }
+.cierre-doble h2 { margin: 0 0 16px; max-width: 12ch; }
+.cierre-doble .entrada { margin: 0; max-width: 34ch; }
+.cierre-doble .marca-seccion { color: var(--sobre-color); }
+.cierre-doble .marca-seccion::before { background: var(--tinta); }
+.cierre-canales { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; margin-top: 26px; }
+.cierre-canales a {
+  display: inline-flex; align-items: center; gap: 8px; padding: 12px 18px; border-radius: 999px;
+  border: 1px solid rgba(16, 16, 16, 0.28); font-weight: 600; color: var(--tinta);
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+@media (hover: hover) and (pointer: fine) { .cierre-canales a:hover { background: var(--tinta); border-color: var(--tinta); color: var(--blanco); } }
+.proyecto {
+  position: relative; display: grid; gap: 14px; padding: clamp(22px, 3vw, 34px); border-radius: 26px;
+  background: var(--blanco); color: var(--tinta); text-align: left;
+}
+.proyecto h3 { font-size: clamp(22px, 2.2vw, 28px); letter-spacing: -0.025em; }
+.proyecto-nota { margin-top: -8px; font-size: 14px; color: var(--tinta-suave); }
+.proyecto-etiqueta {
+  margin-top: 6px; font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: 11px;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--tinta-suave);
+}
+.proyecto-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip-proyecto {
+  padding: 9px 15px; border-radius: 999px; border: 1px solid var(--borde-fuerte); background: var(--blanco);
+  font: inherit; font-size: 14px; font-weight: 500; color: var(--tinta); cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+.chip-proyecto[aria-pressed="true"] { background: var(--tinta); border-color: var(--tinta); color: var(--blanco); }
+@media (hover: hover) and (pointer: fine) { .chip-proyecto:hover { border-color: var(--tinta); } }
+.proyecto-campos { display: grid; gap: 14px; margin-top: 4px; }
+@media (min-width: 560px) { .proyecto-campos { grid-template-columns: 1fr 1fr; } }
+.proyecto label { display: block; }
+.proyecto label > span { display: block; margin-bottom: 2px; font-size: 12.5px; color: var(--tinta-suave); }
+.proyecto input, .proyecto textarea {
+  display: block; width: 100%; padding: 8px 0; border: 0; border-bottom: 1px solid var(--borde-fuerte); border-radius: 0;
+  background: transparent; font: inherit; font-size: 16px; color: var(--tinta); resize: vertical;
+}
+.proyecto input:focus, .proyecto textarea:focus { outline: none; border-bottom-color: var(--tinta); }
+.proyecto-aviso { font-size: 13.5px; font-weight: 600; color: var(--c-servicios-texto); }
+.proyecto .boton { justify-self: start; margin-top: 4px; }
+
+/* el pie: volver arriba y el logo gigante, en un tono apenas más oscuro que el fondo */
+.volver-arriba { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; color: var(--tinta-media); }
+@media (hover: hover) and (pointer: fine) { .volver-arriba:hover { color: var(--tinta); } }
+.pie-gigante {
+  margin-top: clamp(28px, 4vw, 48px); width: 100%; aspect-ratio: 253 / 53.6; background: rgba(16, 16, 16, 0.07);
+  -webkit-mask: url("assets/creax-logo-silueta.svg") center / contain no-repeat;
+  mask: url("assets/creax-logo-silueta.svg") center / contain no-repeat;
+}
+
+@media (max-width: 759px) {
+  .bajar { display: none; }
+  .fila-flecha { width: 44px; height: 44px; font-size: 18px; }
+  .fila-etiquetas span { font-size: 12.5px; padding: 6px 11px; }
+  .muro-escena { height: 340px; }
+  .muro-plano { width: 150%; left: -12%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bajar i::after { animation: none; top: 30%; }
+  .fila-nombre, .fila-flecha, .boton-circulo { transition: none; }
+}
+
+/* =============================================================================
+   Páginas legales (privacidad y términos) y aviso de cookies (30/09/2026)
+   ========================================================================== */
+.legal { padding-top: clamp(28px, 4vw, 48px); }
+.legal-grilla { display: grid; gap: 32px; }
+.legal-indice { display: none; }
+@media (min-width: 960px) {
+  .legal-grilla { grid-template-columns: 230px minmax(0, 1fr); gap: 64px; align-items: start; }
+  .legal-indice { display: grid; gap: 2px; position: sticky; top: 110px; font-size: 14px; }
+  .legal-indice a { padding: 6px 0 6px 14px; border-left: 2px solid var(--borde); color: var(--tinta-media); transition: color 0.2s ease, border-color 0.2s ease; }
+  .legal-indice a:hover { color: var(--tinta); border-left-color: var(--menta); }
+}
+.legal-texto { max-width: 68ch; }
+.legal-fecha {
+  margin-bottom: 28px; font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: 12px;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--tinta-suave);
+}
+.legal-texto h2 { font-size: clamp(24px, 2.6vw, 32px); letter-spacing: -0.025em; margin: 44px 0 14px; scroll-margin-top: 110px; }
+.legal-texto h2:first-of-type { margin-top: 0; }
+.legal-texto p, .legal-texto li { font-size: 16.5px; line-height: 1.65; color: var(--tinta-media); }
+.legal-texto p + p { margin-top: 12px; }
+.legal-texto ul { display: grid; gap: 10px; margin: 12px 0 0 1.1em; }
+.legal-texto strong { color: var(--tinta); font-weight: 600; }
+.legal-texto code { padding: 2px 7px; border-radius: 6px; background: var(--hueso-2); font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: 0.88em; color: var(--tinta); }
+
+/* el aviso de cookies: una tarjeta oscura abajo, que no tapa la página */
+.aviso-cookies {
+  position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 200; max-width: 440px; margin-left: auto;
+  display: grid; gap: 10px; padding: 18px 20px 20px; border-radius: 22px;
+  background: var(--tinta); color: var(--hueso); border: 1px solid rgba(244, 244, 242, 0.12);
+  opacity: 0; transform: translateY(14px); transition: opacity 0.3s var(--salida), transform 0.3s var(--salida);
+}
+.aviso-cookies.visible { opacity: 1; transform: none; }
+.aviso-titulo {
+  display: inline-flex; align-items: center; gap: 9px; font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--c-inicio);
+}
+.aviso-titulo::before { content: ""; width: 9px; height: 9px; border-radius: 3px; background: var(--c-inicio); }
+.aviso-texto { font-size: 14px; line-height: 1.55; color: rgba(244, 244, 242, 0.82); }
+.aviso-texto a { color: var(--hueso); text-decoration: underline; text-underline-offset: 3px; }
+.aviso-botones { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.aviso-cookies .boton-oscuro { background: var(--c-inicio); color: var(--tinta); }
+.aviso-cookies .boton-secundario { background: transparent; color: var(--hueso); border-color: rgba(244, 244, 242, 0.3); }
+@media (prefers-reduced-motion: reduce) { .aviso-cookies { transform: none; transition: opacity 0.2s ease; } }
+
+/* los titulares del encabezado se ven desde el primer momento (velocidad percibida); solo se deslizan un poco */
+.con-js .encabezado .revelar { opacity: 1; }
+
+/* =============================================================================
+   Formulario del proyecto: errores por campo y trampa para robots (30/09/2026)
+   ========================================================================== */
+.campo-error { display: block; margin-top: 5px; font-size: 12.5px; font-weight: 500; color: var(--c-servicios-texto); }
+.proyecto [aria-invalid="true"] { border-bottom-color: var(--c-servicios-texto); }
+.trampa { position: absolute !important; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.proyecto .boton[disabled] { opacity: 0.6; cursor: default; }
+
+/* =============================================================================
+   Celular, segunda vuelta (30/09/2026): la portada y el aviso, más compactos
+   ========================================================================== */
+@media (max-width: 759px) {
+  .resultados.resultados-simples { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .resultados-simples .tarjeta { padding: 18px 16px; }
+  .resultados-simples .icono { display: none; }
+  .resultados-simples .resultado-num { font-size: 38px; margin-bottom: 10px; }
+  .resultados-simples h3 { font-size: 17px; }
+  .resultados-simples p { font-size: 14px; }
+  .fono { zoom: 0.86; }
+  .aviso-cookies { left: 10px; right: 10px; bottom: 10px; gap: 8px; padding: 14px 16px 16px; }
+  .aviso-texto { font-size: 13px; }
+}
+
+/* la página 404: accesos a las secciones, con el bloque de color de cada una */
+.enlaces-404 { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; margin-top: 22px; }
+.enlaces-404 a {
+  display: inline-flex; align-items: center; gap: 9px; padding: 11px 16px; border-radius: 999px;
+  background: var(--blanco); border: 1px solid var(--borde-fuerte); font-weight: 600; color: var(--tinta);
+}
+.enlaces-404 a::before { content: ""; width: 9px; height: 9px; border-radius: 3px; background: var(--menta); }

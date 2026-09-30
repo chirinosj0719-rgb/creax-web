@@ -4,6 +4,11 @@
    para que la política de seguridad (CSP) pueda prohibir los scripts escritos
    dentro de la página, que es por donde entra una inyección de código (XSS).
    ========================================================================== */
+/* siempre por HTTPS: si alguien entra por http, se pasa a https. GitHub Pages ya lo hace;
+   esto lo asegura también cuando la web tenga su dominio propio. En la PC (localhost) no aplica. */
+if (location.protocol === "http:" && !/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname)) {
+  location.replace("https:" + location.href.slice(location.protocol.length));
+}
 document.documentElement.classList.add("con-js");
 /* la intro del logo: una vez por visita, y nunca si pidieron menos movimiento o es una captura */
 try {
