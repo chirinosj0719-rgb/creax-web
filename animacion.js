@@ -482,9 +482,10 @@
   }
 
   /* --------------------------------------------------------------
-     5z. La intro: los bloques se arman, el cursor arrastra el último a
-         su lugar, aparece CreaX y la cortina sube. Una vez por visita;
-         un clic la salta. La portada arranca recién cuando termina.
+     5z. La intro "Encendido": "Crea" se descifra letra por letra, la X
+         se traza, los bloques se prenden como luces y el último se enciende
+         en lima. Después sube la cortina. Una vez por visita; un clic la
+         salta. La portada arranca recién cuando termina.
      -------------------------------------------------------------- */
   var raiz = document.documentElement;
   var intro = document.getElementById("intro");
@@ -506,16 +507,58 @@
     correrTareas();
   };
   if (conIntro) {
-    A.createTimeline({ defaults: { ease: salida }, onComplete: terminarIntro })
-      .add("#intro .ib", { opacity: [0, 1], scale: [0, 1], duration: 640, delay: A.stagger(90), ease: rebote }, 100)
-      .add("#intro .ranura", { opacity: [0, 1], duration: 420 }, 480)
-      .add("#intro .arrastre", { x: [58, 0], y: [58, 0], rotate: [-14, 0], duration: 950 }, 640)
-      .add("#intro .arrastre", { scale: [1, 0.92, 1], duration: 300, ease: "outQuad" }, 1600)
-      .add("#intro .intro-palabra", { opacity: [0, 1], y: [22, 0], duration: 650 }, 1450)
-      .call(correrTareas, 2300)
-      .add("#intro", { y: ["0%", "-100%"], duration: 760, ease: "inOutQuart" }, 2350);
+    var enIntro = function (sel) { return [].slice.call(intro.querySelectorAll(sel)); };
+    var svgIntro = intro.querySelector(".intro-logo");
+    var bloquesIntro = enIntro(".ib"), letrasIntro = enIntro(".letra");
+    var barraIntro = intro.querySelector(".barra"), astaIntro = intro.querySelector(".asta");
+    // "Crea" se descifra: sobre cada letra, un texto que cambia de signo hasta que la letra real se fija
+    var signos = "ABCDEFGHJKLMNPRSTUVWXYZ0123456789#&%";
+    var textosIntro = letrasIntro.map(function (letra) {
+      var caja = letra.getBBox();
+      var t = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      t.setAttribute("x", (caja.x + caja.width / 2).toFixed(1));
+      t.setAttribute("y", "80");
+      t.setAttribute("text-anchor", "middle");
+      t.setAttribute("font-family", "Space Grotesk, Inter, sans-serif");
+      t.setAttribute("font-weight", "700");
+      t.setAttribute("font-size", "64");
+      t.setAttribute("fill", "#F4F4F2");
+      svgIntro.appendChild(t);
+      return t;
+    });
+    var descifrado = { avance: 0 };
+    var apagado = "#2B2B2B", encendidos = ["#FF7A59", "#B9A6FF", "#F4F4F2", "#FFD84D"];
+    var trazos = A.createDrawable([barraIntro, astaIntro]);
+    var lineaIntro = A.createTimeline({ defaults: { ease: salida }, onComplete: terminarIntro })
+      .set(trazos, { draw: "0 0" }, 0)
+      .set([barraIntro, astaIntro], { opacity: 1 }, 0)
+      .add(descifrado, {
+        avance: 1, duration: 950, ease: "linear",
+        onUpdate: function () {
+          var a = descifrado.avance;
+          textosIntro.forEach(function (t, i) {
+            if (a >= 0.3 + i * 0.2) { t.style.opacity = 0; letrasIntro[i].style.opacity = 1; return; }
+            t.style.opacity = 1; letrasIntro[i].style.opacity = 0;
+            var paso = Math.floor(a * 16);                    // cambia de signo unas 16 veces, no en cada cuadro
+            if (t.__paso !== paso) { t.__paso = paso; t.textContent = signos.charAt(Math.floor(Math.random() * signos.length)); }
+          });
+        }
+      }, 100)
+      .add(trazos[0], { draw: "0 1", duration: 380 }, 620)
+      .add(trazos[1], { draw: "0 1", duration: 380 }, 860)
+      .add(".intro .corte", { opacity: 1, duration: 120 }, 1000)
+      .add(".intro .punta", { opacity: [0, 1], scale: [0.7, 1], ease: A.spring({ bounce: 0.4, duration: 450 }) }, 1080);
+    bloquesIntro.forEach(function (bloque, i) {               // se prenden uno tras otro, con un parpadeo de luz
+      lineaIntro.add(bloque, { fill: [apagado, encendidos[i]], opacity: [1, 0.35, 1, 0.6, 1], duration: 260, ease: "linear" }, 1220 + i * 110);
+    });
+    lineaIntro
+      .add(".intro .ranura", { opacity: 0, duration: 140 }, 1740)
+      .add(".intro .ib-ultimo", { opacity: [0, 1], scale: [0.6, 1], ease: A.spring({ bounce: 0.45, duration: 520 }) }, 1740)
+      .add(".intro .onda", { opacity: [0.9, 0], scale: [1, 3.4], duration: 650 }, 1740)
+      .call(correrTareas, 2450)
+      .add("#intro", { y: ["0%", "-100%"], duration: 760, ease: "inOutQuart" }, 2500);
     intro.addEventListener("click", terminarIntro);
-    setTimeout(terminarIntro, 4300);        // red de seguridad: la página nunca queda tapada
+    setTimeout(terminarIntro, 4600);        // red de seguridad: la página nunca queda tapada
   } else if (intro && intro.parentNode) {
     intro.parentNode.removeChild(intro);
   }

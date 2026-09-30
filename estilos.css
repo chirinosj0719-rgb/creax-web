@@ -1268,12 +1268,10 @@ html.con-intro .intro {
 }
 html.con-intro, html.con-intro body { overflow: hidden; }
 .intro-caja { display: flex; flex-direction: column; align-items: center; gap: 24px; }
-.intro-logo { width: 150px; height: 150px; overflow: visible; }
-.intro .ib, .intro .arrastre { transform-box: fill-box; transform-origin: center; }
-.intro .ib, .intro .ranura, .intro-palabra { opacity: 0; }
-.intro .arrastre { transform: translate(58px, 58px) rotate(-14deg); }
-.intro-palabra { font-family: "Space Grotesk", Inter, sans-serif; font-weight: 700; font-size: 46px; letter-spacing: -0.045em; line-height: 1; color: var(--hueso); }
-.intro-palabra span { color: var(--c-inicio); }
+.intro-logo { width: min(460px, 76vw); height: auto; overflow: visible; }
+.intro .ib, .intro .ib-ultimo, .intro .onda, .intro .punta { transform-box: fill-box; transform-origin: center; }
+/* punto de partida de "Encendido": así no se ve el logo terminado antes de que arranque */
+.intro .ib-ultimo, .intro .onda, .intro .corte, .intro .punta, .intro .barra, .intro .asta, .intro .letra { opacity: 0; }
 .intro-saltar { position: absolute; bottom: 28px; left: 0; right: 0; text-align: center; font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255, 255, 255, 0.38); }
 
 .nav-marca { display: inline-flex; align-items: center; gap: 9px; }
@@ -1281,6 +1279,9 @@ html.con-intro, html.con-intro body { overflow: hidden; }
 .firma-pie { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
 .firma-pie .isotipo { width: 30px; height: 30px; display: block; }
 .firma-pie .logo-pie { margin-bottom: 0; }
+/* logo completo (bloques + Crea + X que sube), en un solo archivo */
+.nav .logo-completo { height: 24px; width: auto; display: block; }
+.firma-pie .logo-completo { height: 30px; width: auto; display: block; }
 
 /* ajustes 2026-09-28: menú sin borde y resultados en versión corta */
 .nav-caja, .nav.encogida .nav-caja { border: 0; }
