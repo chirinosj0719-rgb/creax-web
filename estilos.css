@@ -1546,3 +1546,42 @@ html.contacto-abierto, html.contacto-abierto body { overflow: hidden; }
 }
 /* dos párrafos de entrada seguidos */
 .entrada + .entrada { margin-top: 10px; }
+
+/* ---------- nosotros: el equipo con filtro por área y tarjetas con más interfaz (30/09/2026).
+   La foto de cada socio se agrega cuando Juan Diego las pase (.socio-foto sigue arriba). ---------- */
+.equipo-filtro { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 30px; }
+.equipo-filtro button {
+  display: inline-flex; align-items: center; gap: 9px; min-height: 42px; padding: 8px 9px 8px 16px; cursor: pointer;
+  border-radius: 999px; border: 1px solid var(--borde); background: var(--blanco); color: var(--tinta-media);
+  font-family: Inter, "Segoe UI", sans-serif; font-size: 14.5px; font-weight: 500;
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+.equipo-filtro button:hover { border-color: var(--tinta); color: var(--tinta); }
+.equipo-filtro button span {
+  min-width: 25px; padding: 2px 7px; border-radius: 999px; text-align: center; background: var(--hueso-2); color: var(--tinta-media);
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: 11.5px;
+}
+.equipo-filtro button[aria-pressed="true"] { background: var(--tinta); border-color: var(--tinta); color: #fff; }
+.equipo-filtro button[aria-pressed="true"] span { background: var(--menta); color: var(--sobre-color); }
+.socios { margin-top: 20px; }
+.socio { display: flex; flex-direction: column; transition: opacity 0.35s ease, transform 0.5s var(--salida), border-color 0.3s ease; }
+.socios.filtrando .socio:not(.coincide) { opacity: 0.35 !important; }   /* la entrada deja opacity en línea */
+.socios.filtrando .socio.coincide { border-color: var(--tinta); }
+.socio-avatar {
+  width: 52px; height: 52px; border-radius: 15px; display: grid; place-items: center; margin-bottom: 26px;
+  background: var(--menta); color: var(--sobre-color); font-size: 25px;
+}
+.socio-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; margin-bottom: 18px; }
+.socio-chips span {
+  padding: 5px 10px; border-radius: 999px; border: 1px solid var(--borde-fuerte); color: var(--tinta-media);
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase;
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+.socio-chips span.activa { background: var(--menta); border-color: var(--menta); color: var(--sobre-color); }
+.socio-detalle li { display: flex; align-items: center; gap: 9px; }
+.socio-detalle li .ph { flex: none; font-size: 15px; color: var(--menta-texto); }
+.socio-pista { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: auto; padding-top: 14px; border-top: 1px solid var(--borde); }
+.socio:hover .socio-pista, .socio.abierto .socio-pista { opacity: 1; }
+.socio-detalle + .socio-pista { margin-top: auto; }
+.socio-pista .ph { font-size: 15px; color: var(--tinta); transition: transform 0.4s var(--salida); }
+.socio:hover .socio-pista .ph, .socio.abierto .socio-pista .ph { transform: rotate(180deg); }

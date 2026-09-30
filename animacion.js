@@ -211,6 +211,33 @@
   });
 
   /* --------------------------------------------------------------
+     5e2. Equipo: el filtro por área resalta a los socios de esa área
+          y marca su etiqueta. Los números salen de las tarjetas.
+     -------------------------------------------------------------- */
+  var filtroEquipo = document.querySelector(".equipo-filtro");
+  var grillaSocios = document.querySelector(".socios");
+  if (filtroEquipo && grillaSocios) {
+    var botonesArea = filtroEquipo.querySelectorAll("button");
+    var tarjetasSocio = grillaSocios.querySelectorAll(".socio");
+    var tieneArea = function (tarjeta, area) {
+      return area === "todos" || (" " + tarjeta.dataset.areas + " ").indexOf(" " + area + " ") > -1;
+    };
+    botonesArea.forEach(function (boton) {
+      var area = boton.dataset.area;
+      var cuenta = boton.querySelector("span");
+      if (cuenta) cuenta.textContent = [].filter.call(tarjetasSocio, function (s) { return tieneArea(s, area); }).length;
+      boton.addEventListener("click", function () {
+        botonesArea.forEach(function (b) { b.setAttribute("aria-pressed", b === boton ? "true" : "false"); });
+        grillaSocios.classList.toggle("filtrando", area !== "todos");
+        tarjetasSocio.forEach(function (s) {
+          s.classList.toggle("coincide", tieneArea(s, area));
+          s.querySelectorAll(".socio-chips span").forEach(function (c) { c.classList.toggle("activa", c.dataset.area === area); });
+        });
+      });
+    });
+  }
+
+  /* --------------------------------------------------------------
      5f. La escena de la portada rota: panadería, gimnasio y dentista,
          una a la vez, con la pantalla y la conversación de cada una
      -------------------------------------------------------------- */

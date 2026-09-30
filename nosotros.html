@@ -20,7 +20,7 @@
 </script>
 <link rel="icon" href="assets/creax-isotipo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/iconos/style.css">
-<link rel="stylesheet" href="estilos.css?v=202609301225">
+<link rel="stylesheet" href="estilos.css?v=202609301245">
 </head>
 
 <body class="color-nosotros">
@@ -78,35 +78,47 @@
     <div class="envoltura">
       <p class="marca-seccion revelar">Equipo</p>
       <h2 class="revelar">El <em class="cursiva">equipo</em></h2>
-      <p class="entrada revelar">La empresa está conformada por cuatro socios con participación igualitaria. Las áreas de desarrollo y de gestión trabajan en paralelo, de modo que cada proyecto cuenta desde el inicio con responsables técnicos y comerciales.</p>
+
+      <div class="equipo-filtro revelar" role="group" aria-label="Ver el equipo por área">
+        <button type="button" aria-pressed="true" data-area="todos">Todos <span>4</span></button>
+        <button type="button" aria-pressed="false" data-area="desarrollo">Desarrollo <span>2</span></button>
+        <button type="button" aria-pressed="false" data-area="gerencia">Gerencia <span>2</span></button>
+        <button type="button" aria-pressed="false" data-area="clientes">Clientes <span>2</span></button>
+        <button type="button" aria-pressed="false" data-area="marca">Marca <span>1</span></button>
+      </div>
+
       <div class="socios">
-        <article class="tarjeta socio revelar" tabindex="0">
-          <div class="socio-foto" aria-hidden="true"><span>Foto</span></div>
+        <article class="tarjeta socio revelar" tabindex="0" data-areas="desarrollo marca">
+          <div class="socio-avatar" aria-hidden="true"><i class="ph ph-browsers"></i></div>
           <h3>Juan Diego Chirinos</h3>
           <p>Producto, desarrollo web y marca</p>
-          <div class="socio-detalle"><ul><li>Desarrollo de páginas web</li><li>Estándares técnicos</li><li>Marca</li></ul></div>
-          <span class="socio-pista">+ Áreas a su cargo</span>
+          <div class="socio-chips"><span data-area="desarrollo">Desarrollo</span><span data-area="marca">Marca</span></div>
+          <div class="socio-detalle"><ul><li><i class="ph ph-check" aria-hidden="true"></i>Desarrollo de páginas web</li><li><i class="ph ph-check" aria-hidden="true"></i>Estándares técnicos</li><li><i class="ph ph-check" aria-hidden="true"></i>Marca</li></ul></div>
+          <span class="socio-pista"><span>Áreas a su cargo</span><i class="ph ph-caret-down" aria-hidden="true"></i></span>
         </article>
-        <article class="tarjeta socio revelar" tabindex="0">
-          <div class="socio-foto" aria-hidden="true"><span>Foto</span></div>
+        <article class="tarjeta socio revelar" tabindex="0" data-areas="desarrollo">
+          <div class="socio-avatar" aria-hidden="true"><i class="ph ph-flow-arrow"></i></div>
           <h3>Iker Olite</h3>
           <p>Automatización, integraciones y soporte</p>
-          <div class="socio-detalle"><ul><li>Automatización de procesos</li><li>Integraciones</li><li>Soporte técnico e infraestructura</li></ul></div>
-          <span class="socio-pista">+ Áreas a su cargo</span>
+          <div class="socio-chips"><span data-area="desarrollo">Desarrollo</span></div>
+          <div class="socio-detalle"><ul><li><i class="ph ph-check" aria-hidden="true"></i>Automatización de procesos</li><li><i class="ph ph-check" aria-hidden="true"></i>Integraciones</li><li><i class="ph ph-check" aria-hidden="true"></i>Soporte técnico e infraestructura</li></ul></div>
+          <span class="socio-pista"><span>Áreas a su cargo</span><i class="ph ph-caret-down" aria-hidden="true"></i></span>
         </article>
-        <article class="tarjeta socio revelar" tabindex="0">
-          <div class="socio-foto" aria-hidden="true"><span>Foto</span></div>
+        <article class="tarjeta socio revelar" tabindex="0" data-areas="gerencia clientes">
+          <div class="socio-avatar" aria-hidden="true"><i class="ph ph-compass"></i></div>
           <h3>Joaquín Ortiz</h3>
           <p>Dirección, estrategia comercial y clientes</p>
-          <div class="socio-detalle"><ul><li>Dirección y estrategia comercial</li><li>Alianzas</li><li>Atención de clientes</li></ul></div>
-          <span class="socio-pista">+ Áreas a su cargo</span>
+          <div class="socio-chips"><span data-area="gerencia">Gerencia</span><span data-area="clientes">Clientes</span></div>
+          <div class="socio-detalle"><ul><li><i class="ph ph-check" aria-hidden="true"></i>Dirección y estrategia comercial</li><li><i class="ph ph-check" aria-hidden="true"></i>Alianzas</li><li><i class="ph ph-check" aria-hidden="true"></i>Atención de clientes</li></ul></div>
+          <span class="socio-pista"><span>Áreas a su cargo</span><i class="ph ph-caret-down" aria-hidden="true"></i></span>
         </article>
-        <article class="tarjeta socio revelar" tabindex="0">
-          <div class="socio-foto" aria-hidden="true"><span>Foto</span></div>
+        <article class="tarjeta socio revelar" tabindex="0" data-areas="gerencia clientes">
+          <div class="socio-avatar" aria-hidden="true"><i class="ph ph-briefcase"></i></div>
           <h3>Luis Felipe Terzi</h3>
           <p>Gerencia general, contratos y clientes</p>
-          <div class="socio-detalle"><ul><li>Gerencia general</li><li>Contratos y finanzas</li><li>Trámites y atención de clientes</li></ul></div>
-          <span class="socio-pista">+ Áreas a su cargo</span>
+          <div class="socio-chips"><span data-area="gerencia">Gerencia</span><span data-area="clientes">Clientes</span></div>
+          <div class="socio-detalle"><ul><li><i class="ph ph-check" aria-hidden="true"></i>Gerencia general</li><li><i class="ph ph-check" aria-hidden="true"></i>Contratos y finanzas</li><li><i class="ph ph-check" aria-hidden="true"></i>Trámites y atención de clientes</li></ul></div>
+          <span class="socio-pista"><span>Áreas a su cargo</span><i class="ph ph-caret-down" aria-hidden="true"></i></span>
         </article>
       </div>
     </div>
@@ -131,7 +143,7 @@
         <aside class="tarjeta revelar">
           <div class="icono"><i class="ph ph-buildings" aria-hidden="true"></i></div>
           <h3>Con quiénes trabajamos</h3>
-          <p>Pequeñas y medianas empresas, de 5 a 50 trabajadores, que venden por canales digitales y desean dejar de gestionar su operación a mano.</p>
+          <p>Pequeñas y medianas empresas que venden por canales digitales y desean dejar de gestionar su operación a mano.</p>
           <ul>
             <li>Gastronomía: panaderías, pastelerías y restaurantes</li>
             <li>Salud y bienestar: consultorios, gimnasios y centros de estética</li>
@@ -231,6 +243,6 @@
 </footer>
 
 <script src="assets/anime.min.js"></script>
-<script src="animacion.js?v=202609301225" defer></script>
+<script src="animacion.js?v=202609301245" defer></script>
 </body>
 </html>
