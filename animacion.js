@@ -96,7 +96,7 @@
   if (elegidor) {
     var respuestas = {};
     var PLANES = {
-      presentacion: { columna: 1, nombre: "Vitrina",
+      presentacion: { columna: 1, nombre: "Landing Page",
         porque: "El cliente necesita entender qué hace el negocio y escribirle. Con la web de presentación y el botón directo al WhatsApp alcanza." },
       pedidos: { columna: 2, nombre: "Pedidos",
         porque: "El cliente arma su pedido en la web y llega completo al WhatsApp. Se cobra como hoy, sin comisiones de pasarela." },
@@ -324,7 +324,7 @@
   }
 
   /* --------------------------------------------------------------
-     5h. Plan Cuidado: cada opción muestra su vista en el panel
+     5h. CreaX 360: cada opción muestra su vista en el panel
      -------------------------------------------------------------- */
   var opcionesCuidado = document.querySelectorAll(".cuidado-opcion");
   var vistasCuidado = document.querySelectorAll(".panel-vista");

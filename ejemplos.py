@@ -34,7 +34,7 @@ EJEMPLOS = {
                    ("Galletas de avena", "Caja de seis, hechas en casa", "S/ 18.00"),
                    ("Café filtrado", "Grano peruano, para llevar o en el local", "S/ 8.00"),
                    ("Sándwich en baguette", "Jamón, queso y palta, hecho al momento", "S/ 16.00")],
-            galeria=["La vitrina", "El horno", "Los salados del día", "El pan del día"])),
+            galeria=["El mostrador", "El horno", "Los salados del día", "El pan del día"])),
     "dental": dict(
         negocio=dict(nombre="Dentista", categoria="Consultorio dental", distrito="Lima",
                      horario="Lun a Vie · 9:00 a. m. – 7:00 p. m.",

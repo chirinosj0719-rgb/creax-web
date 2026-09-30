@@ -1525,3 +1525,24 @@ html.contacto-abierto, html.contacto-abierto body { overflow: hidden; }
 .plan-d .plan-resumen { color: rgba(16, 16, 16, 0.78); }
 .plan-d .plan-lema { color: rgba(16, 16, 16, 0.65); }
 
+
+/* ---------- dos columnas alineadas (30/09/2026): la caja de la derecha empieza a la
+   misma altura que las cajas de la izquierda, no a la altura del título ---------- */
+.cuidado-grilla { row-gap: 0; }
+.cuidado-grilla > .panel-app { margin-top: 36px; }
+.metodo-grilla.cajas-alineadas { row-gap: 0; }
+.metodo-grilla.cajas-alineadas > aside { margin-top: 42px; }
+@media (min-width: 760px) {
+  .metodo-grilla.cajas-alineadas { grid-template-areas: "intro ." "pasos caja"; }
+  .metodo-grilla.cajas-alineadas > .metodo-intro { grid-area: intro; }
+  .metodo-grilla.cajas-alineadas > .pasos { grid-area: pasos; }
+  .metodo-grilla.cajas-alineadas > aside { grid-area: caja; margin-top: 0; }
+}
+@media (min-width: 960px) {
+  .cuidado-grilla { grid-template-areas: "intro ." "opciones panel"; align-items: start; }
+  .cuidado-grilla > .cuidado-intro { grid-area: intro; }
+  .cuidado-grilla > .cuidado-opciones { grid-area: opciones; }
+  .cuidado-grilla > .panel-app { grid-area: panel; margin-top: 30px; }
+}
+/* dos párrafos de entrada seguidos */
+.entrada + .entrada { margin-top: 10px; }
