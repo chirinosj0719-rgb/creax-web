@@ -63,9 +63,8 @@ contraseñas. El repositorio es público: todo lo que se sube, se ve.
   cookie. Nunca datos personales ni tokens.
 - **HTTPS:** GitHub Pages lo fuerza; además `inicio.js` pasa a `https` si alguien entra por `http`.
 - **Enlaces que abren pestaña nueva:** siempre con `rel="noopener"`.
-- **Pendiente para cuando haya dominio y hosting propio:** encabezados HTTP que GitHub
-  Pages no permite poner, como `frame-ancestors` (evitar que otra web la muestre dentro
-  de un marco), `X-Content-Type-Options` y `Strict-Transport-Security`.
+- **Encabezados HTTP** que GitHub Pages no permite poner (`frame-ancestors`, `X-Content-Type-Options`,
+  `Strict-Transport-Security`): van en el `.htaccess` de Hostinger, que arma `preparar-hostinger.py`.
 
 ## Lanzamiento (30/09/2026)
 
@@ -82,12 +81,20 @@ contraseñas. El repositorio es público: todo lo que se sube, se ve.
 - **Página 404:** `404.html` lleva `<base href="/creax-web/">` para funcionar desde cualquier dirección.
 - **Velocidad:** las fuentes van en WOFF2 y solo con los caracteres del español, y los íconos, solo los
   que se usan. **Si se agrega un ícono nuevo, correr `python aligerar.py`** (si no, no se ve).
-- **El día que se compre el dominio:**
-  - quitar el `noindex` de las páginas;
-  - cambiar `https://chirinosj0719-rgb.github.io/creax-web/` por el dominio en las etiquetas Open
-    Graph, en `sitemap.xml` y en `robots.txt`, y el `<base>` de `404.html` a `"/"`;
-  - en GitHub, Settings → Pages: marcar «Enforce HTTPS» para el dominio.
-  Mientras la web viva en `github.io/creax-web`, el `robots.txt` no cuenta: los buscadores lo leen solo
-  en la raíz del dominio.
+- **Publicar en creax.net.pe (Hostinger, desde el 01/10/2026):** `python preparar-hostinger.py` arma la
+  carpeta `CreaX/Subir a Hostinger - creax.net.pe/`, con solo lo que la web usa (sin scripts, README,
+  `node_modules`, fuentes TTF ni la hoja completa de íconos). Solo en esa copia:
+  - quita el `noindex` de las páginas (los ejemplos y la 404 lo conservan);
+  - cambia la dirección de GitHub por `https://creax.net.pe/` en Open Graph, `sitemap.xml` y `robots.txt`,
+    y agrega la dirección canónica de cada página;
+  - pasa la 404 a la raíz (`<base href="/">`);
+  - agrega el `.htaccess`: HTTPS y sin www, `ErrorDocument 404`, sin listado de carpetas, encabezados de
+    seguridad (HSTS de 180 días, `nosniff`, `frame-ancestors 'none'`, `Referrer-Policy`,
+    `Permissions-Policy`) y caché (las páginas se revisan siempre; CSS y JS con `?v=`, un año).
+
+  Para subirla: SSL activo en Hostinger, `default.php` borrado de `public_html`, el contenido de la carpeta
+  (con `.htaccess`) comprimido en un ZIP, subido a `public_html` y extraído ahí mismo. Esa carpeta no se
+  edita a mano: si cambia la web, se vuelve a correr el script y se sube de nuevo. Este repositorio sigue
+  siendo el borrador de GitHub Pages, con su `noindex`, para revisar cambios antes de subirlos.
 - **Analítica:** pendiente de elegir proveedor. Si usa cookies, se carga solo cuando la persona acepta
   en el aviso (`creax-cookies` = `todas`), y hay que sumar su dominio a la CSP.
