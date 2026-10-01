@@ -1,7 +1,7 @@
 /* Phosphor Icons (MIT), solo los íconos que usa la web de CreaX. Se arma con aligerar.py. */
 @font-face {
   font-family: "Phosphor";
-  src: url("./Phosphor-web.woff2") format("woff2");
+  src: url("./Phosphor-web.woff2?v=1949b887") format("woff2");
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -40,7 +40,6 @@
 .ph.ph-arrows-clockwise:before { content: "\e094"; }
 .ph.ph-barbell:before { content: "\e0b6"; }
 .ph.ph-bell-ringing:before { content: "\e5e8"; }
-.ph.ph-bread:before { content: "\e81c"; }
 .ph.ph-briefcase:before { content: "\e0ee"; }
 .ph.ph-browsers:before { content: "\e0f6"; }
 .ph.ph-buildings:before { content: "\e102"; }
@@ -61,6 +60,7 @@
 .ph.ph-envelope-simple:before { content: "\e218"; }
 .ph.ph-eye:before { content: "\e220"; }
 .ph.ph-flow-arrow:before { content: "\e6ec"; }
+.ph.ph-gift:before { content: "\e276"; }
 .ph.ph-git-branch:before { content: "\e278"; }
 .ph.ph-hand-pointing:before { content: "\e29a"; }
 .ph.ph-hand-swipe-left:before { content: "\ec94"; }
@@ -79,7 +79,6 @@
 .ph.ph-map-pin:before { content: "\e316"; }
 .ph.ph-moon-stars:before { content: "\e58e"; }
 .ph.ph-paint-brush-broad:before { content: "\e590"; }
-.ph.ph-palette:before { content: "\e6c8"; }
 .ph.ph-paper-plane-right:before { content: "\e396"; }
 .ph.ph-paper-plane-tilt:before { content: "\e398"; }
 .ph.ph-pencil-simple-line:before { content: "\ebc6"; }
@@ -94,7 +93,6 @@
 .ph.ph-table:before { content: "\e476"; }
 .ph.ph-tooth:before { content: "\e9cc"; }
 .ph.ph-trend-up:before { content: "\e4ae"; }
-.ph.ph-users-four:before { content: "\e68c"; }
 .ph.ph-users-three:before { content: "\e68e"; }
 .ph.ph-whatsapp-logo:before { content: "\e5d0"; }
 .ph.ph-x:before { content: "\e4f6"; }

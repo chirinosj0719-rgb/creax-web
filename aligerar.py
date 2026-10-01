@@ -11,6 +11,7 @@ Cuándo correrlo: si se agrega un ícono nuevo (una clase "ph-...") a una págin
 o si hace falta un carácter que no está en las fuentes.  Uso: python aligerar.py
 Necesita: pip install fonttools brotli
 """
+import hashlib
 import io
 import re
 from pathlib import Path
@@ -34,7 +35,6 @@ for archivo in PAGINAS + ["animacion.js", "inicio.js"]:
     usados |= set(re.findall(r"\bph-[a-z0-9-]+", io.open(WEB / archivo, encoding="utf-8").read()))
 hoja = io.open(WEB / "assets" / "iconos" / "style.css", encoding="utf-8").read()
 base = hoja[:hoja.index(".ph.ph-")]
-base = re.sub(r"src:\s*url\(\"\./Phosphor\.woff2\"\)[^;]*;", 'src: url("./Phosphor-web.woff2") format("woff2");', base, flags=re.S)
 reglas, codigos = [], []
 for nombre, codigo in re.findall(r"\.ph\.(ph-[a-z0-9-]+):before\s*\{\s*content:\s*\"\\([0-9a-f]+)\";\s*\}", hoja):
     if nombre in usados:
@@ -43,6 +43,10 @@ for nombre, codigo in re.findall(r"\.ph\.(ph-[a-z0-9-]+):before\s*\{\s*content:\
 faltan = usados - {r.split(":")[0][4:] for r in reglas}
 if faltan:
     raise SystemExit(f"Estos íconos no existen en Phosphor: {', '.join(sorted(faltan))}")
+# la fuente lleva una huella de los íconos que trae: si cambia la lista, cambia la dirección
+# y ningún navegador se queda con la fuente vieja guardada
+huella = hashlib.md5(",".join(str(c) for c in sorted(codigos)).encode()).hexdigest()[:8]
+base = re.sub(r"src:\s*url\(\"\./Phosphor\.woff2\"\)[^;]*;", f'src: url("./Phosphor-web.woff2?v={huella}") format("woff2");', base, flags=re.S)
 io.open(WEB / "assets" / "iconos" / "iconos.css", "w", encoding="utf-8", newline="\n").write(
     "/* Phosphor Icons (MIT), solo los íconos que usa la web de CreaX. Se arma con aligerar.py. */\n"
     + base.strip() + "\n\n" + "\n".join(sorted(reglas)) + "\n")

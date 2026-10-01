@@ -299,27 +299,27 @@
   }
 
   /* --------------------------------------------------------------
-     5f. La escena de la portada rota: panadería, gimnasio y dentista,
+     5f. La escena de la portada rota: repostería, gimnasio y clínica dental,
          una a la vez, con la pantalla y la conversación de cada una
      -------------------------------------------------------------- */
   var ESCENAS = {
-    panaderia: { nombre: "Panadería", icono: "ph-bread", color: "color-servicios",
-      pregunta: "Hola, ¿tienen torta de chocolate para hoy?", respuesta: "¡Hola! Sí, te muestro lo que tenemos listo:",
-      icono1: "ph-cake", opcion1: "Torta de chocolate", icono2: "ph-bread", opcion2: "Pan del día",
-      eleccion: "Quiero la torta, para recoger a las 6", listo: "Pedido anotado", detalle: "Listo para las 6:00 p. m., sin copiar nada a mano" },
+    reposteria: { nombre: "Repostería", icono: "ph-cake", color: "color-servicios",
+      pregunta: "Hola, ¿me hacen una torta para el sábado?", respuesta: "¡Claro! Estas son las más pedidas:",
+      icono1: "ph-cake", opcion1: "Torta de fresas", icono2: "ph-gift", opcion2: "Caja de macarons",
+      eleccion: "La de fresas, para 12 personas", listo: "Pedido anotado", detalle: "Sábado a las 11:00 a. m., sin copiar nada a mano" },
     gimnasio: { nombre: "Gimnasio", icono: "ph-barbell", color: "color-automatizaciones",
       pregunta: "Hola, ¿qué planes tienen?", respuesta: "¡Hola! Estos son los más pedidos:",
-      icono1: "ph-calendar-check", opcion1: "Plan mensual", icono2: "ph-person-simple-run", opcion2: "Clases grupales",
-      eleccion: "Quiero el mensual, ¿cómo me inscribo?", listo: "Inscripción registrada", detalle: "Ya está en la lista, sin llenar nada a mano" },
-    dentista: { nombre: "Dentista", icono: "ph-tooth", color: "color-nosotros",
+      icono1: "ph-calendar-check", opcion1: "Plan mensual", icono2: "ph-person-simple-run", opcion2: "Clase de prueba",
+      eleccion: "Quiero la clase de prueba", listo: "Clase reservada", detalle: "Miércoles a las 6:30 p. m., sin llenar nada a mano" },
+    clinica: { nombre: "Clínica dental", icono: "ph-tooth", color: "color-nosotros",
       pregunta: "Hola, ¿tienen cita para limpieza esta semana?", respuesta: "¡Hola! Estos son los horarios libres:",
-      icono1: "ph-calendar-check", opcion1: "Jueves, 10:00 a. m.", icono2: "ph-calendar-check", opcion2: "Viernes, 4:00 p. m.",
-      eleccion: "El jueves, por favor", listo: "Cita reservada", detalle: "Jueves a las 10:00 a. m., con recordatorio un día antes" }
+      icono1: "ph-calendar-check", opcion1: "Jueves, 10:30 a. m.", icono2: "ph-calendar-check", opcion2: "Viernes, 4:00 p. m.",
+      eleccion: "El jueves, por favor", listo: "Cita reservada", detalle: "Jueves a las 10:30 a. m., con recordatorio un día antes" }
   };
   var escenaPortada = document.getElementById("escena");
   var fonoPortada = document.getElementById("fono");
   if (escenaPortada && fonoPortada && !quieto) {
-    var ordenEscenas = ["panaderia", "gimnasio", "dentista"];
+    var ordenEscenas = ["reposteria", "gimnasio", "clinica"];
     var escenaActual = 0;
     var pantallasEscena = escenaPortada.querySelectorAll(".ventana-pantallas img");
     var rubroEscena = document.getElementById("escenaRubro");
@@ -344,7 +344,7 @@
         fonoPortada.classList.remove("cambiando");
       }, 380);
     };
-    rubroEscena.classList.add(ESCENAS.panaderia.color);
+    rubroEscena.classList.add(ESCENAS.reposteria.color);
     setInterval(function () {
       if (document.hidden) return;
       escenaActual = (escenaActual + 1) % ordenEscenas.length;
@@ -682,6 +682,7 @@
      ============================================================== */
   if (quieto) {
     document.documentElement.classList.remove("con-intro");
+    document.documentElement.classList.remove("con-movimiento");   // los dibujos de las cabeceras se ven quietos
     document.querySelectorAll(".revelar").forEach(function (el) { el.style.opacity = "1"; });
     return;
   }
@@ -783,20 +784,7 @@
     .add(".portada .acciones .boton", { opacity: [0, 1], y: [16, 0], delay: A.stagger(80) }, 600)
     .add(".escena-grande .ventana", { opacity: [0, 1], y: [56, 0], scale: [0.985, 1], duration: 1150 }, 340)
     .add(".escena-grande .fono", { opacity: [0, 1], y: [44, 0], duration: 1000 }, 560)
-    .add(".escena-grande .dato", { opacity: [0, 1], scale: [0.88, 1], delay: A.stagger(120), ease: rebote }, 820)
-    .add(".escena-grande .marca-flotante", { opacity: [0, 1], scale: [0.72, 1], delay: A.stagger(110), ease: rebote }, 960);
-
-  /* --------------------------------------------------------------
-     7. Las tarjetas flotan: la escena se siente viva
-     -------------------------------------------------------------- */
-  if (hayPortada) {
-  A.animate(".dato-1", { y: [0, -10], duration: 3400, loop: true, alternate: true, ease: "inOutQuad" });
-  A.animate(".dato-2", { y: [0, 9], duration: 3900, delay: 350, loop: true, alternate: true, ease: "inOutQuad" });
-  A.animate(".dato-3", { y: [0, -8], duration: 4300, delay: 700, loop: true, alternate: true, ease: "inOutQuad" });
-  A.animate(".marca-1", { y: [0, -11], duration: 4600, delay: 200, loop: true, alternate: true, ease: "inOutQuad" });
-  A.animate(".marca-2", { y: [0, 10], duration: 5200, delay: 600, loop: true, alternate: true, ease: "inOutQuad" });
-  A.animate(".marca-3", { y: [0, -9], duration: 4900, delay: 900, loop: true, alternate: true, ease: "inOutQuad" });
-  }
+    .add(".datos-sueltos .dato", { opacity: [0, 1], y: [16, 0], delay: A.stagger(90) }, 820);
 
   /* --------------------------------------------------------------
      8. Cada bloque aparece cuando entra en pantalla
@@ -988,5 +976,204 @@
     }, { passive: true });
     window.addEventListener("resize", alBajar);
     alBajar();
+  }
+
+  /* --------------------------------------------------------------
+     17. Las cabeceras vivas de Servicios, Automatizaciones, Bocetos y
+         Nosotros. La palabra clave del título se cubre con su bloque de
+         tinta, y el dibujo se arma y después explica la página en un
+         bucle corto, con su leyenda abajo. Solo se mueve mientras la
+         cabecera está a la vista. Si hay intro, espera a que termine.
+     -------------------------------------------------------------- */
+  var alAcabarIntro = function (tarea) { if (introTerminada) tarea(); else alTerminarIntro.push(tarea); };
+  var resaltes = document.querySelectorAll(".resalte");
+  if (resaltes.length) {
+    alAcabarIntro(function () {
+      [].forEach.call(resaltes, function (palabra) { palabra.classList.add("barrido"); });
+    });
+  }
+
+  var dibujo = document.querySelector(".dibujo[data-dibujo]");
+  if (dibujo && "IntersectionObserver" in window) {
+    var enDibujo = function (sel, base) { return [].slice.call((base || dibujo).querySelectorAll(sel)); };
+    var textoPie = dibujo.querySelector(".dibujo-texto");
+    var pasosPie = enDibujo(".dibujo-pasos i");
+    var vaiven = A.cubicBezier(0.77, 0, 0.175, 1);
+    var resorte = A.spring({ bounce: 0.4, duration: 560 });
+    var armadoListo = false, aLaVista = false, arrancado = false;
+    var armado = A.createTimeline({
+      autoplay: false, defaults: { ease: salida },
+      onComplete: function () { armadoListo = true; if (aLaVista) bucle.play(); }
+    });
+    var bucle = A.createTimeline({ autoplay: false, loop: true, defaults: { ease: salida } });
+
+    // la leyenda: cambia el texto y prende los pasos hasta el actual
+    var leyenda = function (paso, texto) {
+      return function () {
+        pasosPie.forEach(function (marca, i) { marca.classList.toggle("activo", i <= paso); });
+        textoPie.textContent = texto;
+        A.animate(textoPie, { opacity: [0, 1], x: [-8, 0], duration: 380, ease: salida });
+      };
+    };
+    // un punto que viaja por una ruta del dibujo; se mueve con cx/cy porque la ruta puede estar escalada
+    var recorrer = function (punto, ruta, en, duracion, alReves) {
+      var largo = ruta.getTotalLength();
+      var avance = { t: 0 };
+      bucle
+        .add(punto, { opacity: [0, 1], duration: 120 }, en)
+        .add(avance, {
+          t: [0, 1], duration: duracion, ease: vaiven,
+          onUpdate: function () {
+            var p = ruta.getPointAtLength((alReves ? 1 - avance.t : avance.t) * largo);
+            punto.setAttribute("cx", p.x.toFixed(3));
+            punto.setAttribute("cy", p.y.toFixed(3));
+          }
+        }, en)
+        .add(punto, { opacity: [1, 0], duration: 140 }, en + duracion - 90);
+    };
+    var aparecer = function (lista, en) {
+      bucle.add(lista, { opacity: [0, 1], scale: [0.9, 1], duration: 480, delay: A.stagger(60) }, en);
+    };
+    var irse = function (lista, en) {
+      bucle.add(lista, { opacity: [1, 0], scale: [1, 0.96], duration: 240, delay: A.stagger(22) }, en);
+    };
+    var tipo = dibujo.getAttribute("data-dibujo");
+
+    if (tipo === "servicios") {
+      // la ventana arma los cuatro niveles de web; el último suma la conversación automática
+      var niveles = enDibujo("[data-nivel]").map(function (grupo) {
+        grupo.setAttribute("opacity", "1");
+        return [].slice.call(grupo.children);
+      });
+      var insignia = dibujo.querySelector(".d-insignia");
+      var tarjeta = dibujo.querySelector(".d-tarjeta");
+      var sin = function (lista, aparte) { return lista.filter(function (el) { return el !== aparte; }); };
+      armado.add(enDibujo("[data-entra]"), { opacity: [0, 1], scale: [0.95, 1], duration: 640 }, 0);
+      bucle.call(leyenda(0, "01 · Landing Page"), 0);
+      aparecer(niveles[0], 0);
+      irse(niveles[0], 2700);
+      bucle.call(leyenda(1, "02 · Pedidos"), 3000);
+      aparecer(sin(niveles[1], insignia), 3000);
+      bucle.add(insignia, { opacity: [0, 1], scale: [0.4, 1], ease: resorte }, 3500);
+      irse(niveles[1], 5700);
+      bucle.call(leyenda(2, "03 · Tienda"), 6000);
+      aparecer(sin(niveles[2], tarjeta), 6000);
+      bucle.add(tarjeta, { opacity: [0, 1], x: [36, 0], ease: resorte }, 6400);
+      bucle.call(leyenda(3, "04 · Piloto automático"), 8600)
+        .add(".d-burbuja", { opacity: [0, 1], scale: [0.6, 1], ease: resorte }, 8600)
+        .add(".d-chispa", { opacity: [0, 1], scale: [0.3, 1], rotate: [-30, 0], ease: resorte }, 8850);
+      [9200, 9800, 10400].forEach(function (en) {   // "escribiendo...": los tres puntos saltan
+        bucle.add(".d-punto", { y: [0, -6, 0], duration: 460, delay: A.stagger(110), ease: vaiven }, en);
+      });
+      irse(niveles[2].concat(niveles[3]), 11300);
+      bucle.call(function () {}, 11800);
+
+    } else if (tipo === "automatizaciones") {
+      // el flujo de siempre, ahora con el mensaje que lo recorre: entra, la IA responde y se reparte en dos
+      var nodos = enDibujo(".d-nodo");
+      var luces = nodos.map(function (nodo) { return nodo.querySelector(".d-luz"); });
+      var ondas = nodos.map(function (nodo) { return nodo.querySelector(".d-onda"); });
+      var senales = enDibujo(".d-senal");
+      var avisos = enDibujo(".d-aviso");     // lo que hace cada paso: mensaje, IA, pedido anotado y aviso
+      var encender = function (i, en) {
+        bucle
+          .add(luces[i], { opacity: [0, 1], scale: [0.3, 1], ease: resorte }, en)
+          .add(ondas[i], { opacity: [0.9, 0], scale: [1, 2.1], duration: 820 }, en)
+          .add(avisos[i], { opacity: [0, 1], scale: [0.4, 1], ease: resorte }, en + 120);
+      };
+      armado
+        .add(nodos, { opacity: [0, 1], scale: [0.4, 1], ease: resorte, delay: A.stagger(120) }, 0)
+        .add(".d-cables", { opacity: [0, 1], duration: 60 }, 140)
+        .add(A.createDrawable(enDibujo(".d-cable")), { draw: ["0 0", "0 1"], duration: 680, ease: vaiven }, 140);
+      bucle.call(leyenda(0, "Llega un mensaje"), 0);
+      encender(0, 0);
+      recorrer(senales[0], document.getElementById("ruta-ab"), 480, 720);
+      bucle.call(leyenda(1, "La IA lo responde"), 1200);
+      encender(1, 1200);
+      recorrer(senales[0], document.getElementById("ruta-bc"), 1850, 880);
+      recorrer(senales[1], document.getElementById("ruta-bd"), 1850, 760);
+      bucle.call(leyenda(2, "Anota el pedido y te avisa"), 2610);
+      encender(3, 2610);
+      encender(2, 2730);
+      bucle.add(luces.concat(avisos), { opacity: [1, 0], scale: [1, 0.5], duration: 380 }, 5200);
+      bucle.call(function () {}, 5900);
+
+    } else if (tipo === "bocetos") {
+      // cada estilo se dibuja primero a lápiz y después se entinta: repostería, clínica y gimnasio
+      var capaLapiz = dibujo.querySelector(".d-trazos");
+      var ESTILOS = ["Repostería · editorial", "Clínica dental · limpio", "Gimnasio · oscuro"];
+      var estilos = enDibujo(".d-estilo").map(function (grupo) {
+        grupo.setAttribute("opacity", "1");
+        var lapiz = document.createElementNS("http://www.w3.org/2000/svg", "g");   // el contorno de cada forma
+        lapiz.setAttribute("clip-path", "url(#d-pantalla)");
+        lapiz.setAttribute("opacity", "0");
+        enDibujo("rect, circle, path", grupo).forEach(function (forma) {
+          var copia = forma.cloneNode(false);
+          copia.setAttribute("class", "d-trazo");
+          lapiz.appendChild(copia);
+        });
+        capaLapiz.appendChild(lapiz);
+        return { lapiz: lapiz, trazos: A.createDrawable([].slice.call(lapiz.children)), piezas: [].slice.call(grupo.children) };
+      });
+      var adornos = enDibujo(".d-adorno").map(function (grupo) {   // la letra del estilo y el rubro, a los lados
+        grupo.setAttribute("opacity", "1");
+        return [].slice.call(grupo.children);
+      });
+      armado.add(enDibujo("[data-entra]"), { opacity: [0, 1], scale: [0.95, 1], duration: 640 }, 0);
+      var PASO = 4600;
+      estilos.forEach(function (estilo, i) {
+        var T = i * PASO;
+        bucle.call(leyenda(i, ESTILOS[i]), T)
+          .set(estilo.trazos, { draw: "0 0" }, T)
+          .add(estilo.lapiz, { opacity: [0, 1], duration: 80 }, T + 20)
+          .add(estilo.trazos, { draw: ["0 0", "0 1"], duration: 900, delay: A.stagger(45), ease: vaiven }, T + 20)
+          .add(estilo.piezas, { opacity: [0, 1], scale: [0.94, 1], duration: 420, delay: A.stagger(55) }, T + 900)
+          .add(adornos[i], { opacity: [0, 1], scale: [0.5, 1], ease: resorte, delay: A.stagger(140) }, T + 1150)
+          .add(estilo.lapiz, { opacity: [1, 0], duration: 500 }, T + 2000)
+          .add(estilo.piezas.concat(adornos[i]), { opacity: [1, 0], duration: 260, delay: A.stagger(18) }, T + PASO - 450);
+      });
+      bucle.call(function () {}, 3 * PASO);
+
+    } else if (tipo === "nosotros") {
+      // los cuatro socios se prenden uno a uno con el color de su bloque del logo y le pasan la señal al centro
+      var socios = enDibujo(".d-socio");
+      var lucesSocios = socios.map(function (socio) { return socio.querySelector(".d-luz"); });
+      var ondasSocios = socios.map(function (socio) { return socio.querySelector(".d-onda-cuadro"); });
+      var radios = enDibujo(".d-radio");
+      var senalCentro = dibujo.querySelector(".d-senal-grande");
+      var centro = dibujo.querySelector(".d-centro");
+      var SOCIOS = ["Juan Diego · Desarrollo y Marca", "Iker · Desarrollo", "Joaquín · Gerencia y Clientes", "Luis Felipe · Gerencia y Clientes"];
+      armado
+        .add(centro, { opacity: [0, 1], scale: [0.4, 1], ease: resorte }, 0)
+        .add(".d-radios", { opacity: [0, 1], duration: 60 }, 160)
+        .add(A.createDrawable(radios), { draw: ["0 0", "0 1"], duration: 560, ease: vaiven }, 160)
+        .add(socios, { opacity: [0, 1], scale: [0.5, 1], ease: resorte, delay: A.stagger(90) }, 420);
+      socios.forEach(function (socio, i) {
+        var T = i * 1800;
+        bucle.call(leyenda(i, SOCIOS[i]), T)
+          .add(lucesSocios[i], { opacity: [0, 1], scale: [0.4, 1], ease: resorte }, T)
+          .add(ondasSocios[i], { opacity: [0.8, 0], scale: [1, 1.4], duration: 820 }, T);
+        recorrer(senalCentro, radios[i], T + 280, 640, true);
+        bucle.add(centro, { scale: [1, 1.12, 1], duration: 460 }, T + 900);
+      });
+      var FINAL = 4 * 1800;
+      bucle.call(leyenda(3, "Un solo equipo"), FINAL)
+        .add(ondasSocios, { opacity: [0.8, 0], scale: [1, 1.4], duration: 900 }, FINAL)
+        .add(centro, { scale: [1, 1.18, 1], duration: 620 }, FINAL)
+        .add(lucesSocios, { opacity: [1, 0], scale: [1, 0.6], duration: 420 }, FINAL + 2600)
+        .call(function () {}, FINAL + 3200);
+    }
+
+    var arrancar = function () {
+      if (arrancado) return;
+      arrancado = true;
+      armado.play();
+    };
+    new IntersectionObserver(function (entradas) {
+      aLaVista = entradas[0].isIntersecting;
+      if (aLaVista && !arrancado) alAcabarIntro(arrancar);
+      if (!armadoListo) return;
+      if (aLaVista) bucle.play(); else bucle.pause();
+    }).observe(dibujo);
   }
 })();

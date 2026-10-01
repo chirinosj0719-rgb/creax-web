@@ -1942,3 +1942,155 @@ html.contacto-abierto, html.contacto-abierto body { overflow: hidden; }
   background: var(--blanco); border: 1px solid var(--borde-fuerte); font-weight: 600; color: var(--tinta);
 }
 .enlaces-404 a::before { content: ""; width: 9px; height: 9px; border-radius: 3px; background: var(--menta); }
+
+/* =============================================================================
+   Portada más limpia (30/09/2026): el navegador y el teléfono con aire entre sí,
+   sin tarjetas ni insignias flotando encima; las tres tarjetas, en fila debajo.
+   ========================================================================== */
+.datos-sueltos .dato { box-shadow: none; background: #191919; border-color: rgba(244, 244, 242, 0.1); }
+.datos-sueltos .dato .ph { color: var(--c-inicio); }
+@media (min-width: 900px) {
+  .escena-grande { padding: 0; }
+  .ventana { width: calc(100% - 226px); }
+  .fono { top: 56px; right: 0; bottom: auto; width: 256px; }
+  .datos-sueltos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 30px; max-width: calc(100% - 226px); }
+  .datos-sueltos .dato { padding: 16px 18px; }
+}
+
+/* las filas de servicios: el nombre tiene su columna y no se mete bajo las etiquetas */
+.fila-nombre { font-size: clamp(32px, 4.2vw, 58px); overflow-wrap: anywhere; }
+@media (min-width: 900px) {
+  .fila-servicio > a { grid-template-columns: 56px minmax(0, 1.5fr) minmax(0, 1fr) 56px; }
+}
+
+/* =============================================================================
+   CABECERAS VIVAS (30/09/2026) · Servicios, Automatizaciones, Bocetos y Nosotros
+   El ícono gigante y desteñido de fondo se cambió por un dibujo de tamaño medio,
+   hecho con el mismo trazo del flujo de Automatizaciones: anillos, trazo grueso
+   y bloques planos. No llama la atención por grande sino porque está vivo: se
+   arma al entrar y después explica la página en un bucle corto (animacion.js, 17).
+   Sin movimiento (o con ?estatico) queda quieto en un cuadro que se entiende solo.
+   ========================================================================== */
+.encabezado-vivo { padding-bottom: clamp(48px, 6vw, 92px); }
+.encabezado-grilla { display: grid; gap: 34px; align-items: center; }
+@media (min-width: 900px) {
+  .encabezado-grilla { grid-template-columns: minmax(0, 1fr) minmax(300px, 400px); gap: clamp(32px, 4.5vw, 76px); }
+}
+.encabezado-vivo h1 { font-size: clamp(46px, 6.1vw, 100px); }
+.encabezado-vivo h1.titulo-gigante { font-size: clamp(56px, 8.2vw, 124px) !important; max-width: none; }
+.encabezado-vivo .entrada strong { font-weight: 600; }
+
+/* la etiqueta de la sección, en una píldora de tinta con el bloque del color del sector */
+.encabezado.encabezado-vivo .marca-seccion {
+  background: var(--tinta); color: var(--hueso); padding: 8px 14px 8px 11px; border-radius: 999px;
+}
+.encabezado.encabezado-vivo .marca-seccion::before { background: var(--menta); }
+
+/* la palabra clave del título va en un bloque de tinta, con la letra del color del sector.
+   El bloque y la letra de color son dos capas encima de la palabra: al entrar, las dos
+   se descubren de izquierda a derecha, así nunca queda letra de color sobre su mismo color */
+.resalte {
+  position: relative; display: inline-block; white-space: nowrap; isolation: isolate;
+  padding: 0.02em 0.16em 0.1em 0.12em; margin-right: 0.04em; line-height: 1.02;
+}
+.encabezado h1 .resalte { color: var(--tinta); }
+.encabezado-vivo h1 .resalte { margin-top: 0.05em; }
+.encabezado-vivo h1.titulo-gigante .resalte { margin-top: 0.16em; }
+.resalte::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: var(--tinta); border-radius: 0.14em;
+}
+.resalte::after {
+  content: attr(data-texto); content: attr(data-texto) / "";
+  position: absolute; inset: 0; padding: inherit; color: var(--menta); white-space: nowrap;
+}
+.con-movimiento .resalte::before,
+.con-movimiento .resalte::after { clip-path: inset(0 100% 0 0); }
+.con-movimiento .resalte.barrido::before,
+.con-movimiento .resalte.barrido::after { animation: resalte-barre 0.9s cubic-bezier(0.23, 1, 0.32, 1) 0.15s both; }
+@keyframes resalte-barre {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+
+/* ---------- el dibujo ---------- */
+.dibujo { margin: 0; width: min(100%, 400px); justify-self: center; }
+@media (min-width: 900px) { .dibujo { justify-self: end; } }
+.dibujo svg { display: block; width: 100%; height: auto; overflow: visible; }
+.dibujo svg * { transform-box: fill-box; transform-origin: center; }
+/* lo que trae su propio transform en el SVG (el flujo escalado, la tarjeta girada) gira y escala como siempre */
+.dibujo svg [transform] { transform-box: view-box; transform-origin: 0 0; }
+/* lo que entra al cargar espera escondido; si no hay movimiento, se ve tal cual */
+.con-movimiento .dibujo [data-entra],
+.con-movimiento .dibujo .d-nivel > *,
+.con-movimiento .dibujo .d-estilo > *,
+.con-movimiento .dibujo .d-adorno > *,
+.con-movimiento .dibujo .d-luz { opacity: 0; }
+
+.d-marco { fill: var(--hueso); stroke: var(--tinta); stroke-width: 10; }
+.d-marco-fino { stroke-width: 7; }
+.d-linea { fill: none; stroke: var(--tinta); stroke-width: 10; stroke-linecap: round; stroke-linejoin: round; }
+.d-tinta { fill: var(--tinta); }
+.d-gris { fill: var(--tinta); fill-opacity: 0.24; }
+.d-color { fill: var(--menta); }
+.d-papel { fill: var(--hueso); }
+.d-blanco { fill: var(--blanco); }
+.d-borde { stroke: var(--tinta); stroke-width: 4; }
+.d-borde-fino { stroke: var(--tinta); stroke-width: 2.5; }
+.d-anillo-chico { fill: none; stroke: var(--tinta); stroke-width: 9; }
+.d-icono {
+  font-family: "Phosphor"; font-size: 26px; fill: var(--hueso);
+  text-anchor: middle; dominant-baseline: central;
+}
+.d-icono-oscuro { fill: var(--tinta); }
+
+/* Automatizaciones: el flujo (dibujado en unidades de 24, por eso los trazos son finos en número) */
+.d-cable, .d-anillo { fill: none; stroke: var(--tinta); stroke-width: 1.2632; stroke-linecap: round; }
+.d-ruta { fill: none; stroke: none; }
+.d-luz { fill: var(--hueso); }
+.d-onda { fill: none; stroke: var(--tinta); stroke-width: 0.2; opacity: 0; }
+.d-senal, .d-senal-grande { fill: var(--hueso); }
+.d-icono-aviso { font-size: 21px; }
+
+/* Bocetos: el trazo a lápiz y el sello que gira */
+.d-trazo { fill: none; stroke: var(--tinta); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.d-sello-anillo { fill: none; stroke: var(--hueso); stroke-width: 2.5; stroke-dasharray: 3 3.6; }
+.d-muestra { fill: var(--tinta); text-anchor: middle; dominant-baseline: central; }
+.d-muestra-1 { font-family: "Instrument Serif", Georgia, serif; font-style: italic; font-size: 48px; }
+.d-muestra-2 { font-family: "Space Grotesk", Inter, sans-serif; font-weight: 500; font-size: 36px; letter-spacing: -0.03em; }
+.d-muestra-3 { font-family: "Space Grotesk", Inter, sans-serif; font-weight: 700; font-size: 40px; }
+.d-icono-rubro { font-size: 30px; }
+.con-movimiento .d-sello-anillo { animation: sello-gira 10s linear infinite; }
+@keyframes sello-gira { to { transform: rotate(360deg); } }
+
+/* Nosotros: los cuatro socios son los cuatro bloques del logo, unidos al de tinta del centro */
+.d-radio { fill: none; stroke: var(--tinta); stroke-width: 12; stroke-linecap: round; }
+.d-hueco { fill: var(--menta); }
+.d-cuadro { fill: none; stroke: var(--tinta); stroke-width: 12; }
+.d-onda-cuadro { fill: none; stroke: var(--tinta); stroke-width: 3; opacity: 0; }
+.d-luz-1 { fill: var(--c-servicios); }
+.d-luz-2 { fill: var(--c-automatizaciones); }
+.d-luz-3 { fill: var(--c-bocetos); }
+.d-luz-4 { fill: var(--c-inicio); }
+.d-icono-socio { font-size: 34px; }
+
+/* la leyenda: qué está pasando en el dibujo, con un bloque por paso */
+.dibujo-pie {
+  display: flex; align-items: center; justify-content: space-between; gap: 14px;
+  width: min(100%, 340px); margin: 16px auto 0; padding: 9px 12px 9px 16px; border-radius: 999px;
+  background: var(--tinta); color: var(--hueso);
+  font-family: ui-monospace, "Cascadia Code", "SF Mono", Consolas, monospace;
+  font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
+}
+.dibujo-texto { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dibujo-pasos { display: inline-flex; gap: 5px; flex: none; }
+.dibujo-pasos i { width: 9px; height: 9px; border-radius: 3px; background: rgba(244, 244, 242, 0.22); transition: background-color 0.3s ease; }
+.dibujo-pasos i.activo { background: var(--menta); }
+[data-dibujo="nosotros"] .dibujo-pasos i.activo:nth-child(1) { background: var(--c-servicios); }
+[data-dibujo="nosotros"] .dibujo-pasos i.activo:nth-child(2) { background: var(--c-automatizaciones); }
+[data-dibujo="nosotros"] .dibujo-pasos i.activo:nth-child(3) { background: var(--c-bocetos); }
+[data-dibujo="nosotros"] .dibujo-pasos i.activo:nth-child(4) { background: var(--c-inicio); }
+
+@media (max-width: 899px) {
+  .dibujo { width: min(100%, 340px); }
+}

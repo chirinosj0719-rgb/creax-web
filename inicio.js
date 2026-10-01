@@ -10,6 +10,12 @@ if (location.protocol === "http:" && !/^(localhost|127\.0\.0\.1|\[::1\])$/.test(
   location.replace("https:" + location.href.slice(location.protocol.length));
 }
 document.documentElement.classList.add("con-js");
+/* con movimiento permitido, los dibujos de las cabeceras esperan escondidos hasta que animacion.js los arma */
+try {
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches && location.search.indexOf("estatico") < 0) {
+    document.documentElement.classList.add("con-movimiento");
+  }
+} catch (e) {}
 /* la intro del logo: una vez por visita, y nunca si pidieron menos movimiento o es una captura */
 try {
   if (!sessionStorage.getItem("creax-intro") && !matchMedia("(prefers-reduced-motion: reduce)").matches &&

@@ -15,20 +15,29 @@ las páginas llevan `noindex`, así que no aparecen en buscadores.
 | `bocetos.html` | Cómo se hace el boceto y los tres ejemplos, recorribles |
 | `nosotros.html` | Los cuatro socios, compromisos y el proceso de un proyecto |
 
-Los tres bocetos de ejemplo (`assets/ejemplos/`) son negocios de muestra, no clientes.
+Los tres ejemplos (`assets/ejemplos/`: repostería, clínica dental y gimnasio) son negocios de muestra, no clientes.
+Están hechos a mano y cada uno tiene su propio estilo de diseño (editorial, limpio y oscuro), para mostrar variedad.
 Sus fotos son libres (CC0); los créditos están en cada carpeta `fotos/CREDITOS.txt`.
+
+Las cuatro páginas internas abren con una **cabecera viva**: la palabra clave del título en un bloque de tinta
+y, al lado, un dibujo que se mueve para explicar la página (la ventana que arma los cuatro niveles de web,
+el flujo que recorre un mensaje, la página que se dibuja a lápiz en tres estilos y los cuatro socios como
+los bloques del logo). El dibujo es SVG dentro de cada página, sus estilos están al final de `estilos.css`
+("CABECERAS VIVAS") y su movimiento en la sección 17 de `animacion.js`. Sin movimiento queda quieto.
+Los íconos que van dentro de esos dibujos se escriben por su código; por eso cada página los nombra en un
+comentario justo antes del dibujo, para que `aligerar.py` no los saque de la fuente.
 
 ## Pendiente
 
 - Datos de contacto reales: correo, Instagram y LinkedIn (marcados con `<!-- CONTACTO -->` en cada página). El WhatsApp ya es el de Juan Diego.
-- Vista de celular.
 - Quitar el `noindex` cuando se publique como web oficial, con el dominio propio.
 
 ## Cómo se trabaja
 
 Es HTML, CSS y JavaScript sin compilación: se abre `index.html` en el navegador.
 Estilos en `estilos.css`, movimiento e interacción en `animacion.js` (usa anime.js, copiado en `assets/`).
-`ejemplos.py` regenera los bocetos de muestra y se corre desde la carpeta `Desarrollo` de CreaX, porque usa `nuevo.py`.
+`capturas.js` saca las capturas de los tres ejemplos que usan la portada y Bocetos: con la web servida en local
+(`python -m http.server 8094`), se corre `node capturas.js`. Si se cambia un ejemplo, se vuelve a correr.
 
 Cada vez que se publica, se cambia el número `?v=` de `estilos.css`, `animacion.js`, `inicio.js` e `iconos.css` en las ocho páginas (las cinco, privacidad, términos y 404):
 así el navegador de quien entra baja los estilos nuevos en vez de usar los que tenía guardados.
