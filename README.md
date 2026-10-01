@@ -92,8 +92,9 @@ contraseñas. El repositorio es público: todo lo que se sube, se ve.
     seguridad (HSTS de 180 días, `nosniff`, `frame-ancestors 'none'`, `Referrer-Policy`,
     `Permissions-Policy`) y caché (las páginas se revisan siempre; CSS y JS con `?v=`, un año).
 
-  Para subirla: SSL activo en Hostinger, `default.php` borrado de `public_html`, el contenido de la carpeta
-  (con `.htaccess`) comprimido en un ZIP, subido a `public_html` y extraído ahí mismo. Esa carpeta no se
+  Para subirla: SSL activo en Hostinger y se sube el ZIP que el script deja al lado de la carpeta
+  (`Subir a Hostinger - creax.net.pe.zip`, con todo en su raíz): los cargadores de Hostinger solo aceptan
+  comprimidos. Si queda un `default.php` de Hostinger en `public_html`, se borra. Esa carpeta no se
   edita a mano: si cambia la web, se vuelve a correr el script y se sube de nuevo. Este repositorio sigue
   siendo el borrador de GitHub Pages, con su `noindex`, para revisar cambios antes de subirlos.
 - **Analítica:** pendiente de elegir proveedor. Si usa cookies, se carga solo cuando la persona acepta

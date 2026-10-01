@@ -16,19 +16,22 @@ del día del dominio:
   - agrega el .htaccess: HTTPS, sin www, página 404, encabezados de seguridad y caché.
 
 Uso: python preparar-hostinger.py
-Crea la carpeta "Subir a Hostinger - creax.net.pe" en la raíz de CreaX. Se vuelve a correr
-cada vez que cambie la web; la copia anterior pasa a CreaX-version-anterior.
+Crea en la raíz de CreaX la carpeta "Subir a Hostinger - creax.net.pe" y, al lado, el mismo
+contenido en un ZIP: es lo que piden los cargadores de Hostinger (solo aceptan comprimidos).
+Se vuelve a correr cada vez que cambie la web; la carpeta anterior pasa a CreaX-version-anterior.
 """
 import io
 import re
 import shutil
 import sys
+import zipfile
 from pathlib import Path
 from urllib.parse import unquote
 
 WEB = Path(__file__).resolve().parent
 CREAX = next(p for p in WEB.parents if p.name == "CreaX")
 SALIDA = CREAX / "Subir a Hostinger - creax.net.pe"
+ZIP = CREAX / "Subir a Hostinger - creax.net.pe.zip"
 RESPALDO = CREAX.parent / "CreaX-version-anterior" / "Subir a Hostinger (copia anterior)"
 DOMINIO = "https://creax.net.pe/"
 BORRADOR = "https://chirinosj0719-rgb.github.io/creax-web/"
@@ -211,8 +214,13 @@ def main():
         assert "noindex" in leer(ejemplo), f"{ejemplo}: los ejemplos deben seguir fuera de Google"
 
     archivos = [p for p in SALIDA.rglob("*") if p.is_file()]
+    # el ZIP para Hostinger: los archivos van en la raíz del ZIP, no dentro de una carpeta
+    with zipfile.ZipFile(ZIP, "w", zipfile.ZIP_DEFLATED) as comprimido:
+        for p in sorted(archivos):
+            comprimido.write(p, p.relative_to(SALIDA).as_posix())
     peso = sum(p.stat().st_size for p in archivos) / 1024 / 1024
     print(f"Listo: {SALIDA}")
+    print(f"ZIP para subir: {ZIP} ({ZIP.stat().st_size / 1024 / 1024:.1f} MB)")
     print(f"{len(archivos)} archivos, {peso:.1f} MB")
     print("Adentro: " + ", ".join(sorted(p.name for p in SALIDA.iterdir())))
 
