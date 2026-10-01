@@ -1,7 +1,7 @@
 /* Phosphor Icons (MIT), solo los íconos que usa la web de CreaX. Se arma con aligerar.py. */
 @font-face {
   font-family: "Phosphor";
-  src: url("./Phosphor-web.woff2?v=1949b887") format("woff2");
+  src: url("./Phosphor-web.woff2?v=464d657c") format("woff2");
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -39,6 +39,7 @@
 .ph.ph-arrow-up:before { content: "\e08e"; }
 .ph.ph-arrows-clockwise:before { content: "\e094"; }
 .ph.ph-barbell:before { content: "\e0b6"; }
+.ph.ph-battery-full:before { content: "\e0c0"; }
 .ph.ph-bell-ringing:before { content: "\e5e8"; }
 .ph.ph-briefcase:before { content: "\e0ee"; }
 .ph.ph-browsers:before { content: "\e0f6"; }
@@ -46,6 +47,7 @@
 .ph.ph-cake:before { content: "\e780"; }
 .ph.ph-calendar-check:before { content: "\e712"; }
 .ph.ph-caret-down:before { content: "\e136"; }
+.ph.ph-cell-signal-full:before { content: "\e142"; }
 .ph.ph-chart-bar:before { content: "\e150"; }
 .ph.ph-chat-circle-dots:before { content: "\e16c"; }
 .ph.ph-chat-circle-text:before { content: "\e16e"; }
@@ -95,4 +97,5 @@
 .ph.ph-trend-up:before { content: "\e4ae"; }
 .ph.ph-users-three:before { content: "\e68e"; }
 .ph.ph-whatsapp-logo:before { content: "\e5d0"; }
+.ph.ph-wifi-high:before { content: "\e4ea"; }
 .ph.ph-x:before { content: "\e4f6"; }

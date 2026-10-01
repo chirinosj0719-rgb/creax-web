@@ -2094,3 +2094,51 @@ html.contacto-abierto, html.contacto-abierto body { overflow: hidden; }
 @media (max-width: 899px) {
   .dibujo { width: min(100%, 340px); }
 }
+
+/* =============================================================================
+   CELULAR, TERCERA PASADA (30/09/2026)
+   - Portada: el teléfono va chico y encima del lado derecho de la ventana, como en
+     computadora; ya no cuelga largo por debajo dejando un hueco al costado.
+   - Automatizaciones: la pantalla de la laptop vuelve a ser apaisada.
+   - Bocetos: los celulares tienen barra de estado; la isla vive ahí y no tapa la página.
+   ========================================================================== */
+.chat-listo span { display: block; line-height: 1.35; }
+
+@media (max-width: 899px) {
+  .escena-grande { display: grid; }
+  .escena-grande > .ventana, .escena-grande > .fono { grid-area: 1 / 1; }
+  .escena-grande > .ventana { align-self: start; }   /* la ventana no se estira para alcanzar al teléfono */
+  .escena-grande > .datos-sueltos { grid-area: 2 / 1; }
+  /* el zoom también escala los márgenes del teléfono: por eso van divididos por el zoom */
+  .fono { --zoom-fono: 0.8; zoom: var(--zoom-fono); width: 228px; justify-self: end; align-self: start;
+          margin: calc(64px / var(--zoom-fono)) calc(14px / var(--zoom-fono)) 0 0; }
+}
+@media (max-width: 599px) {
+  .fono { --zoom-fono: 0.58; margin: calc(54px / var(--zoom-fono)) calc(10px / var(--zoom-fono)) 0 0; }
+  .fono [data-campo="eleccion"] { display: none; }   /* una burbuja menos: el teléfono queda proporcionado */
+}
+
+@media (max-width: 700px) {
+  .laptop-pantalla { padding: 16px 9px 9px; border-radius: 14px 14px 6px 6px; }
+  .laptop-pantalla::before { top: 6px; width: 5px; height: 5px; }
+  .app { height: 62vw; font-size: 12px; }
+  .app-cabecera { gap: 8px; padding: 8px 12px; }
+  .app-cabecera .app-avatar { width: 26px; height: 26px; font-size: 11px; }
+  .app-cabecera b { font-size: 12px; }
+  .app-cabecera .app-asistente { gap: 5px; padding: 4px 9px; font-size: 10.5px; }
+  .app-mensajes { gap: 7px; padding: 10px 12px; }
+  .msj { max-width: 84%; padding: 8px 11px; font-size: 12px; }
+  .msj.sistema { font-size: 11px; }
+  .msj-opciones span, .msj-enlace { font-size: 11px; }
+  .app-escribir { margin: 0 10px 10px; padding: 7px 12px; font-size: 11.5px; }
+}
+
+/* la barra de estado del celular: hora a la izquierda, señal, wifi y batería a la derecha */
+.celular-estado {
+  position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between;
+  height: 30px; padding: 0 18px 0 24px; background: #0f1418; color: #fff;
+  font-family: Inter, sans-serif; font-size: 11.5px; font-weight: 600; line-height: 1; letter-spacing: 0.01em;
+}
+.celular-iconos { display: inline-flex; align-items: center; gap: 3px; font-size: 13px; }
+.celular-marco::before { top: 5px; width: 74px; height: 20px; background: #000; outline: 1px solid rgba(255, 255, 255, 0.08); }   /* la isla, apenas visible sobre la barra */
+.celular-marco .recorrido { border-radius: 0 0 37px 37px; }
