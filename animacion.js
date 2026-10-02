@@ -446,7 +446,9 @@
     { icono: "ph-phone", nombre: "Llámanos", color: "var(--c-nosotros-tenue)", enlace: "tel:+51966980388" },
     { icono: "ph-whatsapp-logo", nombre: "WhatsApp", color: "var(--c-automatizaciones-tenue)",
       enlace: "https://wa.me/51966980388?text=Hola%20CreaX%2C%20vengo%20de%20la%20web%20y%20quisiera%20m%C3%A1s%20informaci%C3%B3n.", externo: true },
-    { icono: "ph-envelope-simple", nombre: "Correo" },
+    { icono: "ph-envelope-simple", nombre: "Correo", detalle: "admin@creax.net.pe", color: "var(--c-bocetos-tenue)",
+      enlace: "mailto:admin@creax.net.pe?subject=" + encodeURIComponent("Quiero más información") +
+        "&body=" + encodeURIComponent("Hola CreaX, vengo de la web y quisiera más información.") },
     { icono: "ph-instagram-logo", nombre: "Instagram" },
     { icono: "ph-linkedin-logo", nombre: "LinkedIn" }
   ];
@@ -534,81 +536,235 @@
   }
 
   /* --------------------------------------------------------------
-     5c. "Cuéntanos de tu proyecto": la tarjeta no guarda ni envía nada.
-         Arma el mensaje con lo que la persona eligió y escribió, y lo
-         abre en su WhatsApp; ella decide si lo manda.
+     5c. "Contáctanos por mail": mientras la persona escribe, la vista de
+         la izquierda arma el correo tal como nos va a llegar. Al enviar,
+         contacto.php (solo en creax.net.pe, que tiene PHP) lo manda a
+         admin@creax.net.pe. Si no se puede, por ejemplo en el borrador de
+         GitHub, ofrece abrirlo en su correo o escribirnos por WhatsApp.
+         "Prefiero WhatsApp" arma el mismo mensaje y lo abre en su WhatsApp.
      -------------------------------------------------------------- */
   var proyecto = document.getElementById("proyecto");
   if (proyecto) {
+    var CORREO_CREAX = "admin@creax.net.pe";
     var chipsProyecto = [].slice.call(proyecto.querySelectorAll(".chip-proyecto"));
     var avisoProyecto = document.getElementById("proyectoAviso");
     var botonProyecto = document.getElementById("proyectoEnviar");
+    var textoBotonProyecto = botonProyecto.querySelector(".proyecto-enviar-texto");
+    var pasoProyecto = document.getElementById("proyectoPaso");
+    var listoProyecto = document.getElementById("proyectoListo");
+    var aceptaProyecto = document.getElementById("proyectoAcepta");
+    var errorAcepta = document.getElementById("errorAcepta");
+    var vistaCorreo = document.getElementById("correoVista");
     var cargadaEn = Date.now();
+    var limpio = function (id) { return document.getElementById(id).value.replace(/\s+/g, " ").trim(); };
+    var soloNumero = function (t) { return t.replace(/[^\d+]/g, ""); };
     // validación: cada campo dice qué le falta, debajo de sí mismo
     var CAMPOS = [
       { id: "proyectoNombre", error: "errorNombre", revisar: function (v) {
-        return !v || /^[\p{L}][\p{L} .'-]{1,59}$/u.test(v) ? "" : "Escribe tu nombre solo con letras.";
+        return /^[\p{L}][\p{L} .'-]{1,59}$/u.test(v) ? "" : (v ? "Escribe tu nombre solo con letras." : "Escribe tu nombre.");
       } },
       { id: "proyectoNegocio", error: "errorNegocio", revisar: function (v) {
-        return !v || (v.length >= 2 && /[\p{L}\p{N}]/u.test(v)) ? "" : "Escribe el nombre de tu negocio.";
+        return v.length >= 2 && /[\p{L}\p{N}]/u.test(v) ? "" : "Escribe el nombre de tu empresa.";
+      } },
+      { id: "proyectoRubro", error: "errorRubro", revisar: function (v) {
+        return v.length >= 2 ? "" : "Cuéntanos a qué se dedica.";
+      } },
+      { id: "proyectoCelular", error: "errorCelular", revisar: function (v) {
+        var n = soloNumero(v);
+        return /^(\+?51)?9\d{8}$/.test(n) || /^\+\d{8,15}$/.test(n) ? "" : "Escribe tu celular (9 dígitos).";
+      } },
+      { id: "proyectoCorreo", error: "errorCorreo", revisar: function (v) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v) ? "" : "Escribe un correo válido.";
       } },
       { id: "proyectoMensaje", error: "errorMensaje", revisar: function (v) {
         return !v || v.length >= 10 ? "" : "Cuéntanos un poco más (al menos 10 letras).";
       } }
     ];
-    var limpio = function (id) { return document.getElementById(id).value.replace(/\s+/g, " ").trim(); };
     var marcar = function (campo, mensaje) {
       var entrada = document.getElementById(campo.id), error = document.getElementById(campo.error);
       error.textContent = mensaje;
       error.hidden = !mensaje;
       if (mensaje) entrada.setAttribute("aria-invalid", "true"); else entrada.removeAttribute("aria-invalid");
     };
+    // para el correo todo es obligatorio menos las ideas; para WhatsApp, solo se revisa lo que escribió
+    var revisarCampos = function (paraCorreo) {
+      var primero = null;
+      CAMPOS.forEach(function (campo) {
+        var v = limpio(campo.id);
+        var mensaje = !v && (!paraCorreo || campo.id === "proyectoMensaje") ? "" : campo.revisar(v);
+        marcar(campo, mensaje);
+        if (mensaje && !primero) primero = document.getElementById(campo.id);
+      });
+      return primero;
+    };
+    var interesesProyecto = function () {
+      return chipsProyecto.filter(function (chip) { return chip.getAttribute("aria-pressed") === "true"; })
+        .map(function (chip) { return chip.dataset.valor; });
+    };
+    var datosProyecto = function () {
+      return {
+        nombre: limpio("proyectoNombre"), empresa: limpio("proyectoNegocio"), rubro: limpio("proyectoRubro"),
+        celular: soloNumero(limpio("proyectoCelular")), correo: limpio("proyectoCorreo"),
+        ideas: document.getElementById("proyectoMensaje").value.trim(), intereses: interesesProyecto(),
+        acepta: aceptaProyecto.checked, sitio: document.getElementById("proyectoSitio").value,
+        tiempo: Date.now() - cargadaEn
+      };
+    };
+    // el mismo texto sirve para WhatsApp y para abrirlo en el correo de la persona
+    var textoProyecto = function (d) {
+      var lineas = ["Hola CreaX, vengo de la web."];
+      if (d.nombre) lineas.push("Soy " + d.nombre + (d.empresa ? ", de " + d.empresa : "") + (d.rubro ? " (" + d.rubro + ")" : "") + ".");
+      else if (d.empresa) lineas.push("Les escribo por " + d.empresa + (d.rubro ? " (" + d.rubro + ")" : "") + ".");
+      if (d.intereses.length) lineas.push("Me interesa: " + d.intereses.join(", ") + ".");
+      if (d.ideas) lineas.push(d.ideas.slice(0, 1200));
+      if (d.celular) lineas.push("Mi celular: " + d.celular);
+      if (d.correo) lineas.push("Mi correo: " + d.correo);
+      return lineas.join("\n");
+    };
+    var whatsappProyecto = function (d) { return "https://wa.me/51966980388?text=" + encodeURIComponent(textoProyecto(d)); };
+    var correoProyecto = function (d) {
+      return "mailto:" + CORREO_CREAX + "?subject=" + encodeURIComponent("Quiero más información · " + (d.empresa || "mi empresa")) +
+        "&body=" + encodeURIComponent(textoProyecto(d));
+    };
+    // el aviso se arma con textContent: lo que escribió la persona nunca se vuelve código
+    var avisarProyecto = function (texto, enlaces) {
+      avisoProyecto.textContent = texto;
+      (enlaces || []).forEach(function (e) {
+        avisoProyecto.appendChild(document.createTextNode(" "));
+        var a = document.createElement("a");
+        a.href = e.href;
+        a.textContent = e.texto;
+        if (e.externo) { a.target = "_blank"; a.rel = "noopener"; }
+        avisoProyecto.appendChild(a);
+      });
+      avisoProyecto.hidden = false;
+    };
+
+    // la vista del correo se escribe sola con lo que la persona va llenando
+    var pintarVista = function () {
+      if (!vistaCorreo) return;
+      var d = datosProyecto();
+      vistaCorreo.querySelector('[data-vista="de"]').textContent =
+        d.nombre ? d.nombre + (d.correo ? " · " + d.correo : "") : "Tu nombre · tu correo";
+      vistaCorreo.querySelector('[data-vista="asunto"]').textContent =
+        (d.empresa || "Tu empresa") + (d.intereses.length ? " · " + d.intereses.join(", ") : " quiere su página");
+      var partes = ["Hola CreaX, soy " + (d.nombre || "…") + (d.empresa ? " de " + d.empresa : "") + (d.rubro ? " (" + d.rubro + ")" : "") + "."];
+      if (d.intereses.length) partes.push("Me interesa: " + d.intereses.join(", ").toLowerCase() + ".");
+      if (d.ideas) partes.push(d.ideas);
+      if (d.celular) partes.push("Mi celular es " + limpio("proyectoCelular") + ".");
+      vistaCorreo.querySelector('[data-vista="cuerpo"]').textContent = partes.join(" ");
+      vistaCorreo.classList.toggle("vacia", !d.nombre && !d.empresa && !d.ideas && !d.intereses.length);
+    };
+    pintarVista();
+
     CAMPOS.forEach(function (campo) {
       // al corregir, el error se va
       document.getElementById(campo.id).addEventListener("input", function () {
         if (this.getAttribute("aria-invalid")) marcar(campo, campo.revisar(limpio(campo.id)));
+        pintarVista();
       });
     });
     chipsProyecto.forEach(function (chip) {
       chip.addEventListener("click", function () {
         chip.setAttribute("aria-pressed", chip.getAttribute("aria-pressed") === "true" ? "false" : "true");
         avisoProyecto.hidden = true;
+        pintarVista();
       });
     });
-    botonProyecto.addEventListener("click", function () {
+    aceptaProyecto.addEventListener("change", function () {
+      if (aceptaProyecto.checked) { errorAcepta.textContent = ""; errorAcepta.hidden = true; aceptaProyecto.removeAttribute("aria-invalid"); }
+    });
+
+    var listoParaEnviar = function (paraCorreo) {
       // antispam: un robot llena el campo trampa (invisible para las personas) o aprieta el botón al instante
-      if (document.getElementById("proyectoSitio").value) return;
-      if (Date.now() - cargadaEn < 2500) {
-        avisoProyecto.textContent = "Un momento, vuelve a intentarlo.";
-        avisoProyecto.hidden = false;
-        return;
-      }
-      var primero = null;
-      CAMPOS.forEach(function (campo) {
-        var mensaje = campo.revisar(limpio(campo.id));
-        marcar(campo, mensaje);
-        if (mensaje && !primero) primero = document.getElementById(campo.id);
-      });
-      var intereses = chipsProyecto.filter(function (chip) { return chip.getAttribute("aria-pressed") === "true"; })
-        .map(function (chip) { return chip.dataset.valor; });
-      var nombre = limpio("proyectoNombre"), negocio = limpio("proyectoNegocio"), necesidad = limpio("proyectoMensaje");
-      if (!primero && !intereses.length && !necesidad) {
-        avisoProyecto.textContent = "Elige qué te interesa o cuéntanos qué necesitas.";
-        avisoProyecto.hidden = false;
-        chipsProyecto[0].focus();
-        return;
-      }
-      if (primero) { primero.focus(); return; }
+      if (document.getElementById("proyectoSitio").value) return null;
+      if (Date.now() - cargadaEn < 3000) { avisarProyecto("Un momento, vuelve a intentarlo."); return null; }
       avisoProyecto.hidden = true;
-      var lineas = ["Hola CreaX, vengo de la web."];
-      if (nombre) lineas.push("Soy " + nombre + (negocio ? ", de " + negocio : "") + ".");
-      else if (negocio) lineas.push("Les escribo por " + negocio + ".");
-      if (intereses.length) lineas.push("Me interesa " + intereses.join(", ") + ".");
-      if (necesidad) lineas.push(necesidad.slice(0, 600));
-      window.open("https://wa.me/51966980388?text=" + encodeURIComponent(lineas.join("\n")), "_blank", "noopener");
-      // y no deja abrir diez ventanas seguidas
+      var primero = revisarCampos(paraCorreo);
+      var d = datosProyecto();
+      if (!primero && !d.intereses.length && !d.ideas) {
+        avisarProyecto("Elige qué te interesa o cuéntanos tus ideas.");
+        chipsProyecto[0].focus();
+        return null;
+      }
+      if (primero) { primero.focus(); return null; }
+      if (paraCorreo && !d.acepta) {
+        errorAcepta.textContent = "Marca la casilla para que podamos responderte.";
+        errorAcepta.hidden = false;
+        aceptaProyecto.setAttribute("aria-invalid", "true");
+        aceptaProyecto.focus();
+        return null;
+      }
+      return d;
+    };
+
+    var enviadoProyecto = function (d) {
+      document.getElementById("proyectoListoTitulo").textContent =
+        "¡Listo" + (d.nombre ? ", " + d.nombre.split(" ")[0] : "") + "! Recibimos tu mensaje";
+      document.getElementById("proyectoListoTexto").textContent = "Te escribimos pronto a " + d.correo + ".";
+      pasoProyecto.hidden = true;
+      listoProyecto.hidden = false;
+      listoProyecto.focus({ preventScroll: true });
+      if (vistaCorreo) vistaCorreo.classList.add("enviada");
+    };
+    var noSalioProyecto = function (d, respuesta) {
+      if (respuesta.error === "muchos") {
+        avisarProyecto("Ya recibimos varios mensajes desde tu conexión. Si necesitas algo más,",
+          [{ href: correoProyecto(d), texto: "escríbenos a " + CORREO_CREAX + "." }]);
+        return;
+      }
+      avisarProyecto("No pudimos enviarlo desde aquí.", [
+        { href: correoProyecto(d), texto: "Ábrelo en tu correo" },
+        { href: whatsappProyecto(d), texto: "o escríbenos por WhatsApp.", externo: true }
+      ]);
+    };
+
+    var enviando = false;
+    proyecto.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (enviando) return;
+      var d = listoParaEnviar(true);
+      if (!d) return;
+      enviando = true;
       botonProyecto.disabled = true;
-      setTimeout(function () { botonProyecto.disabled = false; }, 4000);
+      textoBotonProyecto.textContent = "Enviando…";
+      var corte = "AbortController" in window ? new AbortController() : null;
+      var limite = setTimeout(function () { if (corte) corte.abort(); }, 15000);
+      fetch("contacto.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(d),
+        signal: corte ? corte.signal : undefined
+      })
+        .then(function (r) {
+          return r.json().catch(function () { return { ok: false, error: "respuesta" }; });
+        })
+        .then(function (respuesta) {
+          if (respuesta && respuesta.ok) enviadoProyecto(d); else noSalioProyecto(d, respuesta || {});
+        })
+        .catch(function () { noSalioProyecto(d, { error: "red" }); })
+        .then(function () {
+          clearTimeout(limite);
+          enviando = false;
+          botonProyecto.disabled = false;
+          textoBotonProyecto.textContent = "Enviar por correo";
+        });
+    });
+
+    document.getElementById("proyectoWhatsapp").addEventListener("click", function () {
+      var d = listoParaEnviar(false);
+      if (d) window.open(whatsappProyecto(d), "_blank", "noopener");
+    });
+
+    document.getElementById("proyectoOtro").addEventListener("click", function () {
+      proyecto.reset();
+      chipsProyecto.forEach(function (chip) { chip.setAttribute("aria-pressed", "false"); });
+      if (vistaCorreo) vistaCorreo.classList.remove("enviada");
+      listoProyecto.hidden = true;
+      pasoProyecto.hidden = false;
+      cargadaEn = Date.now();
+      pintarVista();
+      document.getElementById("proyectoNombre").focus();
     });
   }
 
@@ -1176,4 +1332,119 @@
       if (aLaVista) bucle.play(); else bucle.pause();
     }).observe(dibujo);
   }
+
+  /* --------------------------------------------------------------
+     18. Cambio de página (idea de fraxbit.com): al ir a otra sección de
+         la web sube una cortina de tinta con el color del destino en el
+         borde, el logo se enciende como en la intro y el nombre del
+         destino se descifra al centro, en grande. En la página nueva,
+         inicio.js deja la cortina puesta desde el primer cuadro y el CSS
+         la levanta. Al volver con "atrás", la página se descubre igual.
+     -------------------------------------------------------------- */
+  var PAGINAS_WEB = window.CREAX_PAGINAS || {};
+  var raizWeb = new URL(".", document.baseURI).pathname;      // la carpeta de la web: "/" o "/creax-web/"
+  var destinoDe = function (enlace) {
+    if (!enlace || !enlace.href || enlace.target === "_blank" || enlace.hasAttribute("download")) return null;
+    var url = new URL(enlace.href, location.href);
+    if (url.origin !== location.origin) return null;
+    var carpeta = url.pathname.slice(0, url.pathname.lastIndexOf("/") + 1);
+    var archivo = url.pathname.slice(carpeta.length);
+    if (carpeta !== raizWeb || !Object.prototype.hasOwnProperty.call(PAGINAS_WEB, archivo)) return null;
+    if (url.pathname === location.pathname && url.search === location.search) return null;   // un ancla de esta misma página
+    return { url: url.href, pagina: PAGINAS_WEB[archivo] };
+  };
+  var saliendo = false;
+  var armarCortina = function (pagina) {
+    var capa = document.createElement("div");
+    capa.className = "transicion";
+    capa.setAttribute("aria-hidden", "true");
+    capa.style.setProperty("--transicion-color", pagina.color);
+    capa.style.setProperty("--transicion-letras", String(pagina.palabra.length));
+    // el logo de bloques, como en la intro: nace apagado y se enciende
+    capa.innerHTML = '<div class="transicion-panel"></div><div class="transicion-centro"><div class="transicion-pila">' +
+      '<svg class="transicion-logo" viewBox="0 0 96 96">' +
+      '<rect class="tb" x="8" y="8" width="24" height="24" rx="7" fill="#2B2B2B"/>' +
+      '<rect class="tb" x="64" y="8" width="24" height="24" rx="7" fill="#2B2B2B"/>' +
+      '<rect class="tb" x="36" y="36" width="24" height="24" rx="7" fill="#2B2B2B"/>' +
+      '<rect class="tb" x="8" y="64" width="24" height="24" rx="7" fill="#2B2B2B"/>' +
+      '<rect class="tb-ultimo" x="64" y="64" width="24" height="24" rx="7" fill="#C5F82A"/>' +
+      '</svg><p class="transicion-palabra"></p></div></div>';
+    var palabra = capa.querySelector(".transicion-palabra");
+    pagina.palabra.split("").forEach(function (letra) {
+      var caja = document.createElement("span");
+      caja.textContent = letra;
+      palabra.appendChild(caja);
+    });
+    return capa;
+  };
+  var salirHacia = function (destino) {
+    if (saliendo) return;
+    saliendo = true;
+    try {
+      sessionStorage.setItem("creax-transicion", JSON.stringify({ palabra: destino.pagina.palabra, color: destino.pagina.color, t: Date.now() }));
+    } catch (e) { /* sin memoria de sesión: la página nueva entra sin cortina */ }
+    var capa = armarCortina(destino.pagina);
+    document.body.appendChild(capa);
+    var letras = [].slice.call(capa.querySelectorAll(".transicion-palabra span"));
+    var reales = letras.map(function (s) { return s.textContent; });
+    // cada letra con su ancho fijo: así la palabra no tiembla mientras se descifra
+    letras.forEach(function (s) { s.style.width = s.getBoundingClientRect().width + "px"; });
+    var bloques = [].slice.call(capa.querySelectorAll(".tb"));
+    var encendidos = ["#FF7A59", "#B9A6FF", "#F4F4F2", "#FFD84D"];
+    var signos = "ABCDEFGHJKLMNPRSTUVWXYZ0123456789#&%";
+    var mezcla = { avance: 0 };
+    var yaSalio = false;
+    var irse = function () { if (yaSalio) return; yaSalio = true; location.href = destino.url; };
+    var linea = A.createTimeline({ defaults: { ease: salida }, onComplete: irse })
+      .add(capa.querySelector(".transicion-panel"), { y: ["100%", "0%"], duration: 560, ease: "inOutQuart" }, 0)
+      .add(letras, { y: ["110%", "0%"], duration: 520, delay: A.stagger(26) }, 300)
+      .add(mezcla, {
+        avance: 1, duration: 520, ease: "linear",
+        onUpdate: function () {
+          letras.forEach(function (s, i) {
+            if (mezcla.avance >= 0.3 + (i / letras.length) * 0.6) { s.textContent = reales[i]; return; }
+            var paso = Math.floor(mezcla.avance * 14);          // cambia de signo unas 14 veces, no en cada cuadro
+            if (s.__paso !== paso) { s.__paso = paso; s.textContent = signos.charAt(Math.floor(Math.random() * signos.length)); }
+          });
+        },
+        onComplete: function () { letras.forEach(function (s, i) { s.textContent = reales[i]; }); }
+      }, 300);
+    bloques.forEach(function (bloque, i) {                     // se prenden uno tras otro, con un parpadeo de luz
+      linea.add(bloque, { fill: ["#2B2B2B", encendidos[i]], opacity: [1, 0.35, 1, 0.6, 1], duration: 240, ease: "linear" }, 240 + i * 80);
+    });
+    linea
+      .add(capa.querySelector(".tb-ultimo"), { opacity: [0, 1], scale: [0.6, 1], ease: A.spring({ bounce: 0.45, duration: 480 }) }, 560)
+      .add(capa.querySelector(".transicion-logo"), { opacity: [1, 0], y: [0, -10], duration: 200 }, 880)
+      .call(function () {}, 1040);
+    setTimeout(irse, 1700);                                     // red de seguridad: igual se va aunque la animación no termine
+  };
+  document.addEventListener("click", function (e) {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    var destino = destinoDe(e.target.closest ? e.target.closest("a[href]") : null);
+    if (!destino) return;
+    e.preventDefault();
+    salirHacia(destino);
+  });
+  // la página de destino se pide apenas el cursor o el foco llegan al enlace: así el cambio es inmediato
+  var precargadas = {};
+  var precargar = function (e) {
+    var destino = destinoDe(e.target.closest ? e.target.closest("a[href]") : null);
+    if (!destino || precargadas[destino.url]) return;
+    precargadas[destino.url] = true;
+    var pista = document.createElement("link");
+    pista.rel = "prefetch";
+    pista.href = destino.url;
+    document.head.appendChild(pista);
+  };
+  document.addEventListener("pointerover", precargar, { passive: true });
+  document.addEventListener("focusin", precargar);
+  // al volver con "atrás", el navegador puede traer la página tal como quedó: con la cortina puesta
+  window.addEventListener("pageshow", function (e) {
+    if (!e.persisted) return;
+    var capa = document.querySelector(".transicion");
+    if (capa) capa.parentNode.removeChild(capa);
+    saliendo = false;
+    var pagina = PAGINAS_WEB[location.pathname.slice(location.pathname.lastIndexOf("/") + 1)];
+    if (pagina && window.CREAX_ENTRAR) window.CREAX_ENTRAR(pagina);
+  });
 })();

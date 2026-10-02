@@ -31,20 +31,20 @@
      "Próximamente". Los enlaces directos de WhatsApp llevan el comentario CONTACTO.
         WhatsApp   https://wa.me/51966980388   (listo: número de Juan Diego)
         Llamada    tel:+51966980388            (listo)
-        Correo     pendiente (el dominio es creax.net.pe; falta crear la cuenta)
+        Correo     mailto:admin@creax.net.pe   (listo; el formulario de la portada lo envía con contacto.php)
         Instagram  pendiente
         LinkedIn   pendiente
      ========================================================================== -->
 
-<script src="inicio.js?v=202609302330"></script>
-<link rel="icon" href="assets/creax-isotipo.svg?v=202609302330" type="image/svg+xml">
-<link rel="icon" href="assets/favicon-32.png?v=202609302330" sizes="32x32" type="image/png">
-<link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=202609302330">
+<script src="inicio.js?v=202610012000"></script>
+<link rel="icon" href="assets/creax-isotipo.svg?v=202610012000" type="image/svg+xml">
+<link rel="icon" href="assets/favicon-32.png?v=202610012000" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=202610012000">
 <link rel="manifest" href="site.webmanifest">
 <link rel="preload" href="assets/fuentes/SpaceGrotesk-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fuentes/Inter-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/iconos/iconos.css?v=202609302330">
-<link rel="stylesheet" href="estilos.css?v=202609302330">
+<link rel="stylesheet" href="assets/iconos/iconos.css?v=202610012000">
+<link rel="stylesheet" href="estilos.css?v=202610012000">
 </head>
 
 <body class="color-inicio">
@@ -79,7 +79,7 @@
 <header class="nav" id="nav">
   <div class="nav-caja">
     <a class="nav-marca" href="index.html" aria-label="CreaX, inicio">
-      <img class="logo-completo" src="assets/creax-logo.svg?v=202609302330" alt="CreaX" width="113" height="24">
+      <img class="logo-completo" src="assets/creax-logo.svg?v=202610012000" alt="CreaX" width="113" height="24">
     </a>
     <nav class="nav-enlaces">
       <a class="enlace color-servicios" href="servicios.html">Servicios</a>
@@ -297,38 +297,70 @@
     </div>
   </section>
 
-  <!-- ================= cierre ================= -->
+  <!-- ================= cierre: contáctanos por mail =================
+       El formulario manda el correo con contacto.php (solo en creax.net.pe, que tiene PHP).
+       En el borrador de GitHub ofrece escribir directo al correo o por WhatsApp. -->
   <section id="contacto">
     <div class="envoltura">
-      <div class="cierre-caja cierre-doble revelar">
+      <div class="cierre-caja cierre-doble cierre-correo revelar">
         <div class="cierre-texto">
-          <p class="marca-seccion">Empecemos</p>
-          <h2>Conversemos sobre <em class="cursiva">tu</em> negocio</h2>
-          <p class="entrada">Cuéntanos qué necesitas y lo vemos juntos por WhatsApp.</p>
+          <p class="marca-seccion">Contáctanos por mail</p>
+          <h2>¿Buscas tener tu página? Escríbenos <em class="cursiva">tus ideas</em></h2>
+          <p class="entrada">Déjanos tus datos, pídenos referencias o más información y te respondemos por correo.</p>
+          <div class="correo-vista" id="correoVista" aria-hidden="true">
+            <div class="correo-vista-barra"><i></i><i></i><i></i><span>Así nos llega tu mensaje</span></div>
+            <dl class="correo-vista-cabeza">
+              <div><dt>Para</dt><dd>admin@creax.net.pe</dd></div>
+              <div><dt>De</dt><dd data-vista="de"></dd></div>
+              <div><dt>Asunto</dt><dd data-vista="asunto"></dd></div>
+            </dl>
+            <p class="correo-vista-cuerpo" data-vista="cuerpo"></p>
+            <p class="correo-vista-sello"><i class="ph ph-paper-plane-tilt"></i> Enviado</p>
+          </div>
           <ul class="cierre-canales">
+            <li><a href="mailto:admin@creax.net.pe"><i class="ph ph-envelope-simple" aria-hidden="true"></i> admin@creax.net.pe</a></li>
             <li><a href="tel:+51966980388"><i class="ph ph-phone" aria-hidden="true"></i> Llámanos</a></li>
             <li><a href="https://wa.me/51966980388?text=Hola%20CreaX%2C%20vengo%20de%20la%20web%20y%20quisiera%20m%C3%A1s%20informaci%C3%B3n." target="_blank" rel="noopener"><i class="ph ph-whatsapp-logo" aria-hidden="true"></i> WhatsApp</a></li>
           </ul>
         </div>
-        <div class="proyecto" id="proyecto">
-          <h3>Cuéntanos de tu proyecto</h3>
-          <p class="proyecto-nota">Con unos datos alcanza. El mensaje se abre en tu WhatsApp.</p>
-          <p class="proyecto-etiqueta" id="proyectoInteres">Me interesa</p>
-          <div class="proyecto-chips" role="group" aria-labelledby="proyectoInteres">
-            <button type="button" class="chip-proyecto" aria-pressed="false" data-valor="una página web">Página web</button>
-            <button type="button" class="chip-proyecto" aria-pressed="false" data-valor="automatizaciones con IA">Automatización con IA</button>
-            <button type="button" class="chip-proyecto" aria-pressed="false" data-valor="un agente de IA">Agente de IA</button>
-            <button type="button" class="chip-proyecto" aria-pressed="false" data-valor="otra cosa">Otro</button>
+        <form class="proyecto" id="proyecto" novalidate>
+          <div class="proyecto-paso" id="proyectoPaso">
+            <h3>Cuéntanos de tu proyecto</h3>
+            <p class="proyecto-nota">Te respondemos al correo que nos dejes.</p>
+            <p class="proyecto-etiqueta" id="proyectoInteres">Me interesa</p>
+            <div class="proyecto-chips" role="group" aria-labelledby="proyectoInteres">
+              <button type="button" class="chip-proyecto" aria-pressed="false" data-valor="Página web">Página web</button>
+              <button type="button" class="chip-proyecto" aria-pressed="false" data-valor="Automatización con IA">Automatización con IA</button>
+              <button type="button" class="chip-proyecto" aria-pressed="false" data-valor="Agente de IA">Agente de IA</button>
+              <button type="button" class="chip-proyecto" aria-pressed="false" data-valor="Referencias y más información">Referencias y más información</button>
+            </div>
+            <div class="proyecto-campos">
+              <label><span>Tu nombre</span><input type="text" id="proyectoNombre" autocomplete="name" maxlength="60" aria-describedby="errorNombre"><small class="campo-error" id="errorNombre" hidden></small></label>
+              <label><span>Tu empresa</span><input type="text" id="proyectoNegocio" autocomplete="organization" maxlength="80" aria-describedby="errorNegocio"><small class="campo-error" id="errorNegocio" hidden></small></label>
+              <label><span>¿A qué se dedica?</span><input type="text" id="proyectoRubro" maxlength="80" placeholder="Ej.: restaurante, clínica, tienda" aria-describedby="errorRubro"><small class="campo-error" id="errorRubro" hidden></small></label>
+              <label><span>Tu celular</span><input type="tel" id="proyectoCelular" autocomplete="tel" inputmode="tel" maxlength="16" placeholder="9XX XXX XXX" aria-describedby="errorCelular"><small class="campo-error" id="errorCelular" hidden></small></label>
+              <label class="campo-ancho"><span>Tu correo</span><input type="email" id="proyectoCorreo" autocomplete="email" maxlength="120" placeholder="nombre@empresa.com" aria-describedby="errorCorreo"><small class="campo-error" id="errorCorreo" hidden></small></label>
+            </div>
+            <label class="proyecto-mensaje"><span>Tus ideas</span><textarea id="proyectoMensaje" rows="3" maxlength="2000" placeholder="Cuéntanos qué tienes en mente" aria-describedby="errorMensaje"></textarea><small class="campo-error" id="errorMensaje" hidden></small></label>
+            <div class="proyecto-acepta">
+              <input type="checkbox" id="proyectoAcepta" aria-describedby="errorAcepta">
+              <label for="proyectoAcepta">Acepto que CreaX use estos datos para responderme, como explica la <a href="privacidad.html" target="_blank" rel="noopener">política de privacidad</a>.</label>
+            </div>
+            <small class="campo-error" id="errorAcepta" hidden></small>
+            <label class="trampa" aria-hidden="true">Tu sitio web<input type="text" id="proyectoSitio" tabindex="-1" autocomplete="off"></label>
+            <p class="proyecto-aviso" id="proyectoAviso" role="status" hidden></p>
+            <div class="proyecto-botones">
+              <button type="submit" class="boton boton-oscuro boton-flecha" id="proyectoEnviar"><span class="proyecto-enviar-texto">Enviar por correo</span> <span class="boton-circulo" aria-hidden="true"><i class="ph ph-paper-plane-tilt"></i></span></button>
+              <button type="button" class="proyecto-whatsapp" id="proyectoWhatsapp"><i class="ph ph-whatsapp-logo" aria-hidden="true"></i> Prefiero WhatsApp</button>
+            </div>
           </div>
-          <div class="proyecto-campos">
-            <label><span>Tu nombre</span><input type="text" id="proyectoNombre" autocomplete="name" maxlength="60" aria-describedby="errorNombre"><small class="campo-error" id="errorNombre" hidden></small></label>
-            <label><span>Tu negocio</span><input type="text" id="proyectoNegocio" autocomplete="organization" maxlength="80" aria-describedby="errorNegocio"><small class="campo-error" id="errorNegocio" hidden></small></label>
+          <div class="proyecto-listo" id="proyectoListo" tabindex="-1" hidden>
+            <span class="proyecto-listo-sello" aria-hidden="true"><i class="ph ph-check"></i></span>
+            <h3 id="proyectoListoTitulo">¡Listo! Recibimos tu mensaje</h3>
+            <p id="proyectoListoTexto">Te escribimos pronto a tu correo.</p>
+            <button type="button" class="enlace-boton" id="proyectoOtro">Enviar otro mensaje</button>
           </div>
-          <label class="proyecto-mensaje"><span>¿Qué necesitas?</span><textarea id="proyectoMensaje" rows="3" maxlength="600" aria-describedby="errorMensaje"></textarea><small class="campo-error" id="errorMensaje" hidden></small></label>
-          <label class="trampa" aria-hidden="true">Tu sitio web<input type="text" id="proyectoSitio" tabindex="-1" autocomplete="off"></label>
-          <p class="proyecto-aviso" id="proyectoAviso" role="status" hidden></p>
-          <button type="button" class="boton boton-oscuro boton-flecha" id="proyectoEnviar">Enviar por WhatsApp <span class="boton-circulo" aria-hidden="true"><i class="ph ph-arrow-up-right"></i></span></button>
-        </div>
+        </form>
       </div>
     </div>
   </section>
@@ -339,7 +371,7 @@
   <div class="envoltura">
     <div class="pie-grilla">
       <div>
-        <span class="firma-pie"><img class="logo-completo" src="assets/creax-logo.svg?v=202609302330" alt="CreaX" width="142" height="30"></span>
+        <span class="firma-pie"><img class="logo-completo" src="assets/creax-logo.svg?v=202610012000" alt="CreaX" width="142" height="30"></span>
         <p>Agencia de webs, automatizaciones con IA y agentes para empresas.</p>
       </div>
       <div>
@@ -356,6 +388,7 @@
         <ul>
           <li><a href="tel:+51966980388">Llámanos</a></li>
           <li><a href="https://wa.me/51966980388?text=Hola%20CreaX%2C%20vengo%20de%20la%20web%20y%20quisiera%20m%C3%A1s%20informaci%C3%B3n." target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a href="mailto:admin@creax.net.pe">admin@creax.net.pe</a></li>
           <li><button type="button" class="enlace-boton" data-contacto>Todos los canales</button></li>
         </ul>
       </div>
@@ -373,6 +406,6 @@
 </footer>
 
 <script src="assets/anime.min.js" defer></script>
-<script src="animacion.js?v=202609302330" defer></script>
+<script src="animacion.js?v=202610012000" defer></script>
 </body>
 </html>

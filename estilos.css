@@ -2142,3 +2142,126 @@ html.contacto-abierto, html.contacto-abierto body { overflow: hidden; }
 .celular-iconos { display: inline-flex; align-items: center; gap: 3px; font-size: 13px; }
 .celular-marco::before { top: 5px; width: 74px; height: 20px; background: #000; outline: 1px solid rgba(255, 255, 255, 0.08); }   /* la isla, apenas visible sobre la barra */
 .celular-marco .recorrido { border-radius: 0 0 37px 37px; }
+
+/* =============================================================================
+   "Contáctanos por mail" (01/10/2026): a la izquierda, el correo que se escribe
+   solo mientras la persona llena el formulario; a la derecha, el formulario.
+   contacto.php lo manda a admin@creax.net.pe.
+   ========================================================================== */
+.cierre-correo h2 { max-width: 13ch; }
+.correo-vista {
+  display: none; position: relative; max-width: 470px; margin-top: 30px; padding: 16px 20px 20px;
+  border-radius: 20px; background: var(--tinta); color: var(--hueso);
+}
+@media (min-width: 960px) { .correo-vista { display: block; } }
+.correo-vista-barra {
+  display: flex; align-items: center; gap: 6px; margin-bottom: 14px;
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: 11px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: rgba(244, 244, 242, 0.55);
+}
+.correo-vista-barra i { width: 9px; height: 9px; border-radius: 3px; }
+.correo-vista-barra i:nth-child(1) { background: var(--c-servicios); }
+.correo-vista-barra i:nth-child(2) { background: var(--c-automatizaciones); }
+.correo-vista-barra i:nth-child(3) { background: var(--c-bocetos); }
+.correo-vista-barra span { margin-left: 8px; }
+.correo-vista-cabeza {
+  display: grid; gap: 6px; margin: 0 0 12px; padding-bottom: 12px; font-size: 13.5px;
+  border-bottom: 1px solid rgba(244, 244, 242, 0.12);
+}
+.correo-vista-cabeza div { display: grid; grid-template-columns: 64px 1fr; gap: 10px; }
+.correo-vista-cabeza dt {
+  padding-top: 2px; font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: 11px;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-inicio);
+}
+.correo-vista-cabeza dd { margin: 0; overflow-wrap: anywhere; }
+.correo-vista-cuerpo {
+  min-height: 4.8em; font-size: 15px; line-height: 1.55; color: rgba(244, 244, 242, 0.88);
+  white-space: pre-line; overflow-wrap: anywhere;
+}
+.correo-vista-cuerpo::after {
+  content: ""; display: inline-block; width: 8px; height: 1.05em; margin-left: 3px; vertical-align: -0.16em;
+  border-radius: 2px; background: var(--c-inicio); animation: correo-cursor 1s steps(1) infinite;
+}
+@keyframes correo-cursor { 50% { opacity: 0; } }
+.correo-vista.vacia [data-vista] { color: rgba(244, 244, 242, 0.42); }
+.correo-vista-sello {
+  display: none; align-items: center; gap: 8px; margin-top: 14px; padding: 7px 14px; border-radius: 999px;
+  background: var(--c-inicio); color: var(--tinta); font-size: 14px; font-weight: 600; width: fit-content;
+}
+.correo-vista.enviada { animation: correo-vuela 0.7s var(--salida); }
+.correo-vista.enviada .correo-vista-sello { display: inline-flex; animation: correo-sello 0.5s var(--rebote) 0.15s both; }
+.correo-vista.enviada .correo-vista-cuerpo::after { display: none; }
+@keyframes correo-vuela { 35% { transform: translateY(-10px) rotate(-1deg); } }
+@keyframes correo-sello { from { opacity: 0; transform: scale(0.8) rotate(-6deg); } }
+
+.proyecto-paso { display: grid; gap: 14px; }
+.proyecto-paso[hidden], .proyecto-listo[hidden] { display: none; }
+.campo-error[hidden] { display: none; }
+.proyecto-campos .campo-ancho { grid-column: 1 / -1; }
+.proyecto input::placeholder, .proyecto textarea::placeholder { color: #9a9a95; }
+.proyecto-acepta { display: flex; align-items: flex-start; gap: 10px; font-size: 13.5px; line-height: 1.45; color: var(--tinta-media); }
+.proyecto .proyecto-acepta input {
+  flex: none; width: 18px; height: 18px; margin: 1px 0 0; padding: 0; border: 0; accent-color: var(--tinta); cursor: pointer;
+}
+.proyecto-acepta label { cursor: pointer; }
+.proyecto-acepta a, .proyecto-aviso a { color: var(--tinta); text-decoration: underline; text-underline-offset: 2px; }
+.proyecto-botones { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 22px; margin-top: 4px; }
+.proyecto .proyecto-botones .boton { margin-top: 0; }
+.proyecto-whatsapp {
+  display: inline-flex; align-items: center; gap: 8px; padding: 10px 2px; border: 0; background: none;
+  font: inherit; font-size: 15px; font-weight: 600; color: var(--tinta); cursor: pointer;
+  text-decoration: underline; text-underline-offset: 4px; text-decoration-color: rgba(16, 16, 16, 0.3);
+  transition: text-decoration-color 0.2s ease;
+}
+.proyecto-whatsapp:hover { text-decoration-color: currentColor; }
+.proyecto-listo { display: grid; justify-items: center; gap: 10px; padding: 44px 10px; text-align: center; }
+.proyecto-listo:focus { outline: none; }
+.proyecto-listo-sello {
+  display: grid; place-items: center; width: 64px; height: 64px; border-radius: 50%;
+  background: var(--c-inicio); color: var(--tinta); font-size: 30px; animation: correo-sello 0.5s var(--rebote) both;
+}
+.proyecto-listo h3 { font-size: clamp(22px, 2.2vw, 28px); }
+.proyecto-listo p { color: var(--tinta-media); }
+
+/* =============================================================================
+   Cambio de página (01/10/2026), con la idea de fraxbit.com: al ir a otra sección
+   sube una cortina de tinta con el color del destino en el borde, el logo se
+   enciende como en la intro y el nombre del destino se descifra al centro.
+   La salida la arma animacion.js. La llegada es solo CSS, sobre <html>, para que
+   la cortina esté puesta desde el primer cuadro de la página nueva.
+   ========================================================================== */
+.transicion { position: fixed; inset: 0; z-index: 1000; }
+.transicion-panel { position: absolute; inset: 0; background: var(--tinta); transform: translateY(100%); }
+.transicion-panel::before {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 100%; height: 18px;
+  background: var(--transicion-color, var(--c-inicio));
+}
+.transicion-centro { position: absolute; inset: 0; display: grid; place-items: center; padding: 0 20px; }
+.transicion-pila { position: relative; }
+.transicion-logo {
+  position: absolute; left: 0; right: 0; bottom: 100%; width: clamp(42px, 4.6vw, 58px); height: auto;
+  margin: 0 auto clamp(14px, 2.4vw, 26px); overflow: visible;
+}
+.transicion-logo rect { transform-box: fill-box; transform-origin: center; }
+.transicion-logo .tb-ultimo { opacity: 0; }
+.transicion-palabra, html.con-transicion::after {
+  font-family: "Space Grotesk", Inter, sans-serif; font-weight: 700; line-height: 1; letter-spacing: -0.045em;
+  font-size: min(150px, 10.5vw, calc((100vw - 40px) / (var(--transicion-letras, 9) * 0.6)));
+  color: var(--hueso); white-space: nowrap;
+}
+.transicion-palabra { display: flex; margin: 0; overflow: hidden; padding: 0.06em 0 0.12em; }
+.transicion-palabra span { display: inline-block; text-align: center; transform: translateY(110%); }
+
+html.con-transicion::before {
+  content: ""; position: fixed; left: 0; right: 0; top: 0; z-index: 1000; box-sizing: content-box;
+  height: 100vh; height: 100lvh; background: var(--tinta);
+  border-bottom: 18px solid var(--transicion-color, var(--c-inicio));
+  animation: transicion-levantar 0.64s cubic-bezier(0.77, 0, 0.175, 1) 0.24s both;
+}
+html.con-transicion::after {
+  content: attr(data-transicion); position: fixed; inset: 0; z-index: 1001; display: grid; place-items: center;
+  padding: 0.06em 20px 0.12em; pointer-events: none;
+  animation: transicion-palabra-sale 0.36s cubic-bezier(0.7, 0, 0.84, 0) 0.06s both;
+}
+@keyframes transicion-levantar { to { transform: translateY(-100%); } }
+@keyframes transicion-palabra-sale { to { transform: translateY(-48px); opacity: 0; } }

@@ -38,7 +38,7 @@ BORRADOR = "https://chirinosj0719-rgb.github.io/creax-web/"
 
 PAGINAS = ["index.html", "servicios.html", "automatizaciones.html", "bocetos.html", "nosotros.html",
            "privacidad.html", "terminos.html", "404.html"]
-OTROS = ["robots.txt", "sitemap.xml", "site.webmanifest"]
+OTROS = ["robots.txt", "sitemap.xml", "site.webmanifest", "contacto.php"]   # contacto.php: el formulario de correo
 NUNCA = {"node_modules", ".git", "README.md", "aligerar.py", "capturas.js", "preparar-hostinger.py",
          "package.json", "package-lock.json", ".gitignore", ".nojekyll"}
 

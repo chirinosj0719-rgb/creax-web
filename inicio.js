@@ -24,3 +24,38 @@ try {
     setTimeout(function () { document.documentElement.classList.remove("con-intro"); }, 5000);
   }
 } catch (e) {}
+/* las páginas de la web, con su nombre y su color, para la cortina del cambio de página
+   (animacion.js arma la salida; acá se pone la llegada) */
+window.CREAX_PAGINAS = {
+  "": { palabra: "Inicio", color: "var(--c-inicio)" },
+  "index.html": { palabra: "Inicio", color: "var(--c-inicio)" },
+  "servicios.html": { palabra: "Servicios", color: "var(--c-servicios)" },
+  "automatizaciones.html": { palabra: "Automatizaciones", color: "var(--c-automatizaciones)" },
+  "bocetos.html": { palabra: "Bocetos", color: "var(--c-bocetos)" },
+  "nosotros.html": { palabra: "Nosotros", color: "var(--c-nosotros)" },
+  "privacidad.html": { palabra: "Privacidad", color: "var(--hueso)" },
+  "terminos.html": { palabra: "Términos", color: "var(--hueso)" }
+};
+/* la llegada: la cortina está puesta desde el primer cuadro, con el nombre de la página,
+   y el CSS (html.con-transicion) la levanta */
+window.CREAX_ENTRAR = function (pagina) {
+  var raiz = document.documentElement;
+  raiz.classList.remove("con-transicion");
+  void raiz.offsetWidth;                       // así la animación arranca de nuevo si se repite
+  raiz.setAttribute("data-transicion", pagina.palabra);
+  raiz.style.setProperty("--transicion-color", pagina.color);
+  raiz.style.setProperty("--transicion-letras", String(pagina.palabra.length));
+  raiz.classList.add("con-transicion");
+  clearTimeout(window.CREAX_ENTRAR.espera);
+  window.CREAX_ENTRAR.espera = setTimeout(function () { raiz.classList.remove("con-transicion"); }, 1150);
+};
+try {
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches && location.search.indexOf("estatico") < 0) {
+    var llegada = JSON.parse(sessionStorage.getItem("creax-transicion") || "null");
+    sessionStorage.removeItem("creax-transicion");
+    var viaje = performance.getEntriesByType ? performance.getEntriesByType("navigation")[0] : null;
+    var esta = window.CREAX_PAGINAS[location.pathname.slice(location.pathname.lastIndexOf("/") + 1)];
+    if (llegada && Date.now() - llegada.t < 6000) window.CREAX_ENTRAR(llegada);       // vino desde otra página de la web
+    else if (esta && viaje && viaje.type === "back_forward") window.CREAX_ENTRAR(esta);  // volvió con "atrás" o "adelante"
+  }
+} catch (e) {}
